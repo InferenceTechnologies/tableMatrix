@@ -96,6 +96,8 @@ tableMatrix <- function(dataList, tabCol, matCol) {
 	obj <- tableMatrixWrap()
 	if (missing(dataList)) { return(obj) }
 
+	if (is.data.frame(dataList)||is.data.table(dataList)) { dataList <- list(dataList) }
+
 	for (i in 1:length(dataList)) {
 
 		obji <- dataList[[i]]
