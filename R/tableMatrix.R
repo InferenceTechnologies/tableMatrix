@@ -61,7 +61,8 @@ tableList <- function(tabData, aidData) {
 
 
 # Wraps tableMatrix components
-tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(), aid=list(), setKey=FALSE, objClass=NULL) {
+tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
+	aid=list(), setKey=FALSE, objClass=NULL) {
 	
 	obj <- list()
 	obj$tab <- tab
@@ -83,14 +84,42 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(), a
 	return(obj)
 }
 
-#' Creates tableMatrix obj
+#' S3 class tableMatrix object
 #' 
-#' tableMatrix constructor, creates tableMatrix obj from a list of data.frames or data.tables
+#' \code{tableMatrix} constructor, creates tableMatrix object from a list of data.frames or 
+#' data.tables. It combines features of data.table and matrix. The result is faster access to 
+#' data. It is useful for datasets which have following condition: the main data could be stored 
+#' as matrix and other columns are for description. 
+#'
 #' @param dataList List of data.frames or data.tables
-#' @param tabCol List of table attribute columns names or indicies
-#' @param matCol List of matrix attribute columns names or indicies
-#' @return A tableMatrix obj
+#' @param tabCol List of table attribute columns names or indices
+#' @param matCol List of matrix attribute columns names or indices
+#' @return A tableMatrix object
 #' @export 
+#' @examples
+#' filePathComm <- system.file("data/comm.csv", package="tableMatrix") 
+#' data <- read.csv(filePathComm)
+#' dim(data)
+#' filePathComm2 <- system.file("data/comm2.csv", package="tableMatrix") 
+#' data2 <- read.csv(filePathComm2)
+#' dim(data2)
+#' 
+#' dataAsTable <- as.data.table(data) 
+#'
+#' #Use data.frame as data, first 2 columns as data descriptors, rest as part for matrix
+#' tableMatrix(data, list(r=c(1,2)), list(j=c(3:ncol(data))))
+#'
+#' #Use data.table as data, first 2 columns as data descriptors, rest as part for matrix
+#' tableMatrix(dataAsTable, list(r=c(1,2)), list(j=c(3:ncol(dataAsTable))))
+#'
+#' #Use data.frame as data, first 2 columns as data descriptors with column names, 
+#' #rest as part for matrix
+#' tableMatrix(data, list(r=c("city","state")), list(j=c(3:ncol(data))))
+#'
+#' \dontrun{
+#' tableMatrix(data, list(c("city","state")), list(c(3:ncol(data))))	
+#' }
+
 tableMatrix <- function(dataList, tabCol, matCol) {
 
 	obj <- tableMatrixWrap()

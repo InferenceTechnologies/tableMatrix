@@ -2,21 +2,48 @@
 % Please edit documentation in R/tableMatrix.R
 \name{tableMatrix}
 \alias{tableMatrix}
-\title{Creates tableMatrix obj}
+\title{S3 class tableMatrix object}
 \usage{
 tableMatrix(dataList, tabCol, matCol)
 }
 \arguments{
 \item{dataList}{List of data.frames or data.tables}
 
-\item{tabCol}{List of table attribute columns names or indicies}
+\item{tabCol}{List of table attribute columns names or indices}
 
-\item{matCol}{List of matrix attribute columns names or indicies}
+\item{matCol}{List of matrix attribute columns names or indices}
 }
 \value{
-A tableMatrix obj
+A tableMatrix object
 }
 \description{
-tableMatrix constructor, creates tableMatrix obj from a list of data.frames or data.tables
+\code{tableMatrix} constructor, creates tableMatrix object from a list of data.frames or 
+data.tables. It combines features of data.table and matrix. The result is faster access to 
+data. It is useful for datasets which have following condition: the main data could be stored 
+as matrix and other columns are for description.
+}
+\examples{
+filePathComm <- system.file("data/comm.csv", package="tableMatrix") 
+data <- read.csv(filePathComm)
+dim(data)
+filePathComm2 <- system.file("data/comm2.csv", package="tableMatrix") 
+data2 <- read.csv(filePathComm2)
+dim(data2)
+
+dataAsTable <- as.data.table(data) 
+
+#Use data.frame as data, first 2 columns as data descriptors, rest as part for matrix
+tableMatrix(data, list(r=c(1,2)), list(j=c(3:ncol(data))))
+
+#Use data.table as data, first 2 columns as data descriptors, rest as part for matrix
+tableMatrix(dataAsTable, list(r=c(1,2)), list(j=c(3:ncol(dataAsTable))))
+
+#Use data.frame as data, first 2 columns as data descriptors with column names, 
+#rest as part for matrix
+tableMatrix(data, list(r=c("city","state")), list(j=c(3:ncol(data))))
+
+\dontrun{
+tableMatrix(data, list(c("city","state")), list(c(3:ncol(data))))	
+}
 }
 
