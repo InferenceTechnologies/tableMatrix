@@ -23,27 +23,25 @@ data. It is useful for datasets which have following condition: the main data co
 as matrix and other columns are for description.
 }
 \examples{
-filePathComm <- system.file("data/comm.csv", package="tableMatrix") 
-data <- read.csv(filePathComm)
-dim(data)
-filePathComm2 <- system.file("data/comm2.csv", package="tableMatrix") 
-data2 <- read.csv(filePathComm2)
-dim(data2)
+data(images8By8)
+dim(images8By8)
 
-dataAsTable <- as.data.table(data) 
+data(images10By10)
+dim(images10By10)
+images10By10AsTable <- as.data.table(images10by10) 
 
-#Use data.frame as data, first 2 columns as data descriptors, rest as part for matrix
-tableMatrix(data, list(r=c(1,2)), list(j=c(3:ncol(data))))
+#Use data.frame as data, first 3 columns as data descriptors, rest as part for matrix
+tableMatrix(images8By8, list(r=c(1:3)), list(j=c(4:ncol(images8By8))))
 
-#Use data.table as data, first 2 columns as data descriptors, rest as part for matrix
-tableMatrix(dataAsTable, list(r=c(1,2)), list(j=c(3:ncol(dataAsTable))))
+#Use data.table as data, first 3 columns as data descriptors, rest as part for matrix
+tableMatrix(images10By10AsTable, list(r=c(1:3)), list(j=c(4:ncol(images10By10AsTable ))))
 
 #Use data.frame as data, first 2 columns as data descriptors with column names, 
 #rest as part for matrix
-tableMatrix(data, list(r=c("city","state")), list(j=c(3:ncol(data))))
+tableMatrix(images8By8, list(r=c("shape","dimX","dimY")), list(j=c(4:ncol(images8By8))))
 
 \dontrun{
-tableMatrix(data, list(c("city","state")), list(c(3:ncol(data))))	
+tableMatrix(images8By8, list(c("shape","dimX","dimY")), list(c(4:ncol(images8By8))))	
 }
 }
 
