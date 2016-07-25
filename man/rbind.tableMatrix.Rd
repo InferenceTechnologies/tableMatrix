@@ -2,11 +2,43 @@
 % Please edit documentation in R/tableMatrix.R
 \name{rbind.tableMatrix}
 \alias{rbind.tableMatrix}
-\title{Binding tableMatrix}
+\title{S3 method to bind tableMatrix objects by row}
 \usage{
 rbind.tableMatrix(..., use.names = TRUE, fill = FALSE)
 }
+\arguments{
+\item{...}{List of tableMatrix objects}
+
+\item{use.names}{Just as use.names in data.table}
+
+\item{fill}{Justas fill in data.table}
+}
+\value{
+A tableMatrix object
+}
 \description{
-Binding rows of tableMatrix objects
+\code(rbind.tableMatrix) binds tableMatrix objects together. If matrix
+parts have same dimensions, it only adds row in tab and mat part. Otherwise
+it will create new matrix in mat object.
+}
+\examples{
+data(images8by8)
+dim(images8by8)
+
+data(images10by10)
+dim(images10by10) 
+
+image1 <- tableMatrix(images8By8, list(r=c(1:3)), list(j=c(4:ncol(images8By8))))
+image2 <- tableMatrix(images10By10, list(r=c(1:3)), list(j=c(4:ncol(images10By10))))
+
+#Table matrix objects have different matrix part
+together1 <- rbind(image1, image2)
+length(mat(together1))
+tab(together1)
+
+#Table matrix objects have same matrix part
+together2 <- rbind(image1, image1)
+length(mat(together2))
+tab(together2)
 }
 

@@ -90,10 +90,14 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' data.tables. It combines features of data.table and matrix. The result is faster access to 
 #' data. It is useful for datasets which have following condition: the main data could be stored 
 #' as matrix and other columns are for description. 
+#' \code{tableMatrix} consists of 3 mandatory parts. Tab (table part) part is used for storing descriptors 
+#' of data, mat (matrix part) for storing main data and matDim - dimensions of matrix part.
+#'
 #'
 #' @param dataList List of data.frames or data.tables
 #' @param tabCol List of table attribute columns names or indices
 #' @param matCol List of matrix attribute columns names or indices
+#' @param dims List of dimensions of matrix parts
 #' @return A tableMatrix object
 #' @export 
 #' @examples 
@@ -102,43 +106,67 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' 
 #' data(images10By10)
 #' dim(images10By10)
-#' images10By10AsTable <- as.data.table(images10by10) 
+#' images10By10AsTable <- as.data.table(images10By10) 
 #'
 #' #Use data.frame as data, first 3 columns as data descriptors, rest as part for matrix
 #' tableMatrix(images8By8, list(r=c(1:3)), list(j=c(4:ncol(images8By8))))
 #'
 #' #Use data.table as data, first 3 columns as data descriptors, rest as part for matrix
-#' tableMatrix(images10By10AsTable, list(r=c(1:3)), list(j=c(4:ncol(images10By10AsTable ))))
+#' tableMatrix(images10By10AsTable, list(r=c(1:3)), list(j=c(4:ncol(images10By10AsTable))))
 #'
 #' #Use data.frame as data, first 2 columns as data descriptors with column names, 
 #' #rest as part for matrix
 #' tableMatrix(images8By8, list(r=c("shape","dimX","dimY")), list(j=c(4:ncol(images8By8))))
 #'
+#' #Example of using parameter dims - each row of data consists of meta data (first three columns) and main
+#' data - pixels of image. Original resolution of the image was 8x8.
+#' image <- tableMatrix(images8By8, list(r=c(1:3)), list(j=c(4:ncol(images8By8))), list(c(8,8)))
+#' matDim(image)
+#'
 #' \dontrun{
 #' tableMatrix(images8By8, list(c("shape","dimX","dimY")), list(c(4:ncol(images8By8))))	
 #' }
 
-tableMatrix <- function(dataList, tabCol, matCol) {
+tableMatrix <- function(dataList, tabCol, matCol, dims=NULL) {
 
 	obj <- tableMatrixWrap()
 	if (missing(dataList)) { return(obj) }
 
 	if (is.data.frame(dataList)||is.data.table(dataList)) { dataList <- list(dataList) }
 
+	if (! is.null(dims) && length(dims) != length(dataList)) {
+		stop("length of dims should be the same as number of dataLists")
+	}
+
 	for (i in 1:length(dataList)) {
 
 		obji <- dataList[[i]]
 		if (is.data.frame(obji)) { obji <- as.data.table(obji) }
 		if (!is.data.table(obji)) { stop("tableMatrix requires list of data.frames or data.tables") }
+
+		if (! is.null(dims) && length(dims) != length(dataList)) {
+			stop("length of dims should be the same as number of data.frames (data.tables)")
+		}
 		
 		addTab <- obji[, colj(obji, geti(tabCol, i)), with=F]
 		addTab[,c(tmName$matN, tmName$matRow):=list(1, 1:nrow(addTab))]
 		colShiftRef(addTab, c(tmName$matN, tmName$matRow), 1)
 
 		addMat <- as.matrix(obji[, colj(obji, geti(matCol, i)), with=F])
-	
-		addMatDim <- setnames(data.table(1, ncol(addMat)), c(tmName$matN, tmName$matCols))
-		
+
+
+		if (! is.null(dims)) {
+			dim <- dims[[i]]
+			#generate names for dims
+			names <- c(1:length(dim))
+			names <- paste("dim", names, sep = "")
+
+			#set matDim
+			addMatDim <- setnames(data.table(c(1)), c(tmName$matN))
+			addMatDim[,names := as.list(dim), with=F]
+		} else {
+			addMatDim <- setnames(data.table(1, ncol(addMat)), c(tmName$matN, tmName$matCols))
+		}
 		obj <- rbind(obj, tableMatrixWrap(addTab, list(addMat), addMatDim, setKey=T))
 	}
 	setkeyv(obj$tab, c(tmName$matN, tmName$matRow))
@@ -541,10 +569,40 @@ rbind.tableList <- function(..., use.names=TRUE, fill=FALSE) {
 	return(obj)
 }
 
-#' Binding tableMatrix
+#' S3 method to bind tableMatrix objects by row
 #' 
-#' Binding rows of tableMatrix objects
+#' \code(rbind.tableMatrix) binds tableMatrix objects together. If matrix
+#' parts have same dimensions, it only adds row in tab and mat part. Otherwise
+#' it will create new matrix in mat object.
+#'
+#' @param ... List of tableMatrix objects
+#' @param use.names Just as use.names in data.table
+#' @param fill Justas fill in data.table
+#'
+#' 
+#' @return A tableMatrix object
 #' @export
+#' @examples 
+#' data(images8by8)
+#' dim(images8by8)
+#' 
+#' data(images10by10)
+#' dim(images10by10) 
+#' 
+#' image1 <- tableMatrix(images8By8, list(r=c(1:3)), list(j=c(4:ncol(images8By8))))
+#' image2 <- tableMatrix(images10By10, list(r=c(1:3)), list(j=c(4:ncol(images10By10))))
+#'
+#' #Table matrix objects have different matrix part
+#' together1 <- rbind(image1, image2)
+#' length(mat(together1))
+#' tab(together1)
+#'
+#' #Table matrix objects have same matrix part
+#' together2 <- rbind(image1, image1)
+#' length(mat(together2))
+#' tab(together2)
+
+
 rbind.tableMatrix <- function(..., use.names=TRUE, fill=FALSE) {
 
 	argsList <- list(...)

@@ -4,7 +4,7 @@
 \alias{tableMatrix}
 \title{S3 class tableMatrix object}
 \usage{
-tableMatrix(dataList, tabCol, matCol)
+tableMatrix(dataList, tabCol, matCol, dims = NULL)
 }
 \arguments{
 \item{dataList}{List of data.frames or data.tables}
@@ -12,6 +12,8 @@ tableMatrix(dataList, tabCol, matCol)
 \item{tabCol}{List of table attribute columns names or indices}
 
 \item{matCol}{List of matrix attribute columns names or indices}
+
+\item{dims}{List of dimensions of matrix parts}
 }
 \value{
 A tableMatrix object
@@ -20,7 +22,9 @@ A tableMatrix object
 \code{tableMatrix} constructor, creates tableMatrix object from a list of data.frames or 
 data.tables. It combines features of data.table and matrix. The result is faster access to 
 data. It is useful for datasets which have following condition: the main data could be stored 
-as matrix and other columns are for description.
+as matrix and other columns are for description. 
+\code{tableMatrix} consists of 3 mandatory parts. Tab (table part) part is used for storing descriptors 
+of data, mat (matrix part) for storing main data and matDim - dimensions of matrix part.
 }
 \examples{
 data(images8By8)
@@ -28,17 +32,22 @@ dim(images8By8)
 
 data(images10By10)
 dim(images10By10)
-images10By10AsTable <- as.data.table(images10by10) 
+images10By10AsTable <- as.data.table(images10By10) 
 
 #Use data.frame as data, first 3 columns as data descriptors, rest as part for matrix
 tableMatrix(images8By8, list(r=c(1:3)), list(j=c(4:ncol(images8By8))))
 
 #Use data.table as data, first 3 columns as data descriptors, rest as part for matrix
-tableMatrix(images10By10AsTable, list(r=c(1:3)), list(j=c(4:ncol(images10By10AsTable ))))
+tableMatrix(images10By10AsTable, list(r=c(1:3)), list(j=c(4:ncol(images10By10AsTable))))
 
 #Use data.frame as data, first 2 columns as data descriptors with column names, 
 #rest as part for matrix
 tableMatrix(images8By8, list(r=c("shape","dimX","dimY")), list(j=c(4:ncol(images8By8))))
+
+#Example of using parameter dims - each row of data consists of meta data (first three columns) and main
+data - pixels of image. Original resolution of the image was 8x8.
+image <- tableMatrix(images8By8, list(r=c(1:3)), list(j=c(4:ncol(images8By8))), list(c(8,8)))
+matDim(image)
 
 \dontrun{
 tableMatrix(images8By8, list(c("shape","dimX","dimY")), list(c(4:ncol(images8By8))))	
