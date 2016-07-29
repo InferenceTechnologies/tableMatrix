@@ -7,38 +7,47 @@
 rbind.tableMatrix(..., use.names = TRUE, fill = FALSE)
 }
 \arguments{
-\item{...}{List of tableMatrix objects}
+\item{...}{List of \code{tableMatrix}. Objects to be bind together. Their tab
+or mat part can be different.}
 
-\item{use.names}{Just as use.names in data.table}
+\item{use.names}{Just as use.names in data.table. If \code{TRUE} items are bound
+by matching column names. Default \code{TRUE}.}
 
-\item{fill}{Justas fill in data.table}
+\item{fill}{Just as fill in data.table. Used when tab parts are different. Fills
+missing columns with NAs. If \code{TRUE}, \code{user.names} has to be \code{TRUE}.
+Default \code{FALSE}}
 }
 \value{
 A tableMatrix object
 }
 \description{
-\code{rbind.tableMatrix} binds tableMatrix objects together. If matrix
-parts have same dimensions, it only adds row in tab and mat part. Otherwise
-it will create new matrix in mat object.
+Takes a sequence of \code{tableMatrix} arugments and combine them by row. If 
+matrix parts have same dimensions, it only adds rows in tab and mat part. 
+Otherwiseit will add new matrix to mat part of \code{tableMatrix}.
 }
 \examples{
-data(images8by8)
-dim(images8by8)
+data(images8By8)
+dim(images8By8)
 
-data(images10by10)
-dim(images10by10) 
+data(images10By10)
+dim(images10By10) 
 
-image1 <- tableMatrix(images8By8, list(r=c(1:3)), list(j=c(4:ncol(images8By8))))
-image2 <- tableMatrix(images10By10, list(r=c(1:3)), list(j=c(4:ncol(images10By10))))
+image8By8TM <- tableMatrix(images8By8, list(c(1:3)), list(c(4:ncol(images8By8))))
+#Only first two columns are used for tab part
+image8By8TM2 <- tableMatrix(images8By8, list(c(1,2)), list(c(4:ncol(images8By8))))
+image10By10TM <- tableMatrix(images10By10, list(r=c(1,3)), list(j=c(4:ncol(images10By10))))
 
-#Table matrix objects have different matrix part
-together1 <- rbind(image1, image2)
+#Different matrix part, another matrix is created in mat
+together1 <- rbind(image8By8TM , image10By10TM)
 length(mat(together1))
 tab(together1)
 
-#Table matrix objects have same matrix part
-together2 <- rbind(image1, image1)
+#Same mat and tab part
+together2 <- rbind(image8By8TM , image8By8TM)
 length(mat(together2))
 tab(together2)
+
+#Different number/names of columns of tabs, fill=TRUE must be used
+rbind(image8By8TM,image8By8TM2, fill=TRUE)
 }
 

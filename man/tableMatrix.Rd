@@ -34,10 +34,17 @@ A tableMatrix object
 data.frames or data.tables. It combines features of data.table and matrix. 
 The result is faster access to data. It is useful for datasets which have 
 following condition: the main data could be stored as matrix and other 
-columns are for description. 
+columns are for description.
+}
+\details{
 \code{tableMatrix} is a S3 class which consists of 3 mandatory parts. 
 Tab (table part) part is used for storing descriptors of data, mat (matrix part) 
-for storing main data and matDim - dimensions of matrix part.
+for storing main data and matDim - dimensions of matrix part. 
+Mat is list of matrices. Tab is \code{data.table}. Its first column, \code{tm.matN} 
+tells index of matrix in mat to which is row connected to. Second column 
+\code{tm.matRow} is index of row in this matrix. MatDim is \code{data.table}. It
+has one mandatory column \code{tm.Matn} which is index of matrix in mat to which 
+is row connected to.
 }
 \examples{
 data(images8By8)
@@ -61,7 +68,7 @@ tableMatrix(images8By8, 1:3, 4:ncol(images8By8), c(8,8))
 
 #Use named dims
 dims <- c(8,8)
-names(dims) <- ("dimX", "dimY")
+names(dims) <- c("dimX", "dimY")
 namedDimsTableMatrix <- tableMatrix(images8By8, c(1:3), c(4:ncol(images8By8)), dims)
 matDim(namedDimsTableMatrix)
 
@@ -86,7 +93,7 @@ length(mat(both)) # number of matrix parts
 bothWithoutSpecDims <- tableMatrix(list(images8By8, images10By10), 
   list(r=c("direction","dimY"), j=c("direction","dimX","dimY")),
   list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
-matDim(obthWithoutSpecDims)
+matDim(bothWithoutSpecDims)
 length(mat(bothWithoutSpecDims)) # number of matrix parts - 2
 
 #Combination of two data.frames which have the same matrix part. Only one mat is created.

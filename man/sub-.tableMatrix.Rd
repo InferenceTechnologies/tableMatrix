@@ -6,7 +6,12 @@
 \usage{
 \method{[}{tableMatrix}(x, ...)
 }
+\arguments{
+\item{x}{\code{table.matrix}.}
+
+\item{...}{Sequence of data.table parameters.}
+}
 \description{
-S3 tableMatrix method passes data.table parameters to the table attribute
+S3 tableMatrix method to pass data.table parameters to the table attribute.
 }
 
