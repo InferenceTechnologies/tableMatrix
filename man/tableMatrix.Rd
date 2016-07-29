@@ -7,24 +7,37 @@
 tableMatrix(dataList, tabCol, matCol, dims = NULL)
 }
 \arguments{
-\item{dataList}{List of data.frames or data.tables}
+\item{dataList}{Data.frame, data.table or list of data.frame (data.table).
+Data from which is \code{tableMatrix} created. All datasets must have the same descriptor
+columns, matrix parts can be different.}
 
-\item{tabCol}{List of table attribute columns names or indices}
+\item{tabCol}{Integer or character vector, list of vectors. Specifies columns 
+names or indices of description part. Name \code{j} or \code{r} can be used when it is list. 
+\code{j} option means that names or indices are listed, \code{r} option specifies 
+from to names (indices). By default or if it is vector, \code{j} is used.}
 
-\item{matCol}{List of matrix attribute columns names or indices}
+\item{matCol}{Integer or character vector, list of vectors. Specifies columns
+names or indices. Name \code{j} or \code{r} can be used. \code{j} option means that names 
+or indices are listed, \code{r} option specifies from to names (indices). 
+By default or if it is vector \code{j} is used.}
 
-\item{dims}{List of dimensions of matrix parts}
+\item{dims}{Numeric vector, \code{list} of vectors. Specifies dimensions of matDim.
+If no names of column atributes are given, colums \code{dim}+number are generated. By default is matDim 
+\code{data.table} with column names \code{tmName$matN} (index of matrix) and 
+\code{tmName$matCols} (number of matrix part columns) .}
 }
 \value{
 A tableMatrix object
 }
 \description{
-\code{tableMatrix} constructor, creates tableMatrix object from a list of data.frames or 
-data.tables. It combines features of data.table and matrix. The result is faster access to 
-data. It is useful for datasets which have following condition: the main data could be stored 
-as matrix and other columns are for description. 
-\code{tableMatrix} consists of 3 mandatory parts. Tab (table part) part is used for storing descriptors 
-of data, mat (matrix part) for storing main data and matDim - dimensions of matrix part.
+\code{tableMatrix} constructor, creates tableMatrix object from a list of 
+data.frames or data.tables. It combines features of data.table and matrix. 
+The result is faster access to data. It is useful for datasets which have 
+following condition: the main data could be stored as matrix and other 
+columns are for description. 
+\code{tableMatrix} is a S3 class which consists of 3 mandatory parts. 
+Tab (table part) part is used for storing descriptors of data, mat (matrix part) 
+for storing main data and matDim - dimensions of matrix part.
 }
 \examples{
 data(images8By8)
@@ -34,23 +47,53 @@ data(images10By10)
 dim(images10By10)
 images10By10AsTable <- as.data.table(images10By10) 
 
-#Use data.frame as data, first 3 columns as data descriptors, rest as part for matrix
-tableMatrix(images8By8, list(r=c(1:3)), list(j=c(4:ncol(images8By8))))
+basicTableMatrix <- tableMatrix(images8By8, c(1:3), c(4:ncol(images8By8)))
+matDim(basicTableMatrix) # show matDim
+tab(basicTableMatrix) # show descriptor part of tableMatrix
+head(mat(basicTableMatrix)[[1]]) #show head of main part - matrix
+tableMatrix(images8By8, c("direction","dimY"), c(4:ncol(images8By8)))
+
+#Use one data.frame, vector to use as data descriptors and another vector to be used as matrix data, matDim is 8x8 
+tableMatrix(images8By8, c("direction","dimX","dimY"), c(4:ncol(images8By8)), c(8,8))
+tableMatrix(images8By8, c(1,2,3), c(4:ncol(images8By8)), c(8,8)) 
+tableMatrix(images8By8, c(1:3), c(4:ncol(images8By8)), c(8,8))
+tableMatrix(images8By8, 1:3, 4:ncol(images8By8), c(8,8))
+
+#Use named dims
+dims <- c(8,8)
+names(dims) <- ("dimX", "dimY")
+namedDimsTableMatrix <- tableMatrix(images8By8, c(1:3), c(4:ncol(images8By8)), dims)
+matDim(namedDimsTableMatrix)
+
+#Use one data.frame, list with one vector as data descriptors with "r" option, list with 1 vector as part for matrix "r" option 
+tableMatrix(images8By8, list(r=c(1,3)), list(r=c(4,ncol(images8By8)))) # first three columns in tab, rest in mat
+tableMatrix(images8By8, list(r=c(1:3)), list(r=c(4:ncol(images8By8)))) # first three columns in tab, rest in mat 
+
+#Use one data.frame, list with one vector as data descriptors with "j" option, list with 1 vector as part for matrix "r" option 
+tableMatrix(images8By8, list(j=c(1,3)), list(j=c(4,ncol(images8By8)))) # first and third column is in tab, fourth and last in mat
+tableMatrix(images8By8, list(j=c(1:3)), list(j=c(4:ncol(images8By8)))) # first three columns in tab, rest in mat 
 
 #Use data.table as data, first 3 columns as data descriptors, rest as part for matrix
-tableMatrix(images10By10AsTable, list(r=c(1:3)), list(j=c(4:ncol(images10By10AsTable))))
+tableMatrix(images10By10AsTable, c(1:3), (4:ncol(images10By10AsTable)))
 
-#Use data.frame as data, first 2 columns as data descriptors with column names, 
-#rest as part for matrix
-tableMatrix(images8By8, list(r=c("shape","dimX","dimY")), list(j=c(4:ncol(images8By8))))
+#Combination of data.frame and data.table. Each dataset has different matrix part so two matrices are created
+both <- tableMatrix(list(images8By8, images10By10), list(r=c("direction","dimY"),
+j=c("direction","dimX","dimY")), list(c(4:ncol(images8By8)),c(4:ncol(images10By10))),
+list(c(8,8), c(10,10)))
+matDim(both)
+length(mat(both)) # number of matrix parts
 
-#Example of using parameter dims - each row of data consists of meta data (first three columns) and main
-data - pixels of image. Original resolution of the image was 8x8.
-image <- tableMatrix(images8By8, list(r=c(1:3)), list(j=c(4:ncol(images8By8))), list(c(8,8)))
-matDim(image)
+bothWithoutSpecDims <- tableMatrix(list(images8By8, images10By10), 
+  list(r=c("direction","dimY"), j=c("direction","dimX","dimY")),
+  list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
+matDim(obthWithoutSpecDims)
+length(mat(bothWithoutSpecDims)) # number of matrix parts - 2
 
-\dontrun{
-tableMatrix(images8By8, list(c("shape","dimX","dimY")), list(c(4:ncol(images8By8))))	
-}
+#Combination of two data.frames which have the same matrix part. Only one mat is created.
+bothSameMatrixPart <- tableMatrix(list(images8By8, images8By8), list(r=c("direction","dimY"), j=c("direction","dimX","dimY")),
+list(j=c(4:ncol(images8By8)),c(4:ncol(images8By8))))
+matDim(bothSameMatrixPart)
+length(mat(bothSameMatrixPart)) # number of matrix parts - only 1
+
 }
 

@@ -17,7 +17,7 @@ rbind.tableMatrix(..., use.names = TRUE, fill = FALSE)
 A tableMatrix object
 }
 \description{
-\code(rbind.tableMatrix) binds tableMatrix objects together. If matrix
+\code{rbind.tableMatrix} binds tableMatrix objects together. If matrix
 parts have same dimensions, it only adds row in tab and mat part. Otherwise
 it will create new matrix in mat object.
 }

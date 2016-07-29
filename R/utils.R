@@ -16,8 +16,13 @@
 # rb - column range, numeric or character, border columns excluded
 colj <- function(obj, col, do="j", sortj=FALSE, numj=TRUE) {
 
+	# maybe not needed anymore?
 	if (!is.list(col)) {
 		col <- list(col)
+		names(col) <- do
+	}
+
+	if (is.null(names(col))) {
 		names(col) <- do
 	}
 
@@ -97,6 +102,9 @@ colShiftRef <- function(obj, colSrc, colDest, destInSrc="doNothing") {
 geti <- function(obj, i) {
 
 	if (is.null(obj)) { return(NULL) }
+
+	# case when obj is vector 
+	if (! is.list(obj)) { obj <- list(obj) }
 	return(obj[ifelse(i>length(obj), length(obj), i)])
 }
 
