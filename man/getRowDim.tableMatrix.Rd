@@ -2,11 +2,37 @@
 % Please edit documentation in R/tableMatrix.R
 \name{getRowDim.tableMatrix}
 \alias{getRowDim.tableMatrix}
-\title{Get row dim}
+\title{Method to get row dim}
 \usage{
 \method{getRowDim}{tableMatrix}(obj, i = NULL, repo = NULL)
 }
+\arguments{
+\item{obj}{\code{tableMatrix} object.}
+
+\item{i}{Integer. Index of row in tab. Default NULL.}
+
+\item{repo}{Numeric vector. Vector of 2 elements - matRow and matRow. Default NULL.}
+}
 \description{
-tableMatrix method to get row dim
+\code{tableMatrix} method to get row dim which is stored in matDim.
+}
+\examples{
+data(images8By8)
+data(images10By10)
+
+tm <- tableMatrix(list(images8By8, images10By10), 
+list(r=c(1,3), r=c(1,3)),
+list(r=c(4,ncol(images8By8)),r=c(4,ncol(images10By10))),list(c(8,8),c(10,10)),dimNames =c("dimX", "dimY"))
+matDim(tm)
+tab(tm) 
+
+getRowDim(tm,1)
+
+#2nd matrix in mat, 1st row
+getRowDim(tm,91)
+
+#Same as previous 
+getRowDim(tm,repo=c(2,1))
+
 }
 

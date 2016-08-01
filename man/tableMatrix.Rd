@@ -4,7 +4,7 @@
 \alias{tableMatrix}
 \title{S3 class tableMatrix object}
 \usage{
-tableMatrix(dataList, tabCol, matCol, dims = NULL)
+tableMatrix(dataList, tabCol, matCol, dims = NULL, dimNames = NULL)
 }
 \arguments{
 \item{dataList}{Data.frame, data.table or list of data.frame (data.table).
@@ -22,7 +22,11 @@ or indices are listed, \code{r} option specifies from to names (indices).
 By default or if it is vector \code{j} is used.}
 
 \item{dims}{Numeric vector, \code{list} of vectors. Specifies dimensions of matDim.
-If no names of column atributes are given, colums \code{dim}+number are generated. By default is matDim 
+If no names of column atributes are given or dimNames is NULL, colums \code{dim}+number are generated.
+Default NULL.}
+
+\item{dimNames}{Character vector. Specifies names in matDim part of object.
+Default NULL. 
 \code{data.table} with column names \code{tmName$matN} (index of matrix) and 
 \code{tmName$matCols} (number of matrix part columns) .}
 }
@@ -99,6 +103,10 @@ bothWithoutSpecDims <- tableMatrix(list(images8By8, images10By10),
   list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
 matDim(bothWithoutSpecDims)
 length(mat(bothWithoutSpecDims)) # number of matrix parts - 2
+
+tableMatrix(list(images8By8, images10By10), 
+list(r=c("direction","dimY"), j=c("direction","dimX","dimY")),
+list(c(4:ncol(images8By8)),c(4:ncol(images10By10))),list(c(8,8),c(10,10)),dimNames =c("dimX", "dimY"))
 
 #Combination of two data.frames which have the same matrix part. Only one matrix in mat is created.
 bothSameMatrixPart <- tableMatrix(list(images8By8, images8By8), list(r=c("direction","dimY"), j=c("direction","dimX","dimY")),

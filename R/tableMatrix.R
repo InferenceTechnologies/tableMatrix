@@ -25,7 +25,7 @@ tmName <- list(matN="tm.matN", matRow="tm.matRow", matCols="tm.matCols", allRow=
 # Classes Constructors
 #
 
-# Wraps tableList components
+# Wraps tableList components together.
 tableListWrap <- function(tab=data.table(), aid=list(), objClass=NULL) {
 
 	obj <- list()
@@ -42,14 +42,14 @@ tableListWrap <- function(tab=data.table(), aid=list(), objClass=NULL) {
 }
 
 
-#' Creates tableList object
+#' S3 class tableList object
 #' 
-#' \code{tableList} constructor, creates tableList obj from a data.frame or data.table and from a aid list
+#' \code{tableList} constructor, creates tableList object obj from a data.frame or data.table. 
+#' and from a aid list. 
 #' @param tabData data.frame or data.table
 #' @param aidData Aid list data
 #' @return A tableList object
 #' @export 
-#' @examples
 #' 
 #' 
 tableList <- function(tabData, aidData) {
@@ -116,7 +116,10 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' or indices are listed, \code{r} option specifies from to names (indices). 
 #' By default or if it is vector \code{j} is used.
 #' @param dims Numeric vector, \code{list} of vectors. Specifies dimensions of matDim.
-#' If no names of column atributes are given, colums \code{dim}+number are generated. By default is matDim 
+#' If no names of column atributes are given or dimNames is NULL, colums \code{dim}+number are generated.
+#' Default NULL. 
+#' @param dimNames Character vector. Specifies names in matDim part of object.
+#' Default NULL. 
 #' \code{data.table} with column names \code{tmName$matN} (index of matrix) and 
 #' \code{tmName$matCols} (number of matrix part columns) .
 #' @return A tableMatrix object
@@ -175,6 +178,10 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' matDim(bothWithoutSpecDims)
 #' length(mat(bothWithoutSpecDims)) # number of matrix parts - 2
 #'
+#' tableMatrix(list(images8By8, images10By10), 
+#' list(r=c("direction","dimY"), j=c("direction","dimX","dimY")),
+#' list(c(4:ncol(images8By8)),c(4:ncol(images10By10))),list(c(8,8),c(10,10)),dimNames =c("dimX", "dimY"))
+#'
 #' #Combination of two data.frames which have the same matrix part. Only one matrix in mat is created.
 #' bothSameMatrixPart <- tableMatrix(list(images8By8, images8By8), list(r=c("direction","dimY"), j=c("direction","dimX","dimY")),
 #' list(j=c(4:ncol(images8By8)),c(4:ncol(images8By8))))
@@ -182,7 +189,7 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' length(mat(bothSameMatrixPart)) # number of matrix parts - only 1
 #'
 
-tableMatrix <- function(dataList, tabCol, matCol, dims=NULL) {
+tableMatrix <- function(dataList, tabCol, matCol, dims=NULL, dimNames=NULL) {
 
 	obj <- tableMatrixWrap()
 	if (missing(dataList)) { return(obj) }
@@ -220,11 +227,16 @@ tableMatrix <- function(dataList, tabCol, matCol, dims=NULL) {
 		if (! is.null(dims)) {
 			dim <- dims[[i]]
 			#generate names for dims
-			if (is.null(names(dim))) {
+			if (is.null(names(dim)) && is.null(dimNames)) {
 				names <- c(1:length(dim))
 				names <- paste("dim", names, sep = "")
 			} else {
-				names <- names(dim)
+				#names are taken from param
+				if (is.null(names(dim))) {
+					names <- dimNames 
+				} else {
+					names <- names(dim)
+				}
 			}
 
 			#set matDim
@@ -331,11 +343,12 @@ aid.tableList <- function(obj) {	return(obj$aid) }
 #' Function to get or set table attribute of \code{tableMatrix} object.
 #'
 #' @param obj \code{tableMatrix} object.
-#' @param matN index of list in mat part of \code{tableMatrix}. Default NULL.
-#' @param addRow Boolean. When specified, column \code{tm.allRow} with row 
+#' @param matN Integer. Index of list in mat part of \code{tableMatrix}. Default NULL.
+#' @param addRow Logical. When specified, column \code{tm.allRow} with row 
 #' number is added.  Default FALSE.
 #' @param resetN Integer. Used only when matN is specified. When FALSE
 #' matN of returned tab won't be reseted to 1. Default NULL.
+#' @return Table part of \code{tableMatrix}
 #' @examples
 #' data(images8By8)
 #' data(images10By10)
@@ -396,14 +409,14 @@ tab.tableMatrix <- function(obj, matN=NULL, addRow=FALSE, resetN=NULL) {
 #' of list of matrices.
 #'
 #' @param obj \code{tableMatrix} object.
-#' @param matN index of list in mat part of \code{tableMatrix}.
-#' When NULL, whole list of  Default NULL.
+#' @param matN Integer. Index of list in mat part of \code{tableMatrix}.
+#' When NULL, whole mat is returned  Default NULL.
 #' @rdname mat.tableMatrix
 #' 
 #' @examples
 #' data(images8By8)
 #' data(images10By10)
-#' data(images10By10)
+#' data(images15By15)
 #'
 #' tm <- tableMatrix(list(images8By8, images10By10), list(c(1:3), c(1:3)),
 #' list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
@@ -434,8 +447,26 @@ mat.tableMatrix <- function(obj, matN=NULL) {
 
 #' Get or set matDim attribute
 #' 
-#' tableMatrix method to get or set matDim attribute
+#' \code{tableMatrix} method to get or set matDim attribute
+#' @param obj \code{tableMatrix} object.
+#' @param matN Integer. Index of list in mat part of \code{tableMatrix}. 
+#' Default NULL. When NULL, all rows from matDim are returned.
+#' @param resetN Logical. When TRUE, returned matDim has matN=1. Default FALSE.
 #' @rdname matDim.tableMatrix
+#' @examples
+#' data(images8By8)
+#' data(images10By10)
+#' data(images15By15)
+#'
+#' tm <- tableMatrix(list(images8By8, images10By10), list(c(1:3), c(1:3)),
+#' list(r=c(4,ncol(images8By8)),r=c(4,ncol(images10By10))))
+#' tm2 <- tableMatrix(images15By15, 1:3, 4:ncol(images15By15))
+#'
+#' matDim(tm)
+#' 
+#' matDim(tm, 2)
+#' 
+#' matDim(tm) <- matDim(tm2) 
 #' @export
 matDim.tableMatrix <- function(obj, matN=NULL, resetN=FALSE) {	
 
@@ -461,10 +492,28 @@ matDim.tableMatrix <- function(obj, matN=NULL, resetN=FALSE) {
 	return(obj) 
 }
 
-#' Get a row repo
+#' Method to get a row repo
 #' 
-#' tableMatrix method to get row repo for the matrix attribute
+#' \code{tableMatrix} method to get row repo (vector of matN and matRow) for the matrix attribute
+#' @param obj \code{tableMatrix} object.
+#' @param i Integer. Index of row in tab. Default NULL.
+#' @param repo Numeric vector. Vector of 2 elements - matRow and matRow. Default NULL.
 #' @export
+#' @examples
+#' data(images8By8)
+#' data(images10By10)
+#'
+#' tm <- tableMatrix(list(images8By8, images10By10), list(c(1:3), c(1:3)),
+#' list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
+#' 
+#' #1st matrix, 2nd row
+#' getRowRepo(tm,2)
+#'
+#' #2nd matrix, 1st row  
+#' getRowRepo(tm, 91)
+#'
+#' #Same result as previous
+#' getRowRepo(tm, repo=c(2,1))
 getRowRepo.tableMatrix <- function(obj, i=NULL, repo=NULL) {	
 
 	# if (is.null(repo)) { return(as.integer(obj$tab[i,c(tmName$matN,tmName$matRow),with=F])) }
@@ -474,8 +523,27 @@ getRowRepo.tableMatrix <- function(obj, i=NULL, repo=NULL) {
 
 #' Get or set row from the matrix attribute
 #' 
-#' tableMatrix method to get or set a row from the matrix attribute
+#' \code{tableMatrix} method to get or set a row from the matrix attribute
+#' @param obj \code{tableMatrix} object.
+#' @param value Vector for setting value.
+#' @param i Integer. Index of row in tab. Default NULL.
+#' @param repo Numeric vector. Vector of 2 elements - matRow and matRow. Default NULL.
 #' @rdname getRow.tableMatrix
+#' @examples
+#' data(images8By8)
+#' data(images10By10)
+#'
+#' tm <- tableMatrix(list(images8By8, images10By10), list(c(1:3), c(1:3)),
+#' list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
+#'
+#' #Returns 1st row of 2nd matrix in mat
+#' row <- getRow(tm, 91)
+#'
+#' getRow(tm, repo=c(2,1))
+#'
+#' tm2 <- setRow(tm, rep(2,length(row)),91)
+#' getRow(tm2, 91)
+#' 
 #' @export
 getRow.tableMatrix <- function(obj, i=NULL, repo=NULL) {	
 
@@ -491,10 +559,31 @@ setRow.tableMatrix <- function(obj, value, i=NULL, repo=NULL) {
 	return(obj) 
 }
 
-#' Get row dim
+#' Method to get row dim
 #' 
-#' tableMatrix method to get row dim
+#' \code{tableMatrix} method to get row dim which is stored in matDim.
+#' @param obj \code{tableMatrix} object.
+#' @param i Integer. Index of row in tab. Default NULL.
+#' @param repo Numeric vector. Vector of 2 elements - matRow and matRow. Default NULL.
 #' @export
+#' @examples
+#' data(images8By8)
+#' data(images10By10)
+#'
+#' tm <- tableMatrix(list(images8By8, images10By10), 
+#' list(r=c(1,3), r=c(1,3)),
+#' list(r=c(4,ncol(images8By8)),r=c(4,ncol(images10By10))),list(c(8,8),c(10,10)),dimNames =c("dimX", "dimY"))
+#' matDim(tm)
+#' tab(tm) 
+#'
+#' getRowDim(tm,1)
+#'
+#' #2nd matrix in mat, 1st row
+#' getRowDim(tm,91)
+#'
+#' #Same as previous 
+#' getRowDim(tm,repo=c(2,1))
+#'
 getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL) {	
 
 	repo <- getRowRepo(obj, i, repo)
@@ -822,7 +911,7 @@ is.tableList <- function(obj) {
 	return(FALSE)
 }
 
-#' tableMatrix testing
+#' Method to test class of object
 #' 
 #' Tests if passed obj is of class tableMatrix
 #' @export

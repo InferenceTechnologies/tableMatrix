@@ -9,7 +9,30 @@
 
 \method{matDim}{tableMatrix}(obj) <- value
 }
+\arguments{
+\item{obj}{\code{tableMatrix} object.}
+
+\item{matN}{Integer. Index of list in mat part of \code{tableMatrix}. 
+Default NULL. When NULL, all rows from matDim are returned.}
+
+\item{resetN}{Logical. When TRUE, returned matDim has matN=1. Default FALSE.}
+}
 \description{
-tableMatrix method to get or set matDim attribute
+\code{tableMatrix} method to get or set matDim attribute
+}
+\examples{
+data(images8By8)
+data(images10By10)
+data(images15By15)
+
+tm <- tableMatrix(list(images8By8, images10By10), list(c(1:3), c(1:3)),
+list(r=c(4,ncol(images8By8)),r=c(4,ncol(images10By10))))
+tm2 <- tableMatrix(images15By15, 1:3, 4:ncol(images15By15))
+
+matDim(tm)
+
+matDim(tm, 2)
+
+matDim(tm) <- matDim(tm2) 
 }
 

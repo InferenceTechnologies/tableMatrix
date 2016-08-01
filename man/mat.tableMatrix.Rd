@@ -12,8 +12,8 @@
 \arguments{
 \item{obj}{\code{tableMatrix} object.}
 
-\item{matN}{index of list in mat part of \code{tableMatrix}.
-When NULL, whole list of  Default NULL.}
+\item{matN}{Integer. Index of list in mat part of \code{tableMatrix}.
+When NULL, whole mat is returned  Default NULL.}
 }
 \description{
 \code{tableMatrix} method to get or set matrix attribute. Mat consists
@@ -22,7 +22,7 @@ of list of matrices.
 \examples{
 data(images8By8)
 data(images10By10)
-data(images10By10)
+data(images15By15)
 
 tm <- tableMatrix(list(images8By8, images10By10), list(c(1:3), c(1:3)),
 list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))

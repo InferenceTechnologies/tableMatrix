@@ -9,7 +9,32 @@
 
 \method{setRow}{tableMatrix}(obj, value, i = NULL, repo = NULL)
 }
+\arguments{
+\item{obj}{\code{tableMatrix} object.}
+
+\item{i}{Integer. Index of row in tab. Default NULL.}
+
+\item{repo}{Numeric vector. Vector of 2 elements - matRow and matRow. Default NULL.}
+
+\item{value}{Vector for setting value.}
+}
 \description{
-tableMatrix method to get or set a row from the matrix attribute
+\code{tableMatrix} method to get or set a row from the matrix attribute
+}
+\examples{
+data(images8By8)
+data(images10By10)
+
+tm <- tableMatrix(list(images8By8, images10By10), list(c(1:3), c(1:3)),
+list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
+
+#Returns 1st row of 2nd matrix in mat
+row <- getRow(tm, 91)
+
+getRow(tm, repo=c(2,1))
+
+tm2 <- setRow(tm, rep(2,length(row)),91)
+getRow(tm2, 91)
+
 }
 

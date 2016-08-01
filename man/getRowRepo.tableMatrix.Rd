@@ -2,11 +2,34 @@
 % Please edit documentation in R/tableMatrix.R
 \name{getRowRepo.tableMatrix}
 \alias{getRowRepo.tableMatrix}
-\title{Get a row repo}
+\title{Method to get a row repo}
 \usage{
 \method{getRowRepo}{tableMatrix}(obj, i = NULL, repo = NULL)
 }
+\arguments{
+\item{obj}{\code{tableMatrix} object.}
+
+\item{i}{Integer. Index of row in tab. Default NULL.}
+
+\item{repo}{Numeric vector. Vector of 2 elements - matRow and matRow. Default NULL.}
+}
 \description{
-tableMatrix method to get row repo for the matrix attribute
+\code{tableMatrix} method to get row repo (vector of matN and matRow) for the matrix attribute
+}
+\examples{
+data(images8By8)
+data(images10By10)
+
+tm <- tableMatrix(list(images8By8, images10By10), list(c(1:3), c(1:3)),
+list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
+
+#1st matrix, 2nd row
+getRowRepo(tm,2)
+
+#2nd matrix, 1st row  
+getRowRepo(tm, 91)
+
+#Same result as previous
+getRowRepo(tm, repo=c(2,1))
 }
 

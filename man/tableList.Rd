@@ -2,7 +2,7 @@
 % Please edit documentation in R/tableMatrix.R
 \name{tableList}
 \alias{tableList}
-\title{Creates tableList object}
+\title{S3 class tableList object}
 \usage{
 tableList(tabData, aidData)
 }
@@ -15,10 +15,7 @@ tableList(tabData, aidData)
 A tableList object
 }
 \description{
-\code{tableList} constructor, creates tableList obj from a data.frame or data.table and from a aid list
-}
-\examples{
-
-
+\code{tableList} constructor, creates tableList object obj from a data.frame or data.table. 
+and from a aid list.
 }
 

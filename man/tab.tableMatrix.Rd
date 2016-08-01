@@ -9,13 +9,16 @@
 \arguments{
 \item{obj}{\code{tableMatrix} object.}
 
-\item{matN}{index of list in mat part of \code{tableMatrix}. Default NULL.}
+\item{matN}{Integer. Index of list in mat part of \code{tableMatrix}. Default NULL.}
 
-\item{addRow}{Boolean. When specified, column \code{tm.allRow} with row 
+\item{addRow}{Logical. When specified, column \code{tm.allRow} with row 
 number is added.  Default FALSE.}
 
 \item{resetN}{Integer. Used only when matN is specified. When FALSE
 matN of returned tab won't be reseted to 1. Default NULL.}
+}
+\value{
+Table part of \code{tableMatrix}
 }
 \description{
 Function to get or set table attribute of \code{tableMatrix} object.
