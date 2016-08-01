@@ -44,11 +44,14 @@ tableListWrap <- function(tab=data.table(), aid=list(), objClass=NULL) {
 
 #' Creates tableList object
 #' 
-#' tableList constructor, creates tableList obj from a data.frame or data.table and from a aid list
+#' \code{tableList} constructor, creates tableList obj from a data.frame or data.table and from a aid list
 #' @param tabData data.frame or data.table
 #' @param aidData Aid list data
 #' @return A tableList object
 #' @export 
+#' @examples
+#' 
+#' 
 tableList <- function(tabData, aidData) {
 
 	if (missing(tabData)) { return(tableListWrap()) }
@@ -141,16 +144,20 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' #Use named dims
 #' dims <- c(8,8)
 #' names(dims) <- c("dimX", "dimY")
-#' namedDimsTableMatrix <- tableMatrix(images8By8, c(1:3), c(4:ncol(images8By8)), dims)
-#' matDim(namedDimsTableMatrix)
+#' namedDimsTM <- tableMatrix(images8By8, c(1:3), c(4:ncol(images8By8)), dims)
+#' matDim(namedDimsTM)
 #'
 #' #Use one data.frame, list with one vector as data descriptors with "r" option, list with 1 vector as part for matrix "r" option 
-#' tableMatrix(images8By8, list(r=c(1,3)), list(r=c(4,ncol(images8By8)))) # first three columns in tab, rest in mat
-#' tableMatrix(images8By8, list(r=c(1:3)), list(r=c(4:ncol(images8By8)))) # first three columns in tab, rest in mat 
+#' # first three columns in tab, rest in mat
+#' tableMatrix(images8By8, list(r=c(1,3)), list(r=c(4,ncol(images8By8)))) 
+#' # first three columns in tab, rest in mat 
+#' tableMatrix(images8By8, list(r=c(1:3)), list(r=c(4:ncol(images8By8)))) 
 #'
 #' #Use one data.frame, list with one vector as data descriptors with "j" option, list with 1 vector as part for matrix "r" option 
-#' tableMatrix(images8By8, list(j=c(1,3)), list(j=c(4,ncol(images8By8)))) # first and third column is in tab, fourth and last in mat
-#' tableMatrix(images8By8, list(j=c(1:3)), list(j=c(4:ncol(images8By8)))) # first three columns in tab, rest in mat 
+#' # first and third column is in tab, fourth and last in mat
+#' tableMatrix(images8By8, list(j=c(1,3)), list(j=c(4,ncol(images8By8)))) 
+#' # first three columns in tab, rest in mat 
+#' tableMatrix(images8By8, list(j=c(1:3)), list(j=c(4:ncol(images8By8)))) 
 #'
 #' #Use data.table as data, first 3 columns as data descriptors, rest as part for matrix
 #' tableMatrix(images10By10AsTable, c(1:3), (4:ncol(images10By10AsTable)))
@@ -168,7 +175,7 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' matDim(bothWithoutSpecDims)
 #' length(mat(bothWithoutSpecDims)) # number of matrix parts - 2
 #'
-#' #Combination of two data.frames which have the same matrix part. Only one mat is created.
+#' #Combination of two data.frames which have the same matrix part. Only one matrix in mat is created.
 #' bothSameMatrixPart <- tableMatrix(list(images8By8, images8By8), list(r=c("direction","dimY"), j=c("direction","dimX","dimY")),
 #' list(j=c(4:ncol(images8By8)),c(4:ncol(images8By8))))
 #' matDim(bothSameMatrixPart)
@@ -321,7 +328,39 @@ aid.tableList <- function(obj) {	return(obj$aid) }
 
 #' Get or set table attribute
 #'
-#' tableMatrix method to get or set table attribute
+#' Function to get or set table attribute of \code{tableMatrix} object.
+#'
+#' @param obj \code{tableMatrix} object.
+#' @param matN index of list in mat part of \code{tableMatrix}. Default NULL.
+#' @param addRow Boolean. When specified, column \code{tm.allRow} with row 
+#' number is added.  Default FALSE.
+#' @param resetN Integer. Used only when matN is specified. When FALSE
+#' matN of returned tab won't be reseted to 1. Default NULL.
+#' @examples
+#' data(images8By8)
+#' data(images10By10)
+#' data(images10By10)
+#'
+#' tm <- tableMatrix(list(images8By8, images10By10), list(c(1:3), c(1:3)),
+#' list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
+#' tm2 <- tableMatrix(images15By15, 1:3, 4:ncol(images15By15))
+#' matDim(tm)
+#' 
+#' tab(tm)
+#' 
+#' #get tab only from where matN is 1
+#' tab(tm,2)
+#' 
+#' #tm.allRow column is added
+#' tab(tm,2, TRUE)
+#' 
+#' #matN stays the same
+#' tab(tm,2, TRUE, FALSE)
+#' 
+#' \dontrun{
+#' tm[.(1)]$tab <- tab(tm2)
+#' } 
+#' 
 #' @export
 tab.tableMatrix <- function(obj, matN=NULL, addRow=FALSE, resetN=NULL) {	
 
@@ -332,7 +371,7 @@ tab.tableMatrix <- function(obj, matN=NULL, addRow=FALSE, resetN=NULL) {
 
 	if (addRow) {
 		objTab <- copy(objTab)
-		objTab[,c(tmName$allRow):=.I]
+		objTab[,c(tmName$allRow):=.I]		
 	}
 
 	if (!is.null(matN)) {
@@ -353,8 +392,28 @@ tab.tableMatrix <- function(obj, matN=NULL, addRow=FALSE, resetN=NULL) {
 
 #' Get or set matrix attribute
 #' 
-#' tableMatrix method to get or set matrix attribute
+#' \code{tableMatrix} method to get or set matrix attribute. Mat consists
+#' of list of matrices.
+#'
+#' @param obj \code{tableMatrix} object.
+#' @param matN index of list in mat part of \code{tableMatrix}.
+#' When NULL, whole list of  Default NULL.
 #' @rdname mat.tableMatrix
+#' 
+#' @examples
+#' data(images8By8)
+#' data(images10By10)
+#' data(images10By10)
+#'
+#' tm <- tableMatrix(list(images8By8, images10By10), list(c(1:3), c(1:3)),
+#' list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
+#' tm2 <- tableMatrix(images15By15, 1:3, 4:ncol(images15By15))
+#' mat(tm)
+#' 
+#' 
+#' head(mat(tm, 2))
+#' 
+#' mat(tm) <- mat(tm2) 
 #' @export
 mat.tableMatrix <- function(obj, matN=NULL) {
 
@@ -368,7 +427,7 @@ mat.tableMatrix <- function(obj, matN=NULL) {
 #' @export
 'mat<-.tableMatrix' <- function(obj, value) {
 	
-	if (!is.list(value)||!all(sapply(l, is.matrix))) { stop("list containing matricies required") }
+	if (!is.list(value)||!all(sapply(value, is.matrix))) { stop("list containing matrices required") }
 	obj$mat <- value
 	return(obj) 
 }
@@ -486,7 +545,7 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL) {
 #' S3 tableMatrix method to pass data.table parameters to the table attribute.
 #' @export
 #' @param x \code{table.matrix}.
-#' @param ... Sequence of data.table parameters.
+#' @param ... Sequence of parameters for \code{table.matrix}.
 '[.tableMatrix' <- function(x, ...) {
 
 	## copy first, then bracket 1

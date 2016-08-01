@@ -15,6 +15,10 @@ tableList(tabData, aidData)
 A tableList object
 }
 \description{
-tableList constructor, creates tableList obj from a data.frame or data.table and from a aid list
+\code{tableList} constructor, creates tableList obj from a data.frame or data.table and from a aid list
+}
+\examples{
+
+
 }
 

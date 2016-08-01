@@ -69,16 +69,20 @@ tableMatrix(images8By8, 1:3, 4:ncol(images8By8), c(8,8))
 #Use named dims
 dims <- c(8,8)
 names(dims) <- c("dimX", "dimY")
-namedDimsTableMatrix <- tableMatrix(images8By8, c(1:3), c(4:ncol(images8By8)), dims)
-matDim(namedDimsTableMatrix)
+namedDimsTM <- tableMatrix(images8By8, c(1:3), c(4:ncol(images8By8)), dims)
+matDim(namedDimsTM)
 
 #Use one data.frame, list with one vector as data descriptors with "r" option, list with 1 vector as part for matrix "r" option 
-tableMatrix(images8By8, list(r=c(1,3)), list(r=c(4,ncol(images8By8)))) # first three columns in tab, rest in mat
-tableMatrix(images8By8, list(r=c(1:3)), list(r=c(4:ncol(images8By8)))) # first three columns in tab, rest in mat 
+# first three columns in tab, rest in mat
+tableMatrix(images8By8, list(r=c(1,3)), list(r=c(4,ncol(images8By8)))) 
+# first three columns in tab, rest in mat 
+tableMatrix(images8By8, list(r=c(1:3)), list(r=c(4:ncol(images8By8)))) 
 
 #Use one data.frame, list with one vector as data descriptors with "j" option, list with 1 vector as part for matrix "r" option 
-tableMatrix(images8By8, list(j=c(1,3)), list(j=c(4,ncol(images8By8)))) # first and third column is in tab, fourth and last in mat
-tableMatrix(images8By8, list(j=c(1:3)), list(j=c(4:ncol(images8By8)))) # first three columns in tab, rest in mat 
+# first and third column is in tab, fourth and last in mat
+tableMatrix(images8By8, list(j=c(1,3)), list(j=c(4,ncol(images8By8)))) 
+# first three columns in tab, rest in mat 
+tableMatrix(images8By8, list(j=c(1:3)), list(j=c(4:ncol(images8By8)))) 
 
 #Use data.table as data, first 3 columns as data descriptors, rest as part for matrix
 tableMatrix(images10By10AsTable, c(1:3), (4:ncol(images10By10AsTable)))
@@ -96,7 +100,7 @@ bothWithoutSpecDims <- tableMatrix(list(images8By8, images10By10),
 matDim(bothWithoutSpecDims)
 length(mat(bothWithoutSpecDims)) # number of matrix parts - 2
 
-#Combination of two data.frames which have the same matrix part. Only one mat is created.
+#Combination of two data.frames which have the same matrix part. Only one matrix in mat is created.
 bothSameMatrixPart <- tableMatrix(list(images8By8, images8By8), list(r=c("direction","dimY"), j=c("direction","dimX","dimY")),
 list(j=c(4:ncol(images8By8)),c(4:ncol(images8By8))))
 matDim(bothSameMatrixPart)

@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{\code{table.matrix}.}
 
-\item{...}{Sequence of data.table parameters.}
+\item{...}{Sequence of parameters for \code{table.matrix}.}
 }
 \description{
 S3 tableMatrix method to pass data.table parameters to the table attribute.

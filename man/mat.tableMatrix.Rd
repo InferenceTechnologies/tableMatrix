@@ -9,7 +9,29 @@
 
 \method{mat}{tableMatrix}(obj) <- value
 }
+\arguments{
+\item{obj}{\code{tableMatrix} object.}
+
+\item{matN}{index of list in mat part of \code{tableMatrix}.
+When NULL, whole list of  Default NULL.}
+}
 \description{
-tableMatrix method to get or set matrix attribute
+\code{tableMatrix} method to get or set matrix attribute. Mat consists
+of list of matrices.
+}
+\examples{
+data(images8By8)
+data(images10By10)
+data(images10By10)
+
+tm <- tableMatrix(list(images8By8, images10By10), list(c(1:3), c(1:3)),
+list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
+tm2 <- tableMatrix(images15By15, 1:3, 4:ncol(images15By15))
+mat(tm)
+
+
+head(mat(tm, 2))
+
+mat(tm) <- mat(tm2) 
 }
 
