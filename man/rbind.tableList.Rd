@@ -6,7 +6,33 @@
 \usage{
 rbind.tableList(..., use.names = TRUE, fill = FALSE)
 }
+\arguments{
+\item{...}{List of \code{tableList}. Objects to be bind together.}
+
+\item{use.names}{Just as use.names in data.table. If \code{TRUE} items are bound
+by matching column names. Default \code{TRUE}.}
+
+\item{fill}{Just as fill in data.table. Used when tab parts are different. Fills
+missing columns with NAs. If \code{TRUE}, \code{user.names} has to be \code{TRUE}.
+Default \code{FALSE}.}
+}
 \description{
-Binding rows of tableList objects
+Binding rows of \code{tableList} objects.
+}
+\examples{
+data(images8By8)
+dim(images8By8)
+
+data(images10By10)
+dim(images8By8)
+
+tl1 <- tableList(images8By8[,1:3], NULL)
+tl2 <- tableList(images10By10[,1:3], NULL)
+tl3 <- tableList(images8By8[,1:2], NULL)
+
+rbind(tl1, tl2)
+
+#Different number of columns
+rbind(tl1, tl3, fill=TRUE)
 }
 

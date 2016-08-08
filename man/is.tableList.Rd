@@ -6,6 +6,9 @@
 \usage{
 is.tableList(obj)
 }
+\arguments{
+\item{obj}{\code{tableList} object}
+}
 \description{
 Tests if passed obj is of class tableList
 }

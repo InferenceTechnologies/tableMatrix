@@ -6,6 +6,11 @@
 \usage{
 \method{[[}{tableList}(x, ...)
 }
+\arguments{
+\item{x}{\code{tableList} object.}
+
+\item{...}{Sequence of parameters for \code{tableList}.}
+}
 \description{
 tableList method passes data.table parameters to the table attribute
 }

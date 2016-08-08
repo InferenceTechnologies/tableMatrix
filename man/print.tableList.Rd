@@ -6,6 +6,9 @@
 \usage{
 \method{print}{tableList}(obj)
 }
+\arguments{
+\item{obj}{\code{tableList} object}
+}
 \description{
 tableList method prints tableList obj
 }

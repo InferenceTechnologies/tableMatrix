@@ -32,12 +32,12 @@ dim(images8By8)
 data(images10By10)
 dim(images10By10) 
 
-image8By8TM <- tableMatrix(images8By8, list(c(1:3)), list(c(4:ncol(images8By8))))
+image8By8TM <- tableMatrix(images8By8, list(1:3), list(4:ncol(images8By8)))
 #Only first two columns are used for tab part
-image8By8TM2 <- tableMatrix(images8By8, list(c(1,2)), list(c(4:ncol(images8By8))))
+image8By8TM2 <- tableMatrix(images8By8, list(c(1,2)), list(4:ncol(images8By8)))
 image10By10TM <- tableMatrix(images10By10, list(r=c(1,3)), list(j=c(4:ncol(images10By10))))
 
-#Different matrix part, another matrix is created in mat
+#Different matrix part, another matrix created in mat
 together1 <- rbind(image8By8TM , image10By10TM)
 length(mat(together1))
 tab(together1)
@@ -47,7 +47,7 @@ together2 <- rbind(image8By8TM , image8By8TM)
 length(mat(together2))
 tab(together2)
 
-#Different number/names of columns of tabs, fill=TRUE must be used
+#Different number/names of columns of tabs, fill=TRUE 
 rbind(image8By8TM,image8By8TM2, fill=TRUE)
 }
 

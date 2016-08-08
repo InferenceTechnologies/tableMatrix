@@ -2,11 +2,25 @@
 % Please edit documentation in R/tableMatrix.R
 \name{[.tableList}
 \alias{[.tableList}
-\title{Bracket}
+\title{Bracket tableList}
 \usage{
 \method{[}{tableList}(x, ...)
 }
+\arguments{
+\item{x}{\code{tableList} object.}
+
+\item{...}{Sequence of parameters for \code{tableList}.}
+}
 \description{
-tableList method passes data.table parameters to the table attribute
+\code{tableList} method passes data.table parameters to the table attribute.
+Usage is the same as data.table[].
+}
+\examples{
+data(images8By8)
+dim(images8By8)
+
+tab <- images8By8[,1:3]
+tl <- tableList(tab, NULL)
+tl[direction=="both"]
 }
 

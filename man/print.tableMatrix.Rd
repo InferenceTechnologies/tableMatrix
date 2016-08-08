@@ -6,6 +6,9 @@
 \usage{
 \method{print}{tableMatrix}(obj)
 }
+\arguments{
+\item{obj}{\code{tableMatrix} object}
+}
 \description{
 tableMatrix method prints tableMatrix obj
 }

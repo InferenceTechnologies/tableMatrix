@@ -9,7 +9,12 @@
 
 \method{tab}{tableList}(obj) <- value
 }
+\arguments{
+\item{obj}{\code{dataList}.}
+
+\item{value}{\code{data.table}.}
+}
 \description{
-tableList method to get or set table attribute
+\code{tableList} method to get or set table attribute
 }
 

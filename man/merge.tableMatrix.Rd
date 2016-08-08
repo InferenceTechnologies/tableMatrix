@@ -6,7 +6,14 @@
 \usage{
 \method{merge}{tableMatrix}(obj, dataObj, key)
 }
+\arguments{
+\item{obj}{\code{tableMatrix} object}
+
+\item{dataObj}{Data.table or data.frame object}
+
+\item{key}{}
+}
 \description{
-Merging tableMatrix with data.table or data.frame
+Merging \code{tableMatrix} with data.table or data.frame
 }
 

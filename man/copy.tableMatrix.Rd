@@ -6,7 +6,10 @@
 \usage{
 copy.tableMatrix(obj)
 }
+\arguments{
+\item{obj}{\code{tableList} object}
+}
 \description{
-Copy of a tableMatrix obj
+Copy of a tableMatrix object.
 }
 

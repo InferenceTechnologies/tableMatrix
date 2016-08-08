@@ -6,6 +6,9 @@
 \usage{
 \method{dim}{tableList}(obj)
 }
+\arguments{
+\item{obj}{\code{tableList} object}
+}
 \description{
 tableList method returns dimensions of the table attribute
 }

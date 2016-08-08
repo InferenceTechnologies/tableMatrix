@@ -7,15 +7,39 @@
 tableList(tabData, aidData)
 }
 \arguments{
-\item{tabData}{data.frame or data.table}
+\item{tabData}{Data.frame or data.table. Meta data.}
 
-\item{aidData}{Aid list data}
+\item{aidData}{Aid List.}
 }
 \value{
 A tableList object
 }
 \description{
-\code{tableList} constructor, creates tableList object obj from a data.frame or data.table. 
-and from a aid list.
+\code{tableList} constructor, creates tableList object from a data.frame or data.table
+and list of aid data. It serves to wrap meta data and aid data together.
+}
+\examples{
+data(images8By8)
+dim(images8By8)
+
+data(images10By10)
+dim(images10By10)
+images10By10AsTable <- data.table::as.data.table(images10By10)
+
+tab <- images8By8[,1:3]
+tableList(tab, NULL)
+
+aid <- list()
+
+tabDataTable <- images10By10AsTable[, .(direction, dimX, dimY)]
+tableList(tabDataTable, NULL)
+
+aidData <- list("example1", "example2")
+tableList(tab, aidData)
+}
+\seealso{
+\code{\link{'[.tableList'}}, \code{\link{'[[.tableList'}},
+   \code{\link{dim.tableList}}, \code{\link{dimnames.tableList}}
+   \code{\link{rbind.tableList}}
 }
 

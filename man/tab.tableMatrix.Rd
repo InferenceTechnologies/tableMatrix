@@ -4,7 +4,7 @@
 \alias{tab.tableMatrix}
 \title{Get or set table attribute}
 \usage{
-\method{tab}{tableMatrix}(obj, matN = NULL, addRow = FALSE, resetN = NULL)
+\method{tab}{tableMatrix}(obj, matN = NULL, addRow = FALSE, resetN = TRUE)
 }
 \arguments{
 \item{obj}{\code{tableMatrix} object.}
@@ -14,8 +14,8 @@
 \item{addRow}{Logical. When specified, column \code{tm.allRow} with row 
 number is added.  Default FALSE.}
 
-\item{resetN}{Integer. Used only when matN is specified. When FALSE
-matN of returned tab won't be reseted to 1. Default NULL.}
+\item{resetN}{Logical. Used only when matN is specified. When FALSE
+matN of returned tab won't be reseted to 1. Default TRUE.}
 }
 \value{
 Table part of \code{tableMatrix}
@@ -28,8 +28,8 @@ data(images8By8)
 data(images10By10)
 data(images10By10)
 
-tm <- tableMatrix(list(images8By8, images10By10), list(c(1:3), c(1:3)),
-list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
+tm <- tableMatrix(list(images8By8, images10By10), list(1:3, 1:3),
+list(4:ncol(images8By8),4:ncol(images10By10)))
 tm2 <- tableMatrix(images15By15, 1:3, 4:ncol(images15By15))
 matDim(tm)
 
@@ -44,9 +44,6 @@ tab(tm,2, TRUE)
 #matN stays the same
 tab(tm,2, TRUE, FALSE)
 
-\dontrun{
-tm[.(1)]$tab <- tab(tm2)
-} 
 
 }
 

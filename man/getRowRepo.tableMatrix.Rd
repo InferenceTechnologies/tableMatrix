@@ -20,7 +20,7 @@
 data(images8By8)
 data(images10By10)
 
-tm <- tableMatrix(list(images8By8, images10By10), list(c(1:3), c(1:3)),
+tm <- tableMatrix(list(images8By8, images10By10), list(1:3, 1:3),
 list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
 
 #1st matrix, 2nd row

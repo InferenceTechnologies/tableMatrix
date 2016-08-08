@@ -9,7 +9,12 @@
 
 \method{aid}{tableList}(obj) <- value
 }
+\arguments{
+\item{obj}{\code{tableList} object.}
+
+\item{value}{List.}
+}
 \description{
-tableList method to get or set aid attribute
+\code{tableList} method to get or set aid attribute.
 }
 

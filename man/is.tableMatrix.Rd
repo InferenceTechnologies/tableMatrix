@@ -6,6 +6,9 @@
 \usage{
 is.tableMatrix(obj)
 }
+\arguments{
+\item{obj}{\code{tableTable} object}
+}
 \description{
 Tests if passed obj is of class tableMatrix
 }

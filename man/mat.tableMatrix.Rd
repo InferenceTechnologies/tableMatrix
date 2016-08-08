@@ -24,11 +24,10 @@ data(images8By8)
 data(images10By10)
 data(images15By15)
 
-tm <- tableMatrix(list(images8By8, images10By10), list(c(1:3), c(1:3)),
-list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
+tm <- tableMatrix(list(images8By8, images10By10), list(1:3, 1:3),
+list(4:ncol(images8By8),4:ncol(images10By10)))
 tm2 <- tableMatrix(images15By15, 1:3, 4:ncol(images15By15))
 mat(tm)
-
 
 head(mat(tm, 2))
 
