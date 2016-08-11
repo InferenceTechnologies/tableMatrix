@@ -4,18 +4,21 @@
 \alias{tab.tableMatrix}
 \title{Get or set table attribute}
 \usage{
-\method{tab}{tableMatrix}(obj, matN = NULL, addRow = FALSE, resetN = TRUE)
+\method{tab}{tableMatrix}(obj, matN = NULL, addRow = FALSE, resetN = TRUE,
+  ...)
 }
 \arguments{
 \item{obj}{\code{tableMatrix} object.}
 
-\item{matN}{Integer. Index of list in mat part of \code{tableMatrix}. Default NULL.}
+\item{matN}{Integer. Index of list in \code{mat} part of \code{tableMatrix}. Default NULL.}
 
 \item{addRow}{Logical. When specified, column \code{tm.allRow} with row 
 number is added.  Default FALSE.}
 
 \item{resetN}{Logical. Used only when matN is specified. When FALSE
 matN of returned tab won't be reseted to 1. Default TRUE.}
+
+\item{...}{Further arguments passed to or from other methods.}
 }
 \value{
 Table part of \code{tableMatrix}
@@ -35,7 +38,7 @@ matDim(tm)
 
 tab(tm)
 
-#get tab only from where matN is 1
+#get tab only from where matN is 2
 tab(tm,2)
 
 #tm.allRow column is added

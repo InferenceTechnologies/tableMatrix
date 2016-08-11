@@ -5,12 +5,14 @@
 \alias{tab<-.tableList}
 \title{Get or set table attribute}
 \usage{
-\method{tab}{tableList}(obj)
+\method{tab}{tableList}(obj, ...)
 
-\method{tab}{tableList}(obj) <- value
+\method{tab}{tableList}(obj, ...) <- value
 }
 \arguments{
 \item{obj}{\code{dataList}.}
+
+\item{...}{Further arguments passed to or from other methods.}
 
 \item{value}{\code{data.table}.}
 }

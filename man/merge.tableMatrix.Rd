@@ -4,14 +4,16 @@
 \alias{merge.tableMatrix}
 \title{Merging tableMatrix}
 \usage{
-\method{merge}{tableMatrix}(obj, dataObj, key)
+\method{merge}{tableMatrix}(x, y, key, ...)
 }
 \arguments{
-\item{obj}{\code{tableMatrix} object}
+\item{x}{\code{tableMatrix} object}
 
-\item{dataObj}{Data.table or data.frame object}
+\item{y}{Data.table or data.frame object.}
 
-\item{key}{}
+\item{key}{Vector of shared column names to be used as key.}
+
+\item{...}{Further arguments passed to or from other methods.}
 }
 \description{
 Merging \code{tableMatrix} with data.table or data.frame

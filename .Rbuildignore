@@ -1,1 +1,3 @@
 .git
+^README\.Rmd$
+^README-.*\.png$

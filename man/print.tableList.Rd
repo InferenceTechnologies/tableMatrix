@@ -4,10 +4,12 @@
 \alias{print.tableList}
 \title{Print}
 \usage{
-\method{print}{tableList}(obj)
+\method{print}{tableList}(x, ...)
 }
 \arguments{
-\item{obj}{\code{tableList} object}
+\item{x}{\code{tableList} object}
+
+\item{...}{Further arguments passed to or from other methods.}
 }
 \description{
 tableList method prints tableList obj

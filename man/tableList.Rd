@@ -7,9 +7,9 @@
 tableList(tabData, aidData)
 }
 \arguments{
-\item{tabData}{Data.frame or data.table. Meta data.}
+\item{tabData}{Data.frame or data.table. Descriptors of data.}
 
-\item{aidData}{Aid List.}
+\item{aidData}{Aid List. Can be used to add more information about tabData.}
 }
 \value{
 A tableList object
@@ -38,8 +38,7 @@ aidData <- list("example1", "example2")
 tableList(tab, aidData)
 }
 \seealso{
-\code{\link{'[.tableList'}}, \code{\link{'[[.tableList'}},
-   \code{\link{dim.tableList}}, \code{\link{dimnames.tableList}}
+\code{\link{dim.tableList}}, \code{\link{dimnames.tableList}}
    \code{\link{rbind.tableList}}
 }
 

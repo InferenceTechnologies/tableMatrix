@@ -4,14 +4,16 @@
 \alias{getRowRepo.tableMatrix}
 \title{Method to get a row repo}
 \usage{
-\method{getRowRepo}{tableMatrix}(obj, i = NULL, repo = NULL)
+\method{getRowRepo}{tableMatrix}(obj, i = NULL, repo = NULL, ...)
 }
 \arguments{
 \item{obj}{\code{tableMatrix} object.}
 
-\item{i}{Integer. Index of row in tab. Default NULL.}
+\item{i}{Integer. Index of row in \code{tab}. Default NULL.}
 
 \item{repo}{Numeric vector. Vector of 2 elements - matRow and matRow. Default NULL.}
+
+\item{...}{Further arguments passed to or from other methods.}
 }
 \description{
 \code{tableMatrix} method to get row repo (vector of matN and matRow) for the matrix attribute
@@ -22,6 +24,7 @@ data(images10By10)
 
 tm <- tableMatrix(list(images8By8, images10By10), list(1:3, 1:3),
 list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
+tab(tm)
 
 #1st matrix, 2nd row
 getRowRepo(tm,2)

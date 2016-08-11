@@ -5,9 +5,9 @@
 \alias{matDim<-.tableMatrix}
 \title{Get or set matDim attribute}
 \usage{
-\method{matDim}{tableMatrix}(obj, matN = NULL, resetN = FALSE)
+\method{matDim}{tableMatrix}(obj, matN = NULL, resetN = FALSE, ...)
 
-\method{matDim}{tableMatrix}(obj) <- value
+\method{matDim}{tableMatrix}(obj, ...) <- value
 }
 \arguments{
 \item{obj}{\code{tableMatrix} object.}
@@ -16,6 +16,10 @@
 Default NULL. When NULL, all rows from matDim are returned.}
 
 \item{resetN}{Logical. When TRUE, returned matDim has matN=1. Default FALSE.}
+
+\item{...}{Further arguments passed to or from other methods.}
+
+\item{value}{Matrix.}
 }
 \description{
 \code{tableMatrix} method to get or set matDim attribute

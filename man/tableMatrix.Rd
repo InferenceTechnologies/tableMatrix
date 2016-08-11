@@ -12,23 +12,22 @@ Data from which is \code{tableMatrix} created. All datasets must have the same m
 columns, matrix parts can be different.}
 
 \item{tabCol}{Integer or character vector, list of vectors. Specifies columns 
-names or indices of description part. Name \code{j} or \code{r} can be used when it is list. 
+names or indices of meta data part. Name \code{j} or \code{r} can be used when it is list. 
 \code{j} option means that names or indices are listed, \code{r} option specifies 
-from to names (indices). By default or if it is vector, \code{j} is used.}
+from to names (indices). By default or when it is vector, \code{j} is used.}
 
 \item{matCol}{Integer or character vector, list of vectors. Specifies columns
 names or indices. Name \code{j} or \code{r} can be used. \code{j} option means that names 
 or indices are listed, \code{r} option specifies from to names (indices). 
-By default or if it is vector \code{j} is used.}
+By default or when it is vector \code{j} is used.}
 
 \item{dims}{Numeric vector, \code{list} of vectors. Specifies dimensions of matDim.
-If no names of column atributes are given or dimNames is NULL, columns \code{dim}+number are generated.
-Default NULL.}
+If no names of column atributes are given or dimNames is NULL, columns 
+\code{dim}+number are generated.Default NULL.}
 
-\item{dimNames}{Character vector. Specifies names in matDim part of object.
-Default NULL. 
+\item{dimNames}{Character vector. Specifies names of columns in matDim part of object.
 \code{data.table} with column names \code{tmName$matN} (index of matrix) and 
-\code{tmName$matCols} (number of matrix part columns) .}
+\code{tmName$matCols} (number of matrix part columns). Default NULL.}
 }
 \value{
 A tableMatrix object
@@ -38,19 +37,19 @@ A tableMatrix object
 data.frames or data.tables. It combines features of data.table and matrix. 
 The result is faster access to data. It is useful for datasets which have 
 following condition: the main data could be stored as matrix and other 
-columns are for description.
+columns as description.
 }
 \details{
 \code{tableMatrix} is a S3 class which consists of 3 mandatory parts. 
-\code{Tab} (table part) part is used for storing descriptors of data (meta data), 
+\code{tab} (table part) part is used for storing descriptors of data (meta data), 
 mat (matrix part) for storing main data and matDim - dimensions of matrix part. 
-\code{Mat} is list of matrices. Tab is \code{data.table}. Its first column \code{tm.matN} 
-tells index of matrix in mat to which is row connected to. Second column 
-\code{tm.matRow} is index of row in this matrix. MatDim is \code{data.table}. It
-has one mandatory column \code{tm.Matn} which is index of matrix in mat to which 
-is row connected to. 
-Default print of \code{tableMatrix} is tabData without \code{tm.matN} and 
-\code{tm.matRow} column.
+\code{mat} is list of matrices. \code{tab} is \code{data.table}. Its first column \code{tm.matN} 
+tells index of matrix in \code{mat} to which is row connected to. Second column 
+\code{tm.matRow} is index of row in this matrix. \code{matDim} is \code{data.table}. It
+has one mandatory column \code{tm.Matn} which is index of matrix in \code{mat} to which 
+is row connected to. Rest of columns describe dimensions of \code{mat} part.
+Default print of \code{tableMatrix} is \code{tabData} without \code{tm.matN} and 
+\code{tm.matRow} columns.
 }
 \examples{
 
@@ -97,26 +96,28 @@ bothDefaultDims <- tableMatrix(list(images8By8, images10By10AsTable),
 list(r=c("direction","dimY"), j=c("direction","dimX","dimY")),
 list(4:ncol(images8By8),4:ncol(images10By10AsTable)))
 matDim(bothDefaultDims)
-length(mat(bothDefaultDims)) # number of matrix parts - 2
+length(mat(bothDefaultDims)) # 2 matrices in mat
 
 # Use of named dims
 bothUserDims <- tableMatrix(list(images8By8, images10By10), list(r=c("direction","dimY"),
 j=c("direction","dimX","dimY")), list(4:ncol(images8By8),4:ncol(images10By10)),
 list(c(8,8), c(10,10)))
 matDim(bothUserDims)
-length(mat(bothUserDims)) # number of matrix parts
+length(mat(bothUserDims))
 
 
 tableMatrix(list(images8By8, images10By10),
 list(r=c("direction","dimY"), j=c("direction","dimX","dimY")),
-list(c(4:ncol(images8By8)),c(4:ncol(images10By10))),list(c(8,8),c(10,10)),dimNames =c("dimX", "dimY"))
+list(c(4:ncol(images8By8)),c(4:ncol(images10By10))),list(c(8,8),c(10,10)),
+dimNames =c("dimX", "dimY"))
 
 
 # Same matrix part - only one matrix in mat
-bothSameMatrixPart <- tableMatrix(list(images8By8, images8By8), list(r=c("direction","dimY"), j=c("direction","dimX","dimY")),
+bothSameMatrixPart <- tableMatrix(list(images8By8, images8By8), 
+list(r=c("direction","dimY"), j=c("direction","dimX","dimY")),
 list(j=4:ncol(images8By8),4:ncol(images8By8)))
 matDim(bothSameMatrixPart)
-length(mat(bothSameMatrixPart)) # number of matrix parts - only 1
+length(mat(bothSameMatrixPart)) # 1 matrix in mat
 }
 \seealso{
 \code{\link{getRowRepo.tableMatrix}}, \code{\link{getRowDim.tableMatrix}},

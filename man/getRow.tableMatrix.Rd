@@ -5,9 +5,9 @@
 \alias{setRow.tableMatrix}
 \title{Get or set row from the matrix attribute}
 \usage{
-\method{getRow}{tableMatrix}(obj, i = NULL, repo = NULL)
+\method{getRow}{tableMatrix}(obj, i = NULL, repo = NULL, ...)
 
-\method{setRow}{tableMatrix}(obj, value, i = NULL, repo = NULL)
+\method{setRow}{tableMatrix}(obj, value, i = NULL, repo = NULL, ...)
 }
 \arguments{
 \item{obj}{\code{tableMatrix} object.}
@@ -15,6 +15,8 @@
 \item{i}{Integer. Index of row in tab. Default NULL.}
 
 \item{repo}{Numeric vector. Vector of 2 elements - matRow and matRow. Default NULL.}
+
+\item{...}{Further arguments passed to or from other methods.}
 
 \item{value}{Vector for setting value.}
 }

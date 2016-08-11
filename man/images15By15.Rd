@@ -9,7 +9,9 @@
   \item{direction}{direction of diagonal, factor "up", "down", "both"}
   \item{dimX}{dimension x of image, in pixels}
   \item{dimY}{dimension y of image, in pixels}
-  \item{pixel1:pixel225}{pixel of image, in number}
+  \item{pixel1}{pixel of image, in number}
+  ...
+  \item{pixel225}{pixel of image, in number}
 }}
 \usage{
 images15By15

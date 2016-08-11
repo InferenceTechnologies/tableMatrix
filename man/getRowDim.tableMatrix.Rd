@@ -4,7 +4,7 @@
 \alias{getRowDim.tableMatrix}
 \title{Method to get row dim}
 \usage{
-\method{getRowDim}{tableMatrix}(obj, i = NULL, repo = NULL)
+\method{getRowDim}{tableMatrix}(obj, i = NULL, repo = NULL, ...)
 }
 \arguments{
 \item{obj}{\code{tableMatrix} object.}
@@ -12,6 +12,8 @@
 \item{i}{Integer. Index of row in tab. Default NULL.}
 
 \item{repo}{Numeric vector. Vector of 2 elements - matRow and matRow. Default NULL.}
+
+\item{...}{Further arguments passed to or from other methods.}
 }
 \description{
 \code{tableMatrix} method to get row dim which is stored in matDim.
@@ -22,7 +24,8 @@ data(images10By10)
 
 tm <- tableMatrix(list(images8By8, images10By10), 
 list(r=c(1,3), r=c(1,3)),
-list(r=c(4,ncol(images8By8)),r=c(4,ncol(images10By10))),list(c(8,8),c(10,10)),dimNames =c("dimX", "dimY"))
+list(r=c(4,ncol(images8By8)),r=c(4,ncol(images10By10))),list(c(8,8),c(10,10)),
+dimNames =c("dimX", "dimY"))
 matDim(tm)
 tab(tm) 
 

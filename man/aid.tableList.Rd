@@ -5,12 +5,14 @@
 \alias{aid<-.tableList}
 \title{Get or set aid attribute}
 \usage{
-\method{aid}{tableList}(obj)
+\method{aid}{tableList}(obj, ...)
 
-\method{aid}{tableList}(obj) <- value
+\method{aid}{tableList}(..., obj) <- value
 }
 \arguments{
 \item{obj}{\code{tableList} object.}
+
+\item{...}{Further arguments passed to or from other methods.}
 
 \item{value}{List.}
 }

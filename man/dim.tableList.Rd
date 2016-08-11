@@ -4,10 +4,10 @@
 \alias{dim.tableList}
 \title{Dimensions}
 \usage{
-\method{dim}{tableList}(obj)
+\method{dim}{tableList}(x)
 }
 \arguments{
-\item{obj}{\code{tableList} object}
+\item{x}{\code{tableList} object}
 }
 \description{
 tableList method returns dimensions of the table attribute
