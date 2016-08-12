@@ -15,6 +15,9 @@
 
 \item{...}{Further arguments passed to or from other methods.}
 }
+\value{
+integer vector of dimensions
+}
 \description{
 \code{tableMatrix} method to get row dim which is stored in matDim.
 }

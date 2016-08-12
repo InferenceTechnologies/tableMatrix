@@ -13,7 +13,7 @@
 \item{obj}{\code{tableMatrix} object.}
 
 \item{matN}{Integer. Index of list in mat part of \code{tableMatrix}.
-When NULL, whole mat is returned.  Default NULL.}
+When NULL, whole mat is returned. Default NULL.}
 
 \item{...}{Further arguments passed to or from other methods.}
 

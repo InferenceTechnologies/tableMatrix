@@ -37,6 +37,8 @@ matDim(tm)
 
 matDim(tm, 2)
 
+matDim(tm, 2, TRUE)
+
 matDim(tm) <- matDim(tm2) 
 }
 

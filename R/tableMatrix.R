@@ -480,7 +480,7 @@ tab.tableMatrix <- function(obj, matN=NULL, addRow=FALSE, resetN=TRUE, ...) {
 #' @param obj \code{tableMatrix} object.
 #' @param value Matrix.
 #' @param matN Integer. Index of list in mat part of \code{tableMatrix}.
-#' When NULL, whole mat is returned.  Default NULL.
+#' When NULL, whole mat is returned. Default NULL.
 #' @param ... Further arguments passed to or from other methods.
 #' @return Mat part of \code{tableMatrix}
 #' @rdname mat.tableMatrix
@@ -537,6 +537,8 @@ mat.tableMatrix <- function(obj, matN=NULL, ...) {
 #' matDim(tm)
 #' 
 #' matDim(tm, 2)
+#'
+#' matDim(tm, 2, TRUE)
 #' 
 #' matDim(tm) <- matDim(tm2) 
 #' @export
@@ -571,6 +573,7 @@ matDim.tableMatrix <- function(obj, matN=NULL, resetN=FALSE, ...) {
 #' @param i Integer. Index of row in \code{tab}. Default NULL.
 #' @param repo Numeric vector. Vector of 2 elements - matRow and matRow. Default NULL.
 #' @param ... Further arguments passed to or from other methods.
+#' @return vector of matN and matRow
 #' @export
 #' @examples
 #' data(images8By8)
@@ -641,6 +644,7 @@ setRow.tableMatrix <- function(obj, value, i=NULL, repo=NULL, ...) {
 #' @param i Integer. Index of row in tab. Default NULL.
 #' @param repo Numeric vector. Vector of 2 elements - matRow and matRow. Default NULL.
 #' @param ... Further arguments passed to or from other methods.
+#' @return integer vector of dimensions
 #' @export
 #' @examples
 #' data(images8By8)
@@ -829,7 +833,7 @@ print.tableList <- function(x, ...) {
 
 #' Print
 #' 
-#' tableMatrix method prints tableMatrix obj
+#' \code{tableMatrix} method prints tableMatrix obj
 #' @param x \code{tableMatrix} object
 #' @param ... Further arguments passed to or from other methods.
 #' @export

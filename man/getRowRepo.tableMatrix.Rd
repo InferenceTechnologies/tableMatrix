@@ -15,6 +15,9 @@
 
 \item{...}{Further arguments passed to or from other methods.}
 }
+\value{
+vector of matN and matRow
+}
 \description{
 \code{tableMatrix} method to get row repo (vector of matN and matRow) for the matrix attribute
 }

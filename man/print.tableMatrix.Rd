@@ -12,6 +12,6 @@
 \item{...}{Further arguments passed to or from other methods.}
 }
 \description{
-tableMatrix method prints tableMatrix obj
+\code{tableMatrix} method prints tableMatrix obj
 }
 
