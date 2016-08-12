@@ -728,6 +728,7 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' @export
 #' @param x \code{tableMatrix}.
 #' @param ... Sequence of parameters for \code{tableMatrix}.
+#' @examples
 #' data(images8By8)
 #' dim(images8By8)
 #' 
@@ -852,11 +853,23 @@ print.tableMatrix <- function(x, ...) {
 #' @param key Vector of shared column names to be used as key.
 #' @param ... Further arguments passed to or from other methods.
 #' @export
+#' @examples
+#' data(images8By8)
+#' dim(images8By8)
+#' data(images10By10)
+#' dim(images10By10)
+#' 
+#' tm <- tableMatrix(images8By8, list(1:3), list(4:ncol(images8By8)))
+#'
+#'
+#' \dontrun{ 
+#' together <- merge(tm, images10By10, c("direction, dimX, dimY"))
+#' }
 merge.tableMatrix <- function(x, y, key, ...) {
 
-	if (is.data.frame(dataObj)) { y <- as.data.table(y) }
-	obj <- copy(obj)
-	dataObj <- copy(dataObj)
+	if (is.data.frame(y)) { y <- as.data.table(y) }
+	obj <- copy(x)
+	dataObj <- copy(y)
 	setkeyv(obj$tab,key)
 	setkeyv(dataObj,key)
 	return(obj[J(dataObj)])
