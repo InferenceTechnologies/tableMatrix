@@ -18,4 +18,17 @@
 \description{
 Merging \code{tableMatrix} with data.table or data.frame
 }
+\examples{
+data(images8By8)
+dim(images8By8)
+data(images10By10)
+dim(images10By10)
+
+tm <- tableMatrix(images8By8, list(1:3), list(4:ncol(images8By8)))
+
+
+\dontrun{ 
+together <- merge(tm, images10By10, c("direction, dimX, dimY"))
+}
+}
 

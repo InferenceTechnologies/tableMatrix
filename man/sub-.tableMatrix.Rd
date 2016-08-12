@@ -9,7 +9,12 @@
 \arguments{
 \item{x}{\code{tableMatrix}.}
 
-\item{...}{Sequence of parameters for \code{tableMatrix}.
+\item{...}{Sequence of parameters for \code{tableMatrix}.}
+}
+\description{
+S3 tableMatrix method to pass data.table parameters to the table attribute.
+}
+\examples{
 data(images8By8)
 dim(images8By8)
 
@@ -22,9 +27,6 @@ image10By10TM <- tableMatrix(images10By10, list(r=c(1,3)), list(j=c(4:ncol(image
 together <- rbind(image8By8TM , image10By10TM)
 
 #where matN is 2
-together[.(2)]}
-}
-\description{
-S3 tableMatrix method to pass data.table parameters to the table attribute.
+together[.(2)]
 }
 
