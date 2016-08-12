@@ -12,7 +12,7 @@
 
 \item{matN}{Integer. Index of list in \code{mat} part of \code{tableMatrix}. Default NULL.}
 
-\item{addRow}{Logical. When specified, column \code{tm.allRow} with row 
+\item{addRow}{Logical. When specified, column \code{tm.allRow} with original row 
 number is added.  Default FALSE.}
 
 \item{resetN}{Logical. Used only when matN is specified. When FALSE

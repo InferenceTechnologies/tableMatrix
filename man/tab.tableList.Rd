@@ -7,7 +7,7 @@
 \usage{
 \method{tab}{tableList}(obj, ...)
 
-\method{tab}{tableList}(obj, ...) <- value
+\method{tab}{tableList}(obj) <- value
 }
 \arguments{
 \item{obj}{\code{dataList}.}

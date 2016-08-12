@@ -7,7 +7,7 @@
 \usage{
 \method{matDim}{tableMatrix}(obj, matN = NULL, resetN = FALSE, ...)
 
-\method{matDim}{tableMatrix}(obj, ...) <- value
+\method{matDim}{tableMatrix}(obj) <- value
 }
 \arguments{
 \item{obj}{\code{tableMatrix} object.}

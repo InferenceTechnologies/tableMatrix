@@ -5,11 +5,13 @@
 \alias{matDim<-}
 \title{S3 tableMatrix generic to get or set matDim attribute}
 \usage{
-matDim(...)
+matDim(obj, ...)
 
-matDim(...) <- value
+matDim(obj) <- value
 }
 \arguments{
+\item{obj}{Variable name}
+
 \item{...}{Further arguments passed to or from other methods.}
 
 \item{value}{Matrix.}

@@ -5,11 +5,13 @@
 \alias{mat<-}
 \title{S3 tableMatrix generic to get or set matrix attribute}
 \usage{
-mat(...)
+mat(obj, ...)
 
-mat(...) <- value
+mat(obj) <- value
 }
 \arguments{
+\item{obj}{Variable name}
+
 \item{...}{Further arguments passed to or from other methods.}
 
 \item{value}{Matrix.}

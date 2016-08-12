@@ -5,11 +5,13 @@
 \alias{tab<-}
 \title{S3 tableMatrix generic to get or set table attribute}
 \usage{
-tab(...)
+tab(obj, ...)
 
-tab(...) <- value
+tab(obj) <- value
 }
 \arguments{
+\item{obj}{Variable name}
+
 \item{...}{Further arguments passed to or from other methods.}
 
 \item{value}{\code{data.table}.}
