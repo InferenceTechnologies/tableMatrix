@@ -1060,10 +1060,10 @@ is.tableMatrix <- function(obj) {
 
 #' Images of distributions
 #'
-#' A dataset containing samples of distributions. Images were generated
-#' and based on direction of diagonal they made, were split into 3 categories.
-#' Each image is only a random sample of distribution. Average of every category
-#' shows true shape.
+#' A dataset containing samples of multivariate normal distributions. 
+#' Each row in dataset represents a generated matrix. Dimensions are stored in
+#' dimX and dimY. Direction "up" and "down" depended on covariance matrix.
+#' "Both" was created as combination of the previous. 
 #'
 #' @format A data frame with 90 rows and 67 variables:
 #' \describe{
@@ -1139,10 +1139,10 @@ is.tableMatrix <- function(obj) {
 
 #' Images of distributions
 #'
-#' A dataset containing samples of distributions. Images were generated
-#' and based on direction of diagonal they made, were split into 3 categories.
-#' Each image is only a random sample of distribution. Average of every category
-#' shows true shape.
+#' A dataset containing samples of multivariate normal distributions. 
+#' Each row in dataset represents a generated matrix. Dimensions are stored in
+#' dimX and dimY. Direction "up" and "down" depended on covariance matrix.
+#' "Both" was created as combination of the previous. 
 #'
 #' @format A data frame with 90 rows and 103 variables:
 #' \describe{
@@ -1254,10 +1254,10 @@ is.tableMatrix <- function(obj) {
 
 #' Images of distributions
 #'
-#' A dataset containing samples of distributions. Images were generated
-#' and based on direction of diagonal they made, were split into 3 categories.
-#' Each image is only a random sample of distribution. Average of every category
-#' shows true shape.
+#' A dataset containing samples of multivariate normal distributions. 
+#' Each row in dataset represents a generated matrix. Dimensions are stored in
+#' dimX and dimY. Direction "up" and "down" depended on covariance matrix.
+#' "Both" was created as combination of the previous. 
 #'
 #' @format A data frame with 90 rows and 228 variables:
 #' \describe{
