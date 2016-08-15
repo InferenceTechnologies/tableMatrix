@@ -1075,78 +1075,15 @@ is.tableMatrix <- function(obj) {
 #'
 #' A dataset containing samples of multivariate normal distributions. 
 #' Each row in dataset represents a generated matrix. Dimensions are stored in
-#' dimX and dimY. Direction "up" and "down" depended on covariance matrix.
+#' dimX and dimY. Direction "up" and "down" depends on used covariance matrix.
 #' "Both" was created as combination of the previous. 
 #'
 #' @format A data frame with 90 rows and 67 variables:
-#' \describe{
-#'   \item{direction}{direction of diagonal, factor "up", "down", "both"}
-#'   \item{dimX}{dimension x of image, in pixels}
-#'   \item{dimY}{dimension y of image, in pixels}
-#'   \item{pixel1}{pixel of image, in number}
-#'   \item{pixel2}{pixel of image, in number}
-#'   \item{pixel3}{pixel of image, in number}
-#'   \item{pixel4}{pixel of image, in number}
-#'   \item{pixel5}{pixel of image, in number}
-#'   \item{pixel6}{pixel of image, in number}
-#'   \item{pixel7}{pixel of image, in number}
-#'   \item{pixel8}{pixel of image, in number}
-#'   \item{pixel9}{pixel of image, in number}
-#'   \item{pixel10}{pixel of image, in number}
-#'   \item{pixel11}{pixel of image, in number}
-#'   \item{pixel12}{pixel of image, in number}
-#'   \item{pixel13}{pixel of image, in number}
-#'   \item{pixel14}{pixel of image, in number}
-#'   \item{pixel15}{pixel of image, in number}
-#'   \item{pixel16}{pixel of image, in number}
-#'   \item{pixel17}{pixel of image, in number}
-#'   \item{pixel18}{pixel of image, in number}
-#'   \item{pixel19}{pixel of image, in number}
-#'   \item{pixel20}{pixel of image, in number}
-#'   \item{pixel21}{pixel of image, in number}
-#'   \item{pixel22}{pixel of image, in number}
-#'   \item{pixel23}{pixel of image, in number}
-#'   \item{pixel24}{pixel of image, in number}
-#'   \item{pixel25}{pixel of image, in number}
-#'   \item{pixel26}{pixel of image, in number}
-#'   \item{pixel27}{pixel of image, in number}
-#'   \item{pixel28}{pixel of image, in number}
-#'   \item{pixel29}{pixel of image, in number}
-#'   \item{pixel30}{pixel of image, in number}
-#'   \item{pixel31}{pixel of image, in number}
-#'   \item{pixel32}{pixel of image, in number}
-#'   \item{pixel33}{pixel of image, in number}
-#'   \item{pixel34}{pixel of image, in number}
-#'   \item{pixel35}{pixel of image, in number}
-#'   \item{pixel36}{pixel of image, in number}
-#'   \item{pixel37}{pixel of image, in number}
-#'   \item{pixel38}{pixel of image, in number}
-#'   \item{pixel39}{pixel of image, in number}
-#'   \item{pixel40}{pixel of image, in number}
-#'   \item{pixel41}{pixel of image, in number}
-#'   \item{pixel42}{pixel of image, in number}
-#'   \item{pixel43}{pixel of image, in number}
-#'   \item{pixel44}{pixel of image, in number}
-#'   \item{pixel45}{pixel of image, in number}
-#'   \item{pixel46}{pixel of image, in number}
-#'   \item{pixel47}{pixel of image, in number}
-#'   \item{pixel48}{pixel of image, in number}
-#'   \item{pixel49}{pixel of image, in number}
-#'   \item{pixel50}{pixel of image, in number}
-#'   \item{pixel51}{pixel of image, in number}
-#'   \item{pixel52}{pixel of image, in number}
-#'   \item{pixel53}{pixel of image, in number}
-#'   \item{pixel54}{pixel of image, in number}
-#'   \item{pixel55}{pixel of image, in number}
-#'   \item{pixel56}{pixel of image, in number}
-#'   \item{pixel57}{pixel of image, in number}
-#'   \item{pixel58}{pixel of image, in number}
-#'   \item{pixel59}{pixel of image, in number}
-#'   \item{pixel60}{pixel of image, in number}
-#'   \item{pixel61}{pixel of image, in number}
-#'   \item{pixel62}{pixel of image, in number}
-#'   \item{pixel63}{pixel of image, in number}
-#'   \item{pixel64}{pixel of image, in number}
+#' \itemize{
+#'   \item{direction direction of diagonal, factor "up", "down", "both"}
+#'   \item{dimX dimension x of image, in pixels}
+#'   \item{dimY dimension y of image, in pixels}
+#'   \item{pixel1:pixel64 pixel of image, in number}
 #' }
 "images8By8"
 
@@ -1154,114 +1091,15 @@ is.tableMatrix <- function(obj) {
 #'
 #' A dataset containing samples of multivariate normal distributions. 
 #' Each row in dataset represents a generated matrix. Dimensions are stored in
-#' dimX and dimY. Direction "up" and "down" depended on covariance matrix.
+#' dimX and dimY. Direction "up" and "down" depends on used covariance matrix.
 #' "Both" was created as combination of the previous. 
 #'
 #' @format A data frame with 90 rows and 103 variables:
-#' \describe{
-#'   \item{direction}{direction of diagonal, factor "up", "down", "both"}
-#'   \item{dimX}{dimension x of image, in pixels}
-#'   \item{dimY}{dimension y of image, in pixels}
-#'   \item{pixel1}{pixel of image, in number}
-#'   \item{pixel2}{pixel of image, in number}
-#'   \item{pixel3}{pixel of image, in number}
-#'   \item{pixel4}{pixel of image, in number}
-#'   \item{pixel5}{pixel of image, in number}
-#'   \item{pixel6}{pixel of image, in number}
-#'   \item{pixel7}{pixel of image, in number}
-#'   \item{pixel8}{pixel of image, in number}
-#'   \item{pixel9}{pixel of image, in number}
-#'   \item{pixel10}{pixel of image, in number}
-#'   \item{pixel11}{pixel of image, in number}
-#'   \item{pixel12}{pixel of image, in number}
-#'   \item{pixel13}{pixel of image, in number}
-#'   \item{pixel14}{pixel of image, in number}
-#'   \item{pixel15}{pixel of image, in number}
-#'   \item{pixel16}{pixel of image, in number}
-#'   \item{pixel17}{pixel of image, in number}
-#'   \item{pixel18}{pixel of image, in number}
-#'   \item{pixel19}{pixel of image, in number}
-#'   \item{pixel20}{pixel of image, in number}
-#'   \item{pixel21}{pixel of image, in number}
-#'   \item{pixel22}{pixel of image, in number}
-#'   \item{pixel23}{pixel of image, in number}
-#'   \item{pixel24}{pixel of image, in number}
-#'   \item{pixel25}{pixel of image, in number}
-#'   \item{pixel26}{pixel of image, in number}
-#'   \item{pixel27}{pixel of image, in number}
-#'   \item{pixel28}{pixel of image, in number}
-#'   \item{pixel29}{pixel of image, in number}
-#'   \item{pixel30}{pixel of image, in number}
-#'   \item{pixel31}{pixel of image, in number}
-#'   \item{pixel32}{pixel of image, in number}
-#'   \item{pixel33}{pixel of image, in number}
-#'   \item{pixel34}{pixel of image, in number}
-#'   \item{pixel35}{pixel of image, in number}
-#'   \item{pixel36}{pixel of image, in number}
-#'   \item{pixel37}{pixel of image, in number}
-#'   \item{pixel38}{pixel of image, in number}
-#'   \item{pixel39}{pixel of image, in number}
-#'   \item{pixel40}{pixel of image, in number}
-#'   \item{pixel41}{pixel of image, in number}
-#'   \item{pixel42}{pixel of image, in number}
-#'   \item{pixel43}{pixel of image, in number}
-#'   \item{pixel44}{pixel of image, in number}
-#'   \item{pixel45}{pixel of image, in number}
-#'   \item{pixel46}{pixel of image, in number}
-#'   \item{pixel47}{pixel of image, in number}
-#'   \item{pixel48}{pixel of image, in number}
-#'   \item{pixel49}{pixel of image, in number}
-#'   \item{pixel50}{pixel of image, in number}
-#'   \item{pixel51}{pixel of image, in number}
-#'   \item{pixel52}{pixel of image, in number}
-#'   \item{pixel53}{pixel of image, in number}
-#'   \item{pixel54}{pixel of image, in number}
-#'   \item{pixel55}{pixel of image, in number}
-#'   \item{pixel56}{pixel of image, in number}
-#'   \item{pixel57}{pixel of image, in number}
-#'   \item{pixel58}{pixel of image, in number}
-#'   \item{pixel59}{pixel of image, in number}
-#'   \item{pixel60}{pixel of image, in number}
-#'   \item{pixel61}{pixel of image, in number}
-#'   \item{pixel62}{pixel of image, in number}
-#'   \item{pixel63}{pixel of image, in number}
-#'   \item{pixel64}{pixel of image, in number}
-#'   \item{pixel65}{pixel of image, in number}
-#'   \item{pixel66}{pixel of image, in number}
-#'   \item{pixel67}{pixel of image, in number}
-#'   \item{pixel68}{pixel of image, in number}
-#'   \item{pixel69}{pixel of image, in number}
-#'   \item{pixel70}{pixel of image, in number}
-#'   \item{pixel71}{pixel of image, in number}
-#'   \item{pixel72}{pixel of image, in number}
-#'   \item{pixel73}{pixel of image, in number}
-#'   \item{pixel74}{pixel of image, in number}
-#'   \item{pixel75}{pixel of image, in number}
-#'   \item{pixel76}{pixel of image, in number}
-#'   \item{pixel77}{pixel of image, in number}
-#'   \item{pixel78}{pixel of image, in number}
-#'   \item{pixel79}{pixel of image, in number}
-#'   \item{pixel80}{pixel of image, in number}
-#'   \item{pixel81}{pixel of image, in number}
-#'   \item{pixel82}{pixel of image, in number}
-#'   \item{pixel83}{pixel of image, in number}
-#'   \item{pixel84}{pixel of image, in number}
-#'   \item{pixel85}{pixel of image, in number}
-#'   \item{pixel86}{pixel of image, in number}
-#'   \item{pixel87}{pixel of image, in number}
-#'   \item{pixel88}{pixel of image, in number}
-#'   \item{pixel89}{pixel of image, in number}
-#'   \item{pixel90}{pixel of image, in number}
-#'   \item{pixel91}{pixel of image, in number}
-#'   \item{pixel92}{pixel of image, in number}
-#'   \item{pixel93}{pixel of image, in number}
-#'   \item{pixel94}{pixel of image, in number}
-#'   \item{pixel95}{pixel of image, in number}
-#'   \item{pixel96}{pixel of image, in number}
-#'   \item{pixel97}{pixel of image, in number}
-#'   \item{pixel98}{pixel of image, in number}
-#'   \item{pixel99}{pixel of image, in number}
-#'   \item{pixel100}{pixel of image, in number}
+#' \itemize{
+#'   \item{direction direction of diagonal, factor "up", "down", "both"}
+#'   \item{dimX dimension x of image, in pixels}
+#'   \item{dimY dimension y of image, in pixels}
+#'   \item{pixel1:pixel100 pixel of image, in number}
 #' }
 "images10By10"
 
@@ -1269,238 +1107,14 @@ is.tableMatrix <- function(obj) {
 #'
 #' A dataset containing samples of multivariate normal distributions. 
 #' Each row in dataset represents a generated matrix. Dimensions are stored in
-#' dimX and dimY. Direction "up" and "down" depended on covariance matrix.
+#' dimX and dimY. Direction "up" and "down" depends on used covariance matrix.
 #' "Both" was created as combination of the previous. 
 #'
 #' @format A data frame with 90 rows and 228 variables:
-#' \describe{
-#'   \item{direction}{direction of diagonal, factor "up", "down", "both"}
-#'   \item{dimX}{dimension x of image, in pixels}
-#'   \item{dimY}{dimension y of image, in pixels}
-#'   \item{pixel1}{pixel of image, in number}
-#'   \item{pixel2}{pixel of image, in number}
-#'   \item{pixel3}{pixel of image, in number}
-#'   \item{pixel4}{pixel of image, in number}
-#'   \item{pixel5}{pixel of image, in number}
-#'   \item{pixel6}{pixel of image, in number}
-#'   \item{pixel7}{pixel of image, in number}
-#'   \item{pixel8}{pixel of image, in number}
-#'   \item{pixel9}{pixel of image, in number}
-#'   \item{pixel10}{pixel of image, in number}
-#'   \item{pixel11}{pixel of image, in number}
-#'   \item{pixel12}{pixel of image, in number}
-#'   \item{pixel13}{pixel of image, in number}
-#'   \item{pixel14}{pixel of image, in number}
-#'   \item{pixel15}{pixel of image, in number}
-#'   \item{pixel16}{pixel of image, in number}
-#'   \item{pixel17}{pixel of image, in number}
-#'   \item{pixel18}{pixel of image, in number}
-#'   \item{pixel19}{pixel of image, in number}
-#'   \item{pixel20}{pixel of image, in number}
-#'   \item{pixel21}{pixel of image, in number}
-#'   \item{pixel22}{pixel of image, in number}
-#'   \item{pixel23}{pixel of image, in number}
-#'   \item{pixel24}{pixel of image, in number}
-#'   \item{pixel25}{pixel of image, in number}
-#'   \item{pixel26}{pixel of image, in number}
-#'   \item{pixel27}{pixel of image, in number}
-#'   \item{pixel28}{pixel of image, in number}
-#'   \item{pixel29}{pixel of image, in number}
-#'   \item{pixel30}{pixel of image, in number}
-#'   \item{pixel31}{pixel of image, in number}
-#'   \item{pixel32}{pixel of image, in number}
-#'   \item{pixel33}{pixel of image, in number}
-#'   \item{pixel34}{pixel of image, in number}
-#'   \item{pixel35}{pixel of image, in number}
-#'   \item{pixel36}{pixel of image, in number}
-#'   \item{pixel37}{pixel of image, in number}
-#'   \item{pixel38}{pixel of image, in number}
-#'   \item{pixel39}{pixel of image, in number}
-#'   \item{pixel40}{pixel of image, in number}
-#'   \item{pixel41}{pixel of image, in number}
-#'   \item{pixel42}{pixel of image, in number}
-#'   \item{pixel43}{pixel of image, in number}
-#'   \item{pixel44}{pixel of image, in number}
-#'   \item{pixel45}{pixel of image, in number}
-#'   \item{pixel46}{pixel of image, in number}
-#'   \item{pixel47}{pixel of image, in number}
-#'   \item{pixel48}{pixel of image, in number}
-#'   \item{pixel49}{pixel of image, in number}
-#'   \item{pixel50}{pixel of image, in number}
-#'   \item{pixel51}{pixel of image, in number}
-#'   \item{pixel52}{pixel of image, in number}
-#'   \item{pixel53}{pixel of image, in number}
-#'   \item{pixel54}{pixel of image, in number}
-#'   \item{pixel55}{pixel of image, in number}
-#'   \item{pixel56}{pixel of image, in number}
-#'   \item{pixel57}{pixel of image, in number}
-#'   \item{pixel58}{pixel of image, in number}
-#'   \item{pixel59}{pixel of image, in number}
-#'   \item{pixel60}{pixel of image, in number}
-#'   \item{pixel61}{pixel of image, in number}
-#'   \item{pixel62}{pixel of image, in number}
-#'   \item{pixel63}{pixel of image, in number}
-#'   \item{pixel64}{pixel of image, in number}
-#'   \item{pixel65}{pixel of image, in number}
-#'   \item{pixel66}{pixel of image, in number}
-#'   \item{pixel67}{pixel of image, in number}
-#'   \item{pixel68}{pixel of image, in number}
-#'   \item{pixel69}{pixel of image, in number}
-#'   \item{pixel70}{pixel of image, in number}
-#'   \item{pixel71}{pixel of image, in number}
-#'   \item{pixel72}{pixel of image, in number}
-#'   \item{pixel73}{pixel of image, in number}
-#'   \item{pixel74}{pixel of image, in number}
-#'   \item{pixel75}{pixel of image, in number}
-#'   \item{pixel76}{pixel of image, in number}
-#'   \item{pixel77}{pixel of image, in number}
-#'   \item{pixel78}{pixel of image, in number}
-#'   \item{pixel79}{pixel of image, in number}
-#'   \item{pixel80}{pixel of image, in number}
-#'   \item{pixel81}{pixel of image, in number}
-#'   \item{pixel82}{pixel of image, in number}
-#'   \item{pixel83}{pixel of image, in number}
-#'   \item{pixel84}{pixel of image, in number}
-#'   \item{pixel85}{pixel of image, in number}
-#'   \item{pixel86}{pixel of image, in number}
-#'   \item{pixel87}{pixel of image, in number}
-#'   \item{pixel88}{pixel of image, in number}
-#'   \item{pixel89}{pixel of image, in number}
-#'   \item{pixel90}{pixel of image, in number}
-#'   \item{pixel91}{pixel of image, in number}
-#'   \item{pixel92}{pixel of image, in number}
-#'   \item{pixel93}{pixel of image, in number}
-#'   \item{pixel94}{pixel of image, in number}
-#'   \item{pixel95}{pixel of image, in number}
-#'   \item{pixel96}{pixel of image, in number}
-#'   \item{pixel97}{pixel of image, in number}
-#'   \item{pixel98}{pixel of image, in number}
-#'   \item{pixel99}{pixel of image, in number}
-#'   \item{pixel100}{pixel of image, in number}
-#'   \item{pixel101}{pixel of image, in number}
-#'   \item{pixel102}{pixel of image, in number}
-#'   \item{pixel103}{pixel of image, in number}
-#'   \item{pixel104}{pixel of image, in number}
-#'   \item{pixel105}{pixel of image, in number}
-#'   \item{pixel106}{pixel of image, in number}
-#'   \item{pixel107}{pixel of image, in number}
-#'   \item{pixel108}{pixel of image, in number}
-#'   \item{pixel109}{pixel of image, in number}
-#'   \item{pixel110}{pixel of image, in number}
-#'   \item{pixel111}{pixel of image, in number}
-#'   \item{pixel112}{pixel of image, in number}
-#'   \item{pixel113}{pixel of image, in number}
-#'   \item{pixel114}{pixel of image, in number}
-#'   \item{pixel115}{pixel of image, in number}
-#'   \item{pixel116}{pixel of image, in number}
-#'   \item{pixel117}{pixel of image, in number}
-#'   \item{pixel118}{pixel of image, in number}
-#'   \item{pixel119}{pixel of image, in number}
-#'   \item{pixel120}{pixel of image, in number}
-#'   \item{pixel121}{pixel of image, in number}
-#'   \item{pixel122}{pixel of image, in number}
-#'   \item{pixel123}{pixel of image, in number}
-#'   \item{pixel124}{pixel of image, in number}
-#'   \item{pixel125}{pixel of image, in number}
-#'   \item{pixel126}{pixel of image, in number}
-#'   \item{pixel127}{pixel of image, in number}
-#'   \item{pixel128}{pixel of image, in number}
-#'   \item{pixel129}{pixel of image, in number}
-#'   \item{pixel130}{pixel of image, in number}
-#'   \item{pixel131}{pixel of image, in number}
-#'   \item{pixel132}{pixel of image, in number}
-#'   \item{pixel133}{pixel of image, in number}
-#'   \item{pixel134}{pixel of image, in number}
-#'   \item{pixel135}{pixel of image, in number}
-#'   \item{pixel136}{pixel of image, in number}
-#'   \item{pixel137}{pixel of image, in number}
-#'   \item{pixel138}{pixel of image, in number}
-#'   \item{pixel139}{pixel of image, in number}
-#'   \item{pixel140}{pixel of image, in number}
-#'   \item{pixel141}{pixel of image, in number}
-#'   \item{pixel142}{pixel of image, in number}
-#'   \item{pixel143}{pixel of image, in number}
-#'   \item{pixel144}{pixel of image, in number}
-#'   \item{pixel145}{pixel of image, in number}
-#'   \item{pixel146}{pixel of image, in number}
-#'   \item{pixel147}{pixel of image, in number}
-#'   \item{pixel148}{pixel of image, in number}
-#'   \item{pixel149}{pixel of image, in number}
-#'   \item{pixel150}{pixel of image, in number}
-#'   \item{pixel151}{pixel of image, in number}
-#'   \item{pixel152}{pixel of image, in number}
-#'   \item{pixel153}{pixel of image, in number}
-#'   \item{pixel154}{pixel of image, in number}
-#'   \item{pixel155}{pixel of image, in number}
-#'   \item{pixel156}{pixel of image, in number}
-#'   \item{pixel157}{pixel of image, in number}
-#'   \item{pixel158}{pixel of image, in number}
-#'   \item{pixel159}{pixel of image, in number}
-#'   \item{pixel160}{pixel of image, in number}
-#'   \item{pixel161}{pixel of image, in number}
-#'   \item{pixel162}{pixel of image, in number}
-#'   \item{pixel163}{pixel of image, in number}
-#'   \item{pixel164}{pixel of image, in number}
-#'   \item{pixel165}{pixel of image, in number}
-#'   \item{pixel166}{pixel of image, in number}
-#'   \item{pixel167}{pixel of image, in number}
-#'   \item{pixel168}{pixel of image, in number}
-#'   \item{pixel169}{pixel of image, in number}
-#'   \item{pixel170}{pixel of image, in number}
-#'   \item{pixel171}{pixel of image, in number}
-#'   \item{pixel172}{pixel of image, in number}
-#'   \item{pixel173}{pixel of image, in number}
-#'   \item{pixel174}{pixel of image, in number}
-#'   \item{pixel175}{pixel of image, in number}
-#'   \item{pixel176}{pixel of image, in number}
-#'   \item{pixel177}{pixel of image, in number}
-#'   \item{pixel178}{pixel of image, in number}
-#'   \item{pixel179}{pixel of image, in number}
-#'   \item{pixel180}{pixel of image, in number}
-#'   \item{pixel181}{pixel of image, in number}
-#'   \item{pixel182}{pixel of image, in number}
-#'   \item{pixel183}{pixel of image, in number}
-#'   \item{pixel184}{pixel of image, in number}
-#'   \item{pixel185}{pixel of image, in number}
-#'   \item{pixel186}{pixel of image, in number}
-#'   \item{pixel187}{pixel of image, in number}
-#'   \item{pixel188}{pixel of image, in number}
-#'   \item{pixel189}{pixel of image, in number}
-#'   \item{pixel190}{pixel of image, in number}
-#'   \item{pixel191}{pixel of image, in number}
-#'   \item{pixel192}{pixel of image, in number}
-#'   \item{pixel193}{pixel of image, in number}
-#'   \item{pixel194}{pixel of image, in number}
-#'   \item{pixel195}{pixel of image, in number}
-#'   \item{pixel196}{pixel of image, in number}
-#'   \item{pixel197}{pixel of image, in number}
-#'   \item{pixel198}{pixel of image, in number}
-#'   \item{pixel199}{pixel of image, in number}
-#'   \item{pixel200}{pixel of image, in number}
-#'   \item{pixel201}{pixel of image, in number}
-#'   \item{pixel202}{pixel of image, in number}
-#'   \item{pixel203}{pixel of image, in number}
-#'   \item{pixel204}{pixel of image, in number}
-#'   \item{pixel205}{pixel of image, in number}
-#'   \item{pixel206}{pixel of image, in number}
-#'   \item{pixel207}{pixel of image, in number}
-#'   \item{pixel208}{pixel of image, in number}
-#'   \item{pixel209}{pixel of image, in number}
-#'   \item{pixel210}{pixel of image, in number}
-#'   \item{pixel211}{pixel of image, in number}
-#'   \item{pixel212}{pixel of image, in number}
-#'   \item{pixel213}{pixel of image, in number}
-#'   \item{pixel214}{pixel of image, in number}
-#'   \item{pixel215}{pixel of image, in number}
-#'   \item{pixel216}{pixel of image, in number}
-#'   \item{pixel217}{pixel of image, in number}
-#'   \item{pixel218}{pixel of image, in number}
-#'   \item{pixel219}{pixel of image, in number}
-#'   \item{pixel220}{pixel of image, in number}
-#'   \item{pixel221}{pixel of image, in number}
-#'   \item{pixel222}{pixel of image, in number}
-#'   \item{pixel223}{pixel of image, in number}
-#'   \item{pixel224}{pixel of image, in number}
-#'   \item{pixel225}{pixel of image, in number}
+#' \itemize{
+#'   \item{direction direction of diagonal, factor "up", "down", "both"}
+#'   \item{dimX dimension x of image, in pixels}
+#'   \item{dimY dimension y of image, in pixels}
+#'   \item{pixel1-pixel225 pixel of image, in number}
 #' }
 "images15By15"
