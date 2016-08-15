@@ -1,10 +1,3 @@
----
-output: github_document
----
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-
 #tableMatrix
 
 `tableMatrix` package provides structure to store data. It is mainly useful for datasets which have following condition: some columns describe data and main data could be stored as matrix. `tableMatrix` purpose is to get faster access.
