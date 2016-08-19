@@ -10,7 +10,7 @@ mat(obj, ...)
 mat(obj) <- value
 }
 \arguments{
-\item{obj}{Variable name}
+\item{obj}{Object to be used}
 
 \item{...}{Further arguments passed to or from other methods.}
 

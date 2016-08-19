@@ -10,6 +10,6 @@
 \item{x}{\code{tableList} object}
 }
 \description{
-tableList method returns dimension names of the table attribute
+\code{tableList} method, returns dimension names of the table attribute
 }
 

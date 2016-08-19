@@ -12,6 +12,6 @@
 \item{...}{Further arguments passed to or from other methods.}
 }
 \description{
-tableList method prints tableList obj
+\code{tableList} method, prints only tab data.
 }
 

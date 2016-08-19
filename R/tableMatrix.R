@@ -287,8 +287,11 @@ tableMatrix <- function(dataList, tabCol, matCol, dims=NULL, dimNames=NULL) {
 #
 # Generics
 #
+# documented parameters
 # tab, mat, matDim and aid signature changed to obj,...
-# setters changed to (obj, value)
+# tab.tableMatrix and so on parameters changed to obj, ...
+# setters (and .tableMatrix) changed to (obj, value)
+# to getRowRepo.tableMatrix, getRow.tM, setRow.tM, getRowDim.tM added par ... 
 
 #' S3 tableMatrix generic to get or set table attribute
 #' @param ... Further arguments passed to or from other methods.
@@ -303,7 +306,7 @@ tab <- function(obj,...) { UseMethod("tab") }
 
 #' S3 tableMatrix generic to get or set matrix attribute
 #' @param ... Further arguments passed to or from other methods.
-#' @param obj Variable name
+#' @param obj Object to be used
 #' @param value Matrix.
 #' @rdname mat
 #' @export
@@ -314,7 +317,7 @@ mat <- function(obj,...) { UseMethod("mat") }
 
 #' S3 tableMatrix generic to get or set matDim attribute
 #' @param ... Further arguments passed to or from other methods.
-#' @param obj Variable name
+#' @param obj Object to be used
 #' @param value Matrix.
 #' @rdname matDim
 #' @export
@@ -324,13 +327,13 @@ matDim <- function(obj,...) { UseMethod("matDim") }
 'matDim<-' <- function(obj, value) { UseMethod("matDim<-") }
 
 #' S3 tableMatrix generic to get row repo for matrix attribute
-#' @param ... Further arguments passed to or from other methods.
+#' @param ... Arguments passed to or from other methods.
 #' @rdname getRowRepo
 #' @export
 getRowRepo <- function(...) { UseMethod("getRowRepo") }
 
 #' S3 tableMatrix generic to get or set row from matrix attribute
-#' @param ... Further arguments passed to or from other methods.
+#' @param ... Arguments passed to or from other methods.
 #' @rdname getRow
 #' @export
 getRow <- function(...) { UseMethod("getRow") }
@@ -339,12 +342,12 @@ getRow <- function(...) { UseMethod("getRow") }
 setRow <- function(...) { UseMethod("setRow") }
 
 #' S3 tableMatrix generic to get row dim
-#' @param ... Further arguments passed to or from other methods.
+#' @param ... Arguments passed to or from other methods.
 #' @export
 getRowDim <- function(...) { UseMethod("getRowDim") }
 
 #' S3 tableMatrix generic to get or set aid attribute
-#' @param ... Further arguments passed to or from other methods.
+#' @param ... Arguments passed to or from other methods.
 #' @param obj Variable name
 #' @param value \code{data.table}.
 #' @rdname aid
@@ -804,7 +807,7 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 }
 #' Dimensions
 #' 
-#' tableList method returns dimensions of the table attribute
+#' \code{tableList} method returns dimensions of the table attribute
 #' @param x \code{tableList} object
 #' @export
 dim.tableList <- function(x) {
@@ -813,7 +816,7 @@ dim.tableList <- function(x) {
 
 #' Dimension Names
 #' 
-#' tableList method returns dimension names of the table attribute
+#' \code{tableList} method, returns dimension names of the table attribute
 #' @param x \code{tableList} object
 #' @export
 dimnames.tableList <- function(x) {
@@ -822,7 +825,7 @@ dimnames.tableList <- function(x) {
 
 #' Print
 #' 
-#' tableList method prints tableList obj
+#' \code{tableList} method, prints only tab data.
 #' @param x \code{tableList} object
 #' @param ... Further arguments passed to or from other methods.
 #' @export
@@ -834,7 +837,8 @@ print.tableList <- function(x, ...) {
 
 #' Print
 #' 
-#' \code{tableMatrix} method prints tableMatrix obj
+#' \code{tableMatrix} method to print. Only tab data without \code{tmName} vars 
+#' are printed.
 #' @param x \code{tableMatrix} object
 #' @param ... Further arguments passed to or from other methods.
 #' @export
@@ -859,12 +863,8 @@ print.tableMatrix <- function(x, ...) {
 #' data(images10By10)
 #' dim(images10By10)
 #' 
-#' tm <- tableMatrix(images8By8, list(1:3), list(4:ncol(images8By8)))
-#'
-#'
-#' \dontrun{ 
-#' together <- merge(tm, images10By10, c("direction, dimX, dimY"))
-#' }
+#' tm <- tableMatrix(images8By8, c("direction","dimX","dimY"), 4:ncol(images8By8), c(8,8))
+#' merge(tm, data.frame(direction="down", flag=TRUE), key="direction")
 merge.tableMatrix <- function(x, y, key, ...) {
 
 	if (is.data.frame(y)) { y <- as.data.table(y) }
@@ -1115,6 +1115,6 @@ is.tableMatrix <- function(obj) {
 #'   \item{direction direction of diagonal, factor "up", "down", "both"}
 #'   \item{dimX dimension x of image, in pixels}
 #'   \item{dimY dimension y of image, in pixels}
-#'   \item{pixel1-pixel225 pixel of image, in number}
+#'   \item{pixel1:pixel225 pixel of image, in number}
 #' }
 "images15By15"

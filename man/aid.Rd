@@ -12,7 +12,7 @@ aid(obj) <- value
 \arguments{
 \item{obj}{Variable name}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Arguments passed to or from other methods.}
 
 \item{value}{\code{data.table}.}
 }

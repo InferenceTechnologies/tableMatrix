@@ -12,6 +12,7 @@
 \item{...}{Further arguments passed to or from other methods.}
 }
 \description{
-\code{tableMatrix} method prints tableMatrix obj
+\code{tableMatrix} method to print. Only tab data without \code{tmName} vars 
+are printed.
 }
 

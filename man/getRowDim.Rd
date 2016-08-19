@@ -7,7 +7,7 @@
 getRowDim(...)
 }
 \arguments{
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Arguments passed to or from other methods.}
 }
 \description{
 S3 tableMatrix generic to get row dim
