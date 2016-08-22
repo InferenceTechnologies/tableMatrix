@@ -1,6 +1,8 @@
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 #tableMatrix
 
-`tableMatrix` package provides structure to store data. It is mainly useful for datasets which have following condition: some columns describe data and main data could be stored as matrix. `tableMatrix` purpose is to get faster access.
+`tableMatrix` package provides structures to store data. First one is tableList which only serves to wrap data.table and additional structures together, second is tableMatrix that combines useful features of data.table and matrix to gain faster access to data.
 
 ##Installation
 From github:
@@ -10,9 +12,40 @@ From github:
 devtools::install_github("InferenceTechnologies/tableMatrix")
 ```
 
-##Examples
+##Motivation
 
-Creation of `tableMatrix` with 2 datasets.
+###tableList
+It is needed to wrap a data.table object and other structures together and preserve data.table behaviour.
+
+####Example
+Dataset and linear model stored in tableList.
+
+
+```r
+data(chickwts)
+tl <- tableList(chickwts, lm(weight~feed, chickwts))
+
+mean(tl[feed=="casein", weight])
+#> [1] 323.5833
+
+aid(tl)
+#> 
+#> Call:
+#> lm(formula = weight ~ feed, data = chickwts)
+#> 
+#> Coefficients:
+#>   (Intercept)  feedhorsebean    feedlinseed   feedmeatmeal    feedsoybean  
+#>       323.583       -163.383       -104.833        -46.674        -77.155  
+#> feedsunflower  
+#>         5.333
+```
+
+###tableMatrix
+Lets have dataset which consists of two parts - metadata columns (any types) and main data columns (only one type). If whole data were stored as data.table (data.frame), access to main part would be much slower (slow indexing in data.table). 
+`tableMatrix` is result for this. It combines best of data.table (access via bracket to metadata part) and matrix. It stores dimensions of main part and effectively use this information while using multiple datasets which can have different dimensions of main data. It also can store additional structures.
+
+####Example
+Solving simple task - recreating pictures from data with `tableMatrix`. Used datasets (images8By8, images15By15) are bitmaps. 
 
 
 ```r
@@ -41,7 +74,8 @@ dim(images15By15)
 tm <- tableMatrix(list(images15By15, images8By8),
 list(1:3, 1:3), list(c(4:ncol(images15By15)),c(4:ncol(images8By8))), list(c(15,15), c(8,8)))
 
-tm$tab
+#metadata
+tab(tm)
 #>      tm.matN tm.matRow direction dimX dimY
 #>   1:       1         1      down   15   15
 #>   2:       1         2      down   15   15
@@ -55,18 +89,32 @@ tm$tab
 #> 179:       2        89      both    8    8
 #> 180:       2        90      both    8    8
 
-tm$matDim
+#dimensions of main data
+matDim(tm)
 #>    tm.matN dim1 dim2
 #> 1:       1   15   15
 #> 2:       2    8    8
 
-#get data from second matrix where direction is "both"
+#additional structures - now empty
+aid(tm)
+#> list()
+
+length(mat(tm))
+#> [1] 2
+
+#subsetting via bracket passed to metadata part
 tabSub <- tm[.(2)][direction=="both"]
 
+length(mat(tabSub))
+#> [1] 1
+
+#recreating heat map
 imageMean <- colMeans(mat(tabSub,1))
+
 dim(imageMean) <- getRowDim(tabSub,1)
 
 image(imageMean)
 ```
 
-![plot of chunk unnamed-chunk-3](figures/README-unnamed-chunk-3-1.png)
+![plot of chunk unnamed-chunk-4](figures/README-unnamed-chunk-4-1.png)
+

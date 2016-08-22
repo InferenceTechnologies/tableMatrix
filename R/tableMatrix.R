@@ -50,7 +50,8 @@ tableListWrap <- function(tab=data.table(), aid=list(), objClass=NULL) {
 #' S3 class tableList object
 #' 
 #' \code{tableList} constructor, creates tableList object from a data.frame or data.table
-#' and list of aid data. It serves to wrap meta data and aid data together.
+#' and list of aid data. It serves to wrap meta data and additional data structures together. It acts 
+#' like data.table.
 #'
 #' @param tabData Data.frame or data.table. Descriptors of data.
 #' @param aidData Aid List. Can be used to add more information about tabData.

@@ -16,7 +16,8 @@ A tableList object
 }
 \description{
 \code{tableList} constructor, creates tableList object from a data.frame or data.table
-and list of aid data. It serves to wrap meta data and aid data together.
+and list of aid data. It serves to wrap meta data and additional data structures together. It acts 
+like data.table.
 }
 \examples{
 data(images8By8)
