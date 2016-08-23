@@ -19,8 +19,8 @@ Usage is the same as data.table[].
 data(images8By8)
 dim(images8By8)
 
-tab <- images8By8[,1:3]
-tl <- tableList(tab, NULL)
+tabPart <- images8By8[,1:3]
+tl <- tableList(tabPart, NULL)
 tl[direction=="both"]
 }
 

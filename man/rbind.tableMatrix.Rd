@@ -21,9 +21,9 @@ Default \code{FALSE}}
 A tableMatrix object
 }
 \description{
-Takes a sequence of \code{tableMatrix} arugments and combine them by row. If 
+Takes a sequence of \code{tableMatrix} arugments and combines them by row. If 
 matrix parts have same dimensions, it only adds rows in tab and mat part. 
-Otherwiseit will add new matrix to mat part of \code{tableMatrix}.
+Otherwise it will add new matrix to mat part of \code{tableMatrix}.
 }
 \examples{
 data(images8By8)
@@ -38,14 +38,14 @@ image8By8TM2 <- tableMatrix(images8By8, list(c(1,2)), list(4:ncol(images8By8)))
 image10By10TM <- tableMatrix(images10By10, list(r=c(1,3)), list(j=c(4:ncol(images10By10))))
 
 #Different matrix part, another matrix created in mat
-together1 <- rbind(image8By8TM , image10By10TM)
-length(mat(together1))
-tab(together1)
+tm <- rbind(image8By8TM , image10By10TM)
+length(mat(tm))
+tab(tm)
 
 #Same mat and tab part
-together2 <- rbind(image8By8TM , image8By8TM)
-length(mat(together2))
-tab(together2)
+tm2 <- rbind(image8By8TM , image8By8TM)
+length(mat(tm2))
+tab(tm2)
 
 #Different number/names of columns of tabs, fill=TRUE 
 rbind(image8By8TM,image8By8TM2, fill=TRUE)

@@ -9,7 +9,7 @@ tableList(tabData, aidData)
 \arguments{
 \item{tabData}{Data.frame or data.table. Descriptors of data.}
 
-\item{aidData}{Aid List. Can be used to add more information about tabData.}
+\item{aidData}{Aid List. Can be used to add more information (or structure)}
 }
 \value{
 A tableList object
@@ -27,16 +27,15 @@ data(images10By10)
 dim(images10By10)
 images10By10AsTable <- data.table::as.data.table(images10By10)
 
-tab <- images8By8[,1:3]
-tableList(tab, NULL)
+tabPart <- images8By8[,1:3]
+tableList(tabPart, NULL)
 
-aid <- list()
 
 tabDataTable <- images10By10AsTable[, .(direction, dimX, dimY)]
 tableList(tabDataTable, NULL)
 
-aidData <- list("example1", "example2")
-tableList(tab, aidData)
+aidPart <- list("example1", "example2")
+tableList(tabPart, aidPart)
 }
 \seealso{
 \code{\link{dim.tableList}}, \code{\link{dimnames.tableList}}

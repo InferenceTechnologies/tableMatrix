@@ -54,7 +54,7 @@ tableListWrap <- function(tab=data.table(), aid=list(), objClass=NULL) {
 #' like data.table.
 #'
 #' @param tabData Data.frame or data.table. Descriptors of data.
-#' @param aidData Aid List. Can be used to add more information about tabData.
+#' @param aidData Aid List. Can be used to add more information (or structure)
 #' @return A tableList object
 #' @export
 #' @seealso
@@ -68,16 +68,15 @@ tableListWrap <- function(tab=data.table(), aid=list(), objClass=NULL) {
 #' dim(images10By10)
 #' images10By10AsTable <- data.table::as.data.table(images10By10)
 #'
-#' tab <- images8By8[,1:3]
-#' tableList(tab, NULL)
+#' tabPart <- images8By8[,1:3]
+#' tableList(tabPart, NULL)
 #'
-#' aid <- list()
 #' 
 #' tabDataTable <- images10By10AsTable[, .(direction, dimX, dimY)]
 #' tableList(tabDataTable, NULL)
 #'
-#' aidData <- list("example1", "example2")
-#' tableList(tab, aidData)
+#' aidPart <- list("example1", "example2")
+#' tableList(tabPart, aidPart)
 
 tableList <- function(tabData, aidData) {
 
@@ -118,8 +117,11 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' 
 #' 
 #' @description \code{tableMatrix} constructor, creates tableMatrix object from a list of 
-#' data.frames or data.tables. It combines features of data.table and matrix. 
-#' The result is faster access to data. It is useful for datasets which have 
+#' data.frames or data.tables. It combines best of data.table (access via bracket 
+#' to metadata part) and matrix. It stores dimensions of main part and effectively
+#' use this information while using multiple datasets which can have different 
+#' dimensions of main data. It also can store additional structures. It is
+#' useful for datasets which have 
 #' following condition: the main data could be stored as matrix and other 
 #' columns as description.
 #' @details \code{tableMatrix} is a S3 class which consists of 3 mandatory parts. 
@@ -418,7 +420,7 @@ aid.tableList <- function(obj, ...) {	return(obj$aid) }
 #'
 #' @param obj \code{tableMatrix} object.
 #' @param matN Integer. Index of list in \code{mat} part of \code{tableMatrix}. Default NULL.
-#' @param addRow Logical. When specified, column \code{tm.allRow} with original row 
+#' @param addRow Logical. If specified, column \code{tm.allRow} with original row 
 #' number is added.  Default FALSE.
 #' @param resetN Logical. Used only when matN is specified. When FALSE
 #' matN of returned tab won't be reseted to 1. Default TRUE.
@@ -484,9 +486,9 @@ tab.tableMatrix <- function(obj, matN=NULL, addRow=FALSE, resetN=TRUE, ...) {
 #' @param obj \code{tableMatrix} object.
 #' @param value Matrix.
 #' @param matN Integer. Index of list in mat part of \code{tableMatrix}.
-#' When NULL, whole mat is returned. Default NULL.
+#' If not NULL, only one part is returned. Default NULL.
 #' @param ... Further arguments passed to or from other methods.
-#' @return Mat part of \code{tableMatrix}
+#' @return Mat part of \code{tableMatrix} or a matrix
 #' @rdname mat.tableMatrix
 #' 
 #' @examples
@@ -690,8 +692,8 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' data(images8By8)
 #' dim(images8By8)
 #'
-#' tab <- images8By8[,1:3]
-#' tl <- tableList(tab, NULL)
+#' tabPart <- images8By8[,1:3]
+#' tl <- tableList(tabPart, NULL)
 #' tl[direction=="both"]
 '[.tableList' <- function(x, ...) {
 
@@ -929,9 +931,9 @@ rbind.tableList <- function(..., use.names=TRUE, fill=FALSE) {
 }
 #' S3 method to bind tableMatrix objects by row
 #' 
-#' Takes a sequence of \code{tableMatrix} arugments and combine them by row. If 
+#' Takes a sequence of \code{tableMatrix} arugments and combines them by row. If 
 #' matrix parts have same dimensions, it only adds rows in tab and mat part. 
-#' Otherwiseit will add new matrix to mat part of \code{tableMatrix}.
+#' Otherwise it will add new matrix to mat part of \code{tableMatrix}.
 #'
 #' @param ... List of \code{tableMatrix}. Objects to be bind together. Their tab
 #' or mat part can be different.
@@ -956,14 +958,14 @@ rbind.tableList <- function(..., use.names=TRUE, fill=FALSE) {
 #' image10By10TM <- tableMatrix(images10By10, list(r=c(1,3)), list(j=c(4:ncol(images10By10))))
 #'
 #' #Different matrix part, another matrix created in mat
-#' together1 <- rbind(image8By8TM , image10By10TM)
-#' length(mat(together1))
-#' tab(together1)
+#' tm <- rbind(image8By8TM , image10By10TM)
+#' length(mat(tm))
+#' tab(tm)
 #'
 #' #Same mat and tab part
-#' together2 <- rbind(image8By8TM , image8By8TM)
-#' length(mat(together2))
-#' tab(together2)
+#' tm2 <- rbind(image8By8TM , image8By8TM)
+#' length(mat(tm2))
+#' tab(tm2)
 #'
 #' #Different number/names of columns of tabs, fill=TRUE 
 #' rbind(image8By8TM,image8By8TM2, fill=TRUE)

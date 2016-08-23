@@ -13,14 +13,14 @@
 \item{obj}{\code{tableMatrix} object.}
 
 \item{matN}{Integer. Index of list in mat part of \code{tableMatrix}.
-When NULL, whole mat is returned. Default NULL.}
+If not NULL, only one part is returned. Default NULL.}
 
 \item{...}{Further arguments passed to or from other methods.}
 
 \item{value}{Matrix.}
 }
 \value{
-Mat part of \code{tableMatrix}
+Mat part of \code{tableMatrix} or a matrix
 }
 \description{
 \code{tableMatrix} method to get or set matrix attribute. Mat consists

@@ -34,8 +34,11 @@ A tableMatrix object
 }
 \description{
 \code{tableMatrix} constructor, creates tableMatrix object from a list of 
-data.frames or data.tables. It combines features of data.table and matrix. 
-The result is faster access to data. It is useful for datasets which have 
+data.frames or data.tables. It combines best of data.table (access via bracket 
+to metadata part) and matrix. It stores dimensions of main part and effectively
+use this information while using multiple datasets which can have different 
+dimensions of main data. It also can store additional structures. It is
+useful for datasets which have 
 following condition: the main data could be stored as matrix and other 
 columns as description.
 }
