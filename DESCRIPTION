@@ -1,9 +1,9 @@
 Package: tableMatrix
 Title: Combines data.table and matrix
 Version: 0.7
-Authors@R: person("Inference Technologies", email = "mail@inferencetech.com", role = c("aut", "cre"))
-Author: Inference Technologies [aut, cre]
-Maintainer: Inference Technologies <mail@inferencetech.com>
+Authors@R: c(person("Petr", "Lenhard", role = c("aut", "cre"), email = "petr.lenhard@inferencetech.com"),	      
+	      person("Inference Technologies", role = "cph"),
+              person("Petra", "Hudeckova", , "hudeckovapetra@gmail.com", role = "ctb"))
 Description: Combines data.table and matrix.
 Depends:
     R (>= 3.3.1)
@@ -12,3 +12,6 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 5.0.1
 Imports: data.table
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

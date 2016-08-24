@@ -1,27 +1,31 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-#tableMatrix
+tableMatrix
+===========
 
 `tableMatrix` package provides structures to store data. First one is tableList which only serves to wrap data.table and additional structures together, second is tableMatrix that combines useful features of data.table and matrix to gain faster access to data.
 
-##Installation
+Installation
+------------
+
 From github:
 
-```r
+``` r
 # install.packages("devtools")
 devtools::install_github("InferenceTechnologies/tableMatrix")
 ```
 
-##Motivation
+Motivation
+----------
 
-###tableList
+### tableList
+
 It is needed to wrap a data.table object and other structures together and preserve data.table behaviour.
 
-####Example
+#### Example
+
 Dataset and linear model stored in tableList.
 
-
-```r
+``` r
 data(chickwts)
 tl <- tableList(chickwts, lm(weight~feed, chickwts))
 
@@ -40,41 +44,45 @@ aid(tl)
 #>         5.333
 ```
 
-###tableMatrix
-Lets have dataset which consists of two parts - metadata columns (any types) and main data columns (only one type). If whole data were stored as data.table (data.frame), access to main part would be much slower (slow indexing in data.table). 
-`tableMatrix` is result for this. It combines best of data.table (access via bracket to metadata part) and matrix. It stores dimensions of main part and effectively use this information while using multiple datasets which can have different dimensions of main data. It also can store additional structures.
+### tableMatrix
 
-####Example
-Solving simple task - recreating pictures from data with `tableMatrix`. Used datasets (images8By8, images15By15) are bitmaps. 
+Let's have dataset which consists of two parts - metadata columns (any types) and main data columns (only one type). If whole data were stored as data.table (data.frame), access to main part would be much slower (slow indexing in data.table). `tableMatrix` is result for this. It combines best of data.table (access via bracket to metadata part) and matrix. It stores dimensions of main part and effectively use this information while using multiple datasets which can have different dimensions of main data. It also can store additional structures.
 
+#### Example
 
-```r
+Solving simple task - recreating pictures from data with `tableMatrix`. Used datasets (images8By8, images15By15) are bitmaps. First let's see a sample image of a images8By8 dataset.
+
+``` r
+#loading data
 data(images8By8)
-colnames(images8By8)
-#>  [1] "direction" "dimX"      "dimY"      "pixel1"    "pixel2"   
-#>  [6] "pixel3"    "pixel4"    "pixel5"    "pixel6"    "pixel7"   
-#> [11] "pixel8"    "pixel9"    "pixel10"   "pixel11"   "pixel12"  
-#> [16] "pixel13"   "pixel14"   "pixel15"   "pixel16"   "pixel17"  
-#> [21] "pixel18"   "pixel19"   "pixel20"   "pixel21"   "pixel22"  
-#> [26] "pixel23"   "pixel24"   "pixel25"   "pixel26"   "pixel27"  
-#> [31] "pixel28"   "pixel29"   "pixel30"   "pixel31"   "pixel32"  
-#> [36] "pixel33"   "pixel34"   "pixel35"   "pixel36"   "pixel37"  
-#> [41] "pixel38"   "pixel39"   "pixel40"   "pixel41"   "pixel42"  
-#> [46] "pixel43"   "pixel44"   "pixel45"   "pixel46"   "pixel47"  
-#> [51] "pixel48"   "pixel49"   "pixel50"   "pixel51"   "pixel52"  
-#> [56] "pixel53"   "pixel54"   "pixel55"   "pixel56"   "pixel57"  
-#> [61] "pixel58"   "pixel59"   "pixel60"   "pixel61"   "pixel62"  
-#> [66] "pixel63"   "pixel64"
-dim(images8By8)
-#> [1] 90 67
+?images8By8
+#> Using development documentation for images8By8
 data(images15By15)
-dim(images15By15)
-#> [1]  90 228
 
+#creating tableMatrix from both datasets
+#first 3 cols used as metadata, rest as main data, dimensions of images
 tm <- tableMatrix(list(images15By15, images8By8),
 list(1:3, 1:3), list(c(4:ncol(images15By15)),c(4:ncol(images8By8))), list(c(15,15), c(8,8)))
 
+#number of matrices stored in mat part
+length(mat(tm))
+#> [1] 2
+
+#dimensions of main data
+#2 matrices in mat part -> 2 rows in matDim
+matDim(tm)
+#>    tm.matN dim1 dim2
+#> 1:       1   15   15
+#> 2:       2    8    8
+
+
+#additional structures - now empty
+aid(tm)
+#> list()
+
 #metadata
+#tm.matN and tm.matRow are data.table keys 
+#tm.matN is index of a matrix in mat part
 tab(tm)
 #>      tm.matN tm.matRow direction dimX dimY
 #>   1:       1         1      down   15   15
@@ -89,32 +97,37 @@ tab(tm)
 #> 179:       2        89      both    8    8
 #> 180:       2        90      both    8    8
 
-#dimensions of main data
-matDim(tm)
-#>    tm.matN dim1 dim2
-#> 1:       1   15   15
-#> 2:       2    8    8
+#image data from first row of 2nd matrix in mat part
+image <- getRow(tm,repo=c(2,1))
 
-#additional structures - now empty
-aid(tm)
-#> list()
+#restoring dimension of this image
+dim(image) <- getRowDim(tm,repo=c(2,1))
 
-length(mat(tm))
-#> [1] 2
+#visualising image
+image(image)
+```
 
+![](figures/README-unnamed-chunk-4-1.png)
+
+Now we'll recreate heat map.
+
+``` r
 #subsetting via bracket passed to metadata part
-tabSub <- tm[.(2)][direction=="both"]
+#selecting via tm.matN and direction
+tabSub <- tm[.(2)][direction=="down"]
 
+#only second matrix is now in mat
 length(mat(tabSub))
 #> [1] 1
 
-#recreating heat map
+#recreating heat map from mean of samples
 imageMean <- colMeans(mat(tabSub,1))
 
+#restoring original dimensions
 dim(imageMean) <- getRowDim(tabSub,1)
 
+#visualising image
 image(imageMean)
 ```
 
-![plot of chunk unnamed-chunk-4](figures/README-unnamed-chunk-4-1.png)
-
+![](figures/README-unnamed-chunk-5-1.png)

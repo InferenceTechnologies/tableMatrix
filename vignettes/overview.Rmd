@@ -1,17 +1,21 @@
 ---
-output:
-  md_document:
-    variant: markdown_github
+title: "Overview"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 ```{r, echo = FALSE}
+library(tableMatrix)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path='figures/README-'
 )
 ```
+
 #tableMatrix
 
 `tableMatrix` package provides structures to store data. First one is tableList which only serves to wrap data.table and additional structures together, second is tableMatrix that combines useful features of data.table and matrix to gain faster access to data.
@@ -94,7 +98,7 @@ tabSub <- tm[.(2)][direction=="down"]
 #only second matrix is now in mat
 length(mat(tabSub))
 
-#recreating heat map from mean of samples
+#recreating heat map from means of samples
 imageMean <- colMeans(mat(tabSub,1))
 
 #restoring original dimensions
@@ -103,5 +107,3 @@ dim(imageMean) <- getRowDim(tabSub,1)
 #visualising image
 image(imageMean)
 ```
-
-
