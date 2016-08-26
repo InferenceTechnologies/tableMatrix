@@ -9,7 +9,9 @@ output:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path='figures/README-'
+  fig.path='figures/README-',
+  fig.width=2,
+  fig.height=2
 )
 ```
 #tableMatrix

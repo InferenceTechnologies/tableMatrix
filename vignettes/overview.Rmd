@@ -95,7 +95,10 @@ Now we'll recreate heat map.
 #selecting via tm.matN and direction
 tabSub <- tm[.(2)][direction=="down"]
 
-#only second matrix is now in mat
+#only 1 matrix is in mat
+matDim(tabSub)
+
+#confirmation
 length(mat(tabSub))
 
 #recreating heat map from means of samples
