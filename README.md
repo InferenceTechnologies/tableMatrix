@@ -116,9 +116,15 @@ Now we'll recreate heat map.
 #selecting via tm.matN and direction
 tabSub <- tm[.(2)][direction=="down"]
 
-#only second matrix is now in mat
+#only 1 matrix is in mat
+matDim(tabSub)
+#>    tm.matN dim1 dim2
+#> 1:       1    8    8
+
+#confirmation
 length(mat(tabSub))
 #> [1] 1
+
 
 #recreating heat map from mean of samples
 imageMean <- colMeans(mat(tabSub,1))

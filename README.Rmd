@@ -9,9 +9,7 @@ output:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path='figures/README-',
-  fig.width=2,
-  fig.height=2
+  fig.path='figures/README-'
 )
 ```
 #tableMatrix
@@ -93,8 +91,12 @@ Now we'll recreate heat map.
 #selecting via tm.matN and direction
 tabSub <- tm[.(2)][direction=="down"]
 
-#only second matrix is now in mat
+#only 1 matrix is in mat
+matDim(tabSub)
+
+#confirmation
 length(mat(tabSub))
+
 
 #recreating heat map from mean of samples
 imageMean <- colMeans(mat(tabSub,1))
