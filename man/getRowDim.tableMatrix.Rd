@@ -2,43 +2,46 @@
 % Please edit documentation in R/tableMatrix.R
 \name{getRowDim.tableMatrix}
 \alias{getRowDim.tableMatrix}
-\title{Method to get row dim}
+\title{Get row dimensions}
 \usage{
 \method{getRowDim}{tableMatrix}(obj, i = NULL, repo = NULL, ...)
 }
 \arguments{
 \item{obj}{\code{tableMatrix} object.}
 
-\item{i}{Integer. Index of row in tab. Default NULL.}
+\item{i}{Integer. Row index in \code{tab}.}
 
-\item{repo}{Numeric vector. Vector of 2 elements - matRow and matRow. Default NULL.}
+\item{repo}{Numeric vector. Vector with 2 elements - matN and matRow.}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Passed arguments.}
 }
 \value{
 integer vector of dimensions
 }
 \description{
-\code{tableMatrix} method to get row dim which is stored in matDim.
+\code{tableMatrix} method to get row dimensions from matDim atrribute.
 }
 \examples{
+
 data(images8By8)
 data(images10By10)
 
-tm <- tableMatrix(list(images8By8, images10By10), 
+# Create tableMatrix from images8By8 and images10By10
+TM <- tableMatrix(list(images8By8, images10By10), 
 list(r=c(1,3), r=c(1,3)),
 list(r=c(4,ncol(images8By8)),r=c(4,ncol(images10By10))),list(c(8,8),c(10,10)),
 dimNames =c("dimX", "dimY"))
-matDim(tm)
-tab(tm) 
+matDim(TM)
+tab(TM) 
 
-getRowDim(tm,1)
+# Dimensions corresponding to row 1 in tab(TM)
+getRowDim(TM, 1)
 
-#2nd matrix in mat, 1st row
-getRowDim(tm,91)
+# Dimensions corresponding to row 91 in tab(TM)
+getRowDim(TM, 91)
 
-#Same as previous 
-getRowDim(tm,repo=c(2,1))
+# Dimensions corresponding to row 1 in second matrix in mat(TM)
+getRowDim(TM, repo=c(2,1))
 
 }
 

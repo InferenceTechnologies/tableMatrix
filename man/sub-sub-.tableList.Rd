@@ -9,9 +9,9 @@
 \arguments{
 \item{x}{\code{tableList} object.}
 
-\item{...}{Sequence of parameters for \code{tableList}.}
+\item{...}{Passed arguments.}
 }
 \description{
-tableList method passes data.table parameters to the table attribute
+\code{tableList} method, passes double bracket functionality to the table attribute.
 }
 

@@ -2,40 +2,36 @@
 % Please edit documentation in R/tableMatrix.R
 \name{tableList}
 \alias{tableList}
-\title{S3 class tableList object}
+\title{tableList constructor}
 \usage{
-tableList(tabData, aidData)
+tableList(tabData, aidData = list())
 }
 \arguments{
-\item{tabData}{Data.frame or data.table. Descriptors of data.}
+\item{tabData}{A data.frame or data.table.}
 
-\item{aidData}{Aid List. Can be used to add more information (or structure)}
+\item{aidData}{Aid structures generally in the form of a list.}
 }
 \value{
 A tableList object
 }
 \description{
 \code{tableList} constructor, creates tableList object from a data.frame or data.table
-and list of aid data. It serves to wrap meta data and additional data structures together. It acts 
-like data.table.
+and aid data. Goal is to wrap data.table and any additional data structures together. 
+It behaves like a data.table object.
 }
 \examples{
-data(images8By8)
-dim(images8By8)
 
-data(images10By10)
-dim(images10By10)
-images10By10AsTable <- data.table::as.data.table(images10By10)
+data(chickwts)
 
-tabPart <- images8By8[,1:3]
-tableList(tabPart, NULL)
+# Bundle chickwts data.frame together with a linear model
+TL <- tableList(chickwts, lm(weight~feed, chickwts))
 
+# tableList behaves like a data.table  
+mean(TL[feed=="casein", weight])
 
-tabDataTable <- images10By10AsTable[, .(direction, dimX, dimY)]
-tableList(tabDataTable, NULL)
+# Aid part of the tableList object carries the linear model
+aid(TL)
 
-aidPart <- list("example1", "example2")
-tableList(tabPart, aidPart)
 }
 \seealso{
 \code{\link{dim.tableList}}, \code{\link{dimnames.tableList}}

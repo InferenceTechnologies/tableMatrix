@@ -10,11 +10,11 @@ matDim(obj, ...)
 matDim(obj) <- value
 }
 \arguments{
-\item{obj}{Object to be used}
+\item{obj}{Object.}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Passed arguments.}
 
-\item{value}{Matrix.}
+\item{value}{data.table}
 }
 \description{
 S3 tableMatrix generic to get or set matDim attribute

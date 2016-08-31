@@ -2,14 +2,14 @@
 % Please edit documentation in R/tableMatrix.R
 \name{copy.tableMatrix}
 \alias{copy.tableMatrix}
-\title{Copying tableMatrix}
+\title{Copy}
 \usage{
 copy.tableMatrix(obj)
 }
 \arguments{
-\item{obj}{\code{tableList} object}
+\item{obj}{\code{tableMatrix} object.}
 }
 \description{
-Copy of a tableMatrix object.
+Copy of a \code{tableMatrix} object.
 }
 

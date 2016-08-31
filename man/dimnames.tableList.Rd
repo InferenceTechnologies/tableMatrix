@@ -2,14 +2,14 @@
 % Please edit documentation in R/tableMatrix.R
 \name{dimnames.tableList}
 \alias{dimnames.tableList}
-\title{Dimension Names}
+\title{Dimension names}
 \usage{
 \method{dimnames}{tableList}(x)
 }
 \arguments{
-\item{x}{\code{tableList} object}
+\item{x}{\code{tableList} object.}
 }
 \description{
-\code{tableList} method, returns dimension names of the table attribute
+\code{tableList} method, returns dimension names of the table attribute.
 }
 

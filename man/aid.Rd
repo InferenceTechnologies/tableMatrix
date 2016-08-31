@@ -10,11 +10,11 @@ aid(obj, ...)
 aid(obj) <- value
 }
 \arguments{
-\item{obj}{Variable name}
+\item{obj}{Object.}
 
-\item{...}{Arguments passed to or from other methods.}
+\item{...}{Passed arguments.}
 
-\item{value}{\code{data.table}.}
+\item{value}{User defined}
 }
 \description{
 S3 tableMatrix generic to get or set aid attribute

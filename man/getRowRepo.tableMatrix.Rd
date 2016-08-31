@@ -2,18 +2,18 @@
 % Please edit documentation in R/tableMatrix.R
 \name{getRowRepo.tableMatrix}
 \alias{getRowRepo.tableMatrix}
-\title{Method to get a row repo}
+\title{Get row repo}
 \usage{
 \method{getRowRepo}{tableMatrix}(obj, i = NULL, repo = NULL, ...)
 }
 \arguments{
 \item{obj}{\code{tableMatrix} object.}
 
-\item{i}{Integer. Index of row in \code{tab}. Default NULL.}
+\item{i}{Integer. Row index in \code{tab}.}
 
-\item{repo}{Numeric vector. Vector of 2 elements - matRow and matRow. Default NULL.}
+\item{repo}{Numeric vector. Vector with 2 elements - matN and matRow.}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Passed arguments.}
 }
 \value{
 vector of matN and matRow
@@ -22,20 +22,20 @@ vector of matN and matRow
 \code{tableMatrix} method to get row repo (vector of matN and matRow) for the matrix attribute
 }
 \examples{
+
 data(images8By8)
 data(images10By10)
 
-tm <- tableMatrix(list(images8By8, images10By10), list(1:3, 1:3),
+# Create tableMatrix from images8By8 and images10By10
+TM <- tableMatrix(list(images8By8, images10By10), list(1:3, 1:3),
 list(c(4:ncol(images8By8)),c(4:ncol(images10By10))))
-tab(tm)
+tab(TM)
 
-#1st matrix, 2nd row
-getRowRepo(tm,2)
+# Row 2 in tab(TM) corresponds to first matrix, second row 
+getRowRepo(TM, 2)
 
-#2nd matrix, 1st row  
-getRowRepo(tm, 91)
+# Row 91 in tab(TM) corresponds to second matrix, first row 
+getRowRepo(TM, 91)
 
-#Same result as previous
-getRowRepo(tm, repo=c(2,1))
 }
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/tableMatrix.R
 \name{is.tableMatrix}
 \alias{is.tableMatrix}
-\title{Method to test class of object}
+\title{tableMatrix test}
 \usage{
 is.tableMatrix(obj)
 }
@@ -10,6 +10,6 @@ is.tableMatrix(obj)
 \item{obj}{\code{tableTable} object}
 }
 \description{
-Tests if passed obj is of class tableMatrix
+Tests if passed object is of class \class{tableMatrix}
 }
 

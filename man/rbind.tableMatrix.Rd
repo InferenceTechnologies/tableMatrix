@@ -2,52 +2,55 @@
 % Please edit documentation in R/tableMatrix.R
 \name{rbind.tableMatrix}
 \alias{rbind.tableMatrix}
-\title{S3 method to bind tableMatrix objects by row}
+\title{Combine by rows}
 \usage{
 rbind.tableMatrix(..., use.names = TRUE, fill = FALSE)
 }
 \arguments{
-\item{...}{List of \code{tableMatrix}. Objects to be bind together. Their tab
-or mat part can be different.}
+\item{...}{\code{tableMatrix} objects.}
 
-\item{use.names}{Just as use.names in data.table. If \code{TRUE} items are bound
-by matching column names. Default \code{TRUE}.}
+\item{use.names}{Passed to rbind.data.table.}
 
-\item{fill}{Just as fill in data.table. Used when tab parts are different. Fills
-missing columns with NAs. If \code{TRUE}, \code{user.names} has to be \code{TRUE}.
-Default \code{FALSE}}
+\item{fill}{Passed to rbind.data.table.}
 }
 \value{
-A tableMatrix object
+A \code{tableMatrix} object
 }
 \description{
-Takes a sequence of \code{tableMatrix} arugments and combines them by row. If 
-matrix parts have same dimensions, it only adds rows in tab and mat part. 
-Otherwise it will add new matrix to mat part of \code{tableMatrix}.
+\code{tableMatrix} method, binds rows of \code{tableMatrix} objects. If 
+matrix parts have the same dimensions, it combines rows in table and matrix parts
+using data.table and matrix rbind methods respectively. In case when dimensions differ
+it combines rows in table part and adds new matrix to the matrix part.
 }
 \examples{
+
 data(images8By8)
 dim(images8By8)
 
 data(images10By10)
 dim(images10By10) 
 
-image8By8TM <- tableMatrix(images8By8, list(1:3), list(4:ncol(images8By8)))
-#Only first two columns are used for tab part
-image8By8TM2 <- tableMatrix(images8By8, list(c(1,2)), list(4:ncol(images8By8)))
-image10By10TM <- tableMatrix(images10By10, list(r=c(1,3)), list(j=c(4:ncol(images10By10))))
+# Create tableMatrix objects from images8By8 and images10By10
+TM1 <- tableMatrix(images8By8, 1:3, 4:ncol(images8By8))
+TM2 <- tableMatrix(images10By10, 1:3, 4:ncol(images10By10))
 
-#Different matrix part, another matrix created in mat
-tm <- rbind(image8By8TM , image10By10TM)
-length(mat(tm))
-tab(tm)
+# Combining tableMatrix objects with same dimensions
+TM <- rbind(TM1, TM1)
+# Combined table part
+tab(TM)
+# One matrix in the matrix part
+length(mat(TM))
+# One dimension type
+matDim(TM)
 
-#Same mat and tab part
-tm2 <- rbind(image8By8TM , image8By8TM)
-length(mat(tm2))
-tab(tm2)
+# Combining tableMatrix objects with different dimensions
+TM <- rbind(TM1, TM2)
+# Combined table part
+tab(TM)
+# Two matrices in the matrix part
+length(mat(TM))
+# Two dimension types
+matDim(TM)
 
-#Different number/names of columns of tabs, fill=TRUE 
-rbind(image8By8TM,image8By8TM2, fill=TRUE)
 }
 

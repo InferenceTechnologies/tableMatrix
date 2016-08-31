@@ -7,7 +7,7 @@
 getRowRepo(...)
 }
 \arguments{
-\item{...}{Arguments passed to or from other methods.}
+\item{...}{Passed arguments.}
 }
 \description{
 S3 tableMatrix generic to get row repo for matrix attribute

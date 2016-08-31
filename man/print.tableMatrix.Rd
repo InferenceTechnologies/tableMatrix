@@ -7,12 +7,11 @@
 \method{print}{tableMatrix}(x, ...)
 }
 \arguments{
-\item{x}{\code{tableMatrix} object}
+\item{x}{\code{tableMatrix} object.}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Passed arguments.}
 }
 \description{
-\code{tableMatrix} method to print. Only tab data without \code{tmName} vars 
-are printed.
+\code{tableMatrix} method, prints table attribute without \code{tmName} columns.
 }
 

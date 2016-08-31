@@ -4,7 +4,7 @@
 \name{images8By8}
 \alias{images8By8}
 \title{Images of distributions}
-\format{A data frame with 90 rows and 67 variables:
+\format{Data frame with 90 rows and 67 variables:
 \itemize{
   \item{direction direction of diagonal, factor "up", "down", "both"}
   \item{dimX dimension x of image, in pixels}
@@ -15,10 +15,10 @@
 images8By8
 }
 \description{
-A dataset containing samples of multivariate normal distributions. 
-Each row in dataset represents a generated matrix. Dimensions are stored in
-dimX and dimY. Direction "up" and "down" depends on used covariance matrix.
-"Both" was created as combination of the previous.
+Dataset containing samples of multivariate normal distributions. 
+Each row in the dataset represents a generated matrix. Dimensions are stored in
+dimX and dimY columns. Directions "up" and "down" correspond to different 
+covariance matrices. Direction "both" was created as a combination of "up" and "down".
 }
 \keyword{datasets}
 

@@ -7,26 +7,22 @@
 \method{[}{tableMatrix}(x, ...)
 }
 \arguments{
-\item{x}{\code{tableMatrix}.}
+\item{x}{\code{tableMatrix} object.}
 
-\item{...}{Sequence of parameters for \code{tableMatrix}.}
+\item{...}{Passed arguments.}
 }
 \description{
-S3 tableMatrix method to pass data.table parameters to the table attribute.
+\code{tableMatrix} method, passes data.table bracket functionality to the table attribute.
 }
 \examples{
+
 data(images8By8)
-dim(images8By8)
 
-data(images10By10)
-dim(images10By10) 
+# Create tableMatrix from images8By8
+TM <- tableMatrix(images8By8, 1:3, 4:ncol(images8By8))
 
-image8By8TM <- tableMatrix(images8By8, list(1:3), list(4:ncol(images8By8)))
-image10By10TM <- tableMatrix(images10By10, list(r=c(1,3)), list(j=c(4:ncol(images10By10))))
+# Apply data.table bracket on a tableMatrix object
+TM[direction=="both"]
 
-together <- rbind(image8By8TM , image10By10TM)
-
-#where matN is 2
-together[.(2)]
 }
 

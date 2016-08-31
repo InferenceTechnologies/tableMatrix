@@ -12,9 +12,9 @@
 \arguments{
 \item{obj}{\code{tableList} object.}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Passed arguments.}
 
-\item{value}{List.}
+\item{value}{User defined.}
 }
 \description{
 \code{tableList} method to get or set aid attribute.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/tableMatrix.R
 \name{is.tableList}
 \alias{is.tableList}
-\title{tableList testing}
+\title{tableList test}
 \usage{
 is.tableList(obj)
 }
@@ -10,6 +10,6 @@ is.tableList(obj)
 \item{obj}{\code{tableList} object}
 }
 \description{
-Tests if passed obj is of class tableList
+Tests if passed object is of class \class{tableList}
 }
 

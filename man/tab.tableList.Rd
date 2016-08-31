@@ -10,13 +10,13 @@
 \method{tab}{tableList}(obj) <- value
 }
 \arguments{
-\item{obj}{\code{dataList}.}
+\item{obj}{\code{tableList} object.}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Passed arguments.}
 
-\item{value}{\code{data.table}.}
+\item{value}{data.table}
 }
 \description{
-\code{tableList} method to get or set table attribute
+\code{tableList} method to get or set table attribute.
 }
 

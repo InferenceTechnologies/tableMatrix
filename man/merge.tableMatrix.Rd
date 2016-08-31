@@ -2,29 +2,32 @@
 % Please edit documentation in R/tableMatrix.R
 \name{merge.tableMatrix}
 \alias{merge.tableMatrix}
-\title{Merging tableMatrix}
+\title{Merge}
 \usage{
 \method{merge}{tableMatrix}(x, y, key, ...)
 }
 \arguments{
 \item{x}{\code{tableMatrix} object}
 
-\item{y}{Data.table or data.frame object.}
+\item{y}{data.table or data.frame object.}
 
-\item{key}{Vector of shared column names to be used as key.}
+\item{key}{Shared columns as merging key.}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Passed arguments.}
 }
 \description{
-Merging \code{tableMatrix} with data.table or data.frame
+\code{tableMatrix} method, merges \code{tableMatrix} objects with data.table or 
+data.frame.
 }
 \examples{
-data(images8By8)
-dim(images8By8)
-data(images10By10)
-dim(images10By10)
 
-tm <- tableMatrix(images8By8, c("direction","dimX","dimY"), 4:ncol(images8By8), c(8,8))
-merge(tm, data.frame(direction="down", flag=TRUE), key="direction")
+data(images8By8)
+
+# Create tableMatrix from images8By8
+TM <- tableMatrix(images8By8, c("direction","dimX","dimY"), 4:ncol(images8By8), c(8,8))
+
+# Merge tableMatrix object with a data.frame
+merge(TM, data.frame(direction="down", flag=TRUE), key="direction")
+
 }
 

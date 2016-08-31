@@ -7,11 +7,11 @@
 \method{print}{tableList}(x, ...)
 }
 \arguments{
-\item{x}{\code{tableList} object}
+\item{x}{\code{tableList} object.}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Passed arguments.}
 }
 \description{
-\code{tableList} method, prints only tab data.
+\code{tableList} method, prints table attribute.
 }
 

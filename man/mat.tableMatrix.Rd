@@ -12,32 +12,32 @@
 \arguments{
 \item{obj}{\code{tableMatrix} object.}
 
-\item{matN}{Integer. Index of list in mat part of \code{tableMatrix}.
-If not NULL, only one part is returned. Default NULL.}
+\item{matN}{Integer. Matrix number in the matrix part list.}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Passed arguments.}
 
-\item{value}{Matrix.}
+\item{value}{List of matrices.}
 }
 \value{
-Mat part of \code{tableMatrix} or a matrix
+Full matrix part of \code{tableMatrix} or a matrix.
 }
 \description{
-\code{tableMatrix} method to get or set matrix attribute. Mat consists
-of list of matrices.
+\code{tableMatrix} method to get or set matrix part attribute. Matrix part is a
+list of matrices.
 }
 \examples{
+
 data(images8By8)
-data(images10By10)
-data(images15By15)
 
-tm <- tableMatrix(list(images8By8, images10By10), list(1:3, 1:3),
+# Create tableMatrix from images8By8 and images10By10
+TM <- tableMatrix(list(images8By8, images10By10), list(1:3, 1:3),
 list(4:ncol(images8By8),4:ncol(images10By10)))
-tm2 <- tableMatrix(images15By15, 1:3, 4:ncol(images15By15))
-mat(tm)
 
-head(mat(tm, 2))
+# Full matrix part of TM
+mat(TM)
 
-mat(tm) <- mat(tm2) 
+# Matrix part of TM corresponding to matrix type 2
+mat(TM, 2)
+
 }
 

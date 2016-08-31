@@ -12,33 +12,32 @@
 \arguments{
 \item{obj}{\code{tableMatrix} object.}
 
-\item{matN}{Integer. Index of list in mat part of \code{tableMatrix}. 
-Default NULL. When NULL, all rows from matDim are returned.}
+\item{matN}{Integer. Matrix number in the matrix part list.}
 
-\item{resetN}{Logical. When TRUE, returned matDim has matN=1. Default FALSE.}
+\item{resetN}{Logical. When FALSE \code{tm.matN} of returned \code{matDim} won't be 
+reseted to 1.}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Passed arguments.}
 
-\item{value}{Matrix.}
+\item{value}{data.table}
 }
 \description{
-\code{tableMatrix} method to get or set matDim attribute
+\code{tableMatrix} method to get or set matDim attribute.
 }
 \examples{
+
 data(images8By8)
 data(images10By10)
-data(images15By15)
 
-tm <- tableMatrix(list(images8By8, images10By10), list(1:3, 1:3),
+# Create tableMatrix from images8By8 and images10By10
+TM <- tableMatrix(list(images8By8, images10By10), list(1:3, 1:3),
 list(r=c(4,ncol(images8By8)),r=c(4,ncol(images10By10))))
-tm2 <- tableMatrix(images15By15, 1:3, 4:ncol(images15By15))
 
-matDim(tm)
+# Dimensions part of TM
+matDim(TM)
 
-matDim(tm, 2)
+# Dimensions part of TM corresponding to matrix type 2
+matDim(TM, 2)
 
-matDim(tm, 2, TRUE)
-
-matDim(tm) <- matDim(tm2) 
 }
 

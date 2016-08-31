@@ -10,43 +10,40 @@
 \arguments{
 \item{obj}{\code{tableMatrix} object.}
 
-\item{matN}{Integer. Index of list in \code{mat} part of \code{tableMatrix}. Default NULL.}
+\item{matN}{Integer. Matrix number in \code{mat} list.}
 
-\item{addRow}{Logical. If specified, column \code{tm.allRow} with original row 
-number is added.  Default FALSE.}
+\item{addRow}{Logical. If TRUE column \code{tm.allRow} with row indexes before subsetting
+is added.}
 
-\item{resetN}{Logical. Used only when matN is specified. When FALSE
-matN of returned tab won't be reseted to 1. Default TRUE.}
+\item{resetN}{Logical. Used when matN is specified. When FALSE
+\code{tm.matN} of returned tab won't be reseted to 1. Default TRUE.}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Passed arguments.}
 }
 \value{
 Table part of \code{tableMatrix}
 }
 \description{
-Function to get or set table attribute of \code{tableMatrix} object.
+\code{tableMatrix} method to get or set table attribute of \code{tableMatrix} object.
 }
 \examples{
+
 data(images8By8)
 data(images10By10)
-data(images10By10)
 
-tm <- tableMatrix(list(images8By8, images10By10), list(1:3, 1:3),
+# Create tableMatrix from images8By8 and images10By10
+TM <- tableMatrix(list(images8By8, images10By10), list(1:3, 1:3),
 list(4:ncol(images8By8),4:ncol(images10By10)))
-tm2 <- tableMatrix(images15By15, 1:3, 4:ncol(images15By15))
-matDim(tm)
+matDim(TM)
 
-tab(tm)
+# Table part of TM
+tab(TM)
 
-#get tab only from where matN is 2
-tab(tm,2)
+# Table part of TM corresponding to matrix type 2
+tab(TM, 2)
 
-#tm.allRow column is added
-tab(tm,2, TRUE)
-
-#matN stays the same
-tab(tm,2, TRUE, FALSE)
-
+# Add row indexes
+tab(TM, 2, TRUE)
 
 }
 

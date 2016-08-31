@@ -7,9 +7,9 @@
 \method{dim}{tableList}(x)
 }
 \arguments{
-\item{x}{\code{tableList} object}
+\item{x}{\code{tableList} object.}
 }
 \description{
-\code{tableList} method returns dimensions of the table attribute
+\code{tableList} method, returns dimensions of the table attribute.
 }
 
