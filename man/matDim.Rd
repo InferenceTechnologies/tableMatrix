@@ -16,6 +16,9 @@ matDim(obj) <- value
 
 \item{value}{data.table}
 }
+\value{
+when getter \code{data.table} with aid data
+}
 \description{
 S3 tableMatrix generic to get or set matDim attribute
 }

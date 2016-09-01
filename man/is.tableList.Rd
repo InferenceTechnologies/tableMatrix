@@ -9,7 +9,10 @@ is.tableList(obj)
 \arguments{
 \item{obj}{\code{tableList} object}
 }
+\value{
+logical vector
+}
 \description{
-Tests if passed object is of class \class{tableList}
+Tests if passed object is of class \code{tableList}
 }
 

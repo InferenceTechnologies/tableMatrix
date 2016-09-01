@@ -13,6 +13,9 @@ rbind.tableList(..., use.names = TRUE, fill = FALSE)
 
 \item{fill}{Passed to rbind.data.table.}
 }
+\value{
+\code{tableList} object
+}
 \description{
 \code{tableList} method, binds rows of \code{tableList} objects.
 }

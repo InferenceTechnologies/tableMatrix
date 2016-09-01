@@ -16,6 +16,9 @@ tab(obj) <- value
 
 \item{value}{data.table}
 }
+\value{
+when getter list of \code{data.table}
+}
 \description{
 S3 tableMatrix generic to get or set table attribute
 }

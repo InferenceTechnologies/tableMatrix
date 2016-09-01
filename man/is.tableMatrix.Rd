@@ -9,7 +9,10 @@ is.tableMatrix(obj)
 \arguments{
 \item{obj}{\code{tableTable} object}
 }
+\value{
+logical vector
+}
 \description{
-Tests if passed object is of class \class{tableMatrix}
+Tests if passed object is of class \code{tableMatrix}
 }
 

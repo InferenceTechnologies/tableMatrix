@@ -11,6 +11,9 @@
 
 \item{...}{Passed arguments.}
 }
+\value{
+character vector
+}
 \description{
 \code{tableMatrix} method, prints table attribute without \code{tmName} columns.
 }

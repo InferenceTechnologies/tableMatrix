@@ -15,6 +15,9 @@
 
 \item{...}{Passed arguments.}
 }
+\value{
+\code{tableMatrix} object
+}
 \description{
 \code{tableMatrix} method, merges \code{tableMatrix} objects with data.table or 
 data.frame.

@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{\code{tableList} object.}
 }
+\value{
+integer vector
+}
 \description{
 \code{tableList} method, returns dimensions of the table attribute.
 }

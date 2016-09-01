@@ -11,6 +11,9 @@
 
 \item{...}{Passed arguments.}
 }
+\value{
+\code{tableMatrix} object
+}
 \description{
 \code{tableMatrix} method, passes data.table bracket functionality to the table attribute.
 }

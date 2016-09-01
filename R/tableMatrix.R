@@ -297,6 +297,8 @@ tableMatrix <- function(dataList, tabCol, matCol, dims=NULL, dimNames=NULL, aidD
 #' @param value data.table
 #' @param ... Passed arguments.
 #' 
+#' @return when getter list of \code{data.table}
+#' 
 #' @rdname tab
 #' 
 #' @export
@@ -311,6 +313,8 @@ tab <- function(obj,...) { UseMethod("tab") }
 #' @param obj Object.
 #' @param value List of matrices.
 #' @param ... Passed arguments.
+#' 
+#' @return when getter list of matrices
 #' 
 #' @rdname mat
 #' 
@@ -329,6 +333,8 @@ mat <- function(obj,...) { UseMethod("mat") }
 #' 
 #' @rdname matDim
 #' 
+#' @return when getter \code{data.table} with aid data
+#' 
 #' @export
 matDim <- function(obj,...) { UseMethod("matDim") }
 #' @rdname matDim
@@ -341,6 +347,8 @@ matDim <- function(obj,...) { UseMethod("matDim") }
 #' @param obj Object.
 #' @param value User defined
 #' @param ... Passed arguments.
+#'
+#' @return when getter list with aid data
 #' 
 #' @rdname aid
 #' 
@@ -356,6 +364,8 @@ aid <- function(obj,...) { UseMethod("aid") }
 #' @param ... Passed arguments.
 #' 
 #' @rdname getRowRepo
+#'
+#' @return numeric vector
 #' 
 #' @export
 getRowRepo <- function(...) { UseMethod("getRowRepo") }
@@ -363,6 +373,8 @@ getRowRepo <- function(...) { UseMethod("getRowRepo") }
 #' S3 tableMatrix generic to get or set row from matrix attribute
 #' 
 #' @param ... Passed arguments.
+#'
+#' @return when getter numeric vector
 #' 
 #' @rdname getRow
 #' 
@@ -377,6 +389,8 @@ setRow <- function(...) { UseMethod("setRow") }
 #' 
 #' @param ... Passed arguments.
 #' 
+#' @return integer vector of dimensions of a row
+#'
 #' @export
 getRowDim <- function(...) { UseMethod("getRowDim") }
 
@@ -422,6 +436,8 @@ tab.tableList <- function(obj, ...) {
 #' @param value User defined. 
 #' @param ... Passed arguments.
 #'
+#' @return list with aid data
+#' 
 #' @rdname aid.tableList
 #' @export
 aid.tableList <- function(obj, ...) {	return(obj$aid) }
@@ -446,7 +462,7 @@ aid.tableList <- function(obj, ...) {	return(obj$aid) }
 #' \code{tm.matN} of returned tab won't be reseted to 1. Default TRUE.
 #' @param ... Passed arguments.
 #' 
-#' @return Table part of \code{tableMatrix}
+#' @return when getter table part of \code{tableMatrix}
 #'
 #' @examples
 #' 
@@ -505,6 +521,8 @@ tab.tableMatrix <- function(obj, matN=NULL, addRow=FALSE, resetN=TRUE, ...) {
 #' @param value List of matrices.
 #' @param ... Passed arguments.
 #' 
+#' @return when getter list of matrices 
+#' 
 #' @return Full matrix part of \code{tableMatrix} or a matrix.
 #' 
 #' @rdname mat.tableMatrix
@@ -552,6 +570,8 @@ mat.tableMatrix <- function(obj, matN=NULL, ...) {
 #' reseted to 1.
 #' @param ... Passed arguments.
 #' @param value data.table
+#'
+#' @return when getter \code{data.table} with matDim data
 #' 
 #' @rdname matDim.tableMatrix
 #' 
@@ -638,6 +658,8 @@ getRowRepo.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' @param i Integer. Row index in \code{tab}.
 #' @param repo Numeric vector. Vector with 2 elements - matN and matRow.
 #' @param ... Passed arguments.
+#'
+#' @return numeric vector
 #' 
 #' @rdname getRow.tableMatrix
 #' 
@@ -685,7 +707,7 @@ setRow.tableMatrix <- function(obj, value, i=NULL, repo=NULL, ...) {
 #' @param repo Numeric vector. Vector with 2 elements - matN and matRow.
 #' @param ... Passed arguments.
 #' 
-#' @return integer vector of dimensions
+#' @return integer vector of dimensions of a row
 #' 
 #' @examples
 #' 
@@ -728,6 +750,8 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' @param x \code{tableList} object.
 #' @param ... Passed arguments.
 #' 
+#' @return tableList
+#'
 #' @examples
 #' 
 #' data(images8By8)
@@ -767,6 +791,8 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' @param x \code{tableList} object.
 #' @param ... Passed arguments.
 #' 
+#' @return vector
+#'
 #' @export
 '[[.tableList' <- function(x, ...) {
 
@@ -779,7 +805,9 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' 
 #' @param x \code{tableMatrix} object.
 #' @param ... Passed arguments.
-#' 
+#'
+#' @return \code{tableMatrix} object
+#'
 #' @examples
 #' 
 #' data(images8By8)
@@ -857,6 +885,8 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' 
 #' @param x \code{tableList} object.
 #' 
+#' @return integer vector
+#'
 #' @export
 dim.tableList <- function(x) {
 	return(dim(x$tab))
@@ -867,7 +897,9 @@ dim.tableList <- function(x) {
 #' \code{tableList} method, returns dimension names of the table attribute.
 #' 
 #' @param x \code{tableList} object.
-#' 
+#'
+#' @return character vector
+#'
 #' @export
 dimnames.tableList <- function(x) {
 	return(dimnames(x$tab))
@@ -880,6 +912,8 @@ dimnames.tableList <- function(x) {
 #' @param x \code{tableList} object.
 #' @param ... Passed arguments.
 #' 
+#' @return character vector
+#'
 #' @export
 print.tableList <- function(x, ...) {
 	
@@ -894,6 +928,8 @@ print.tableList <- function(x, ...) {
 #' @param x \code{tableMatrix} object.
 #' @param ... Passed arguments.
 #' 
+#' @return character vector
+#'
 #' @export
 print.tableMatrix <- function(x, ...) {
 
@@ -911,6 +947,8 @@ print.tableMatrix <- function(x, ...) {
 #' @param y data.table or data.frame object.
 #' @param key Shared columns as merging key.
 #' @param ... Passed arguments.
+#' 
+#' @return \code{tableMatrix} object
 #' 
 #' @examples
 #' 
@@ -941,6 +979,8 @@ merge.tableMatrix <- function(x, y, key, ...) {
 #' @param use.names Passed to rbind.data.table.
 #' @param fill Passed to rbind.data.table.
 #' 
+#' @return \code{tableList} object
+#'
 #' @examples
 #' 
 #' data(images8By8)
@@ -992,7 +1032,7 @@ rbind.tableList <- function(..., use.names=TRUE, fill=FALSE) {
 #' @param use.names Passed to rbind.data.table.
 #' @param fill Passed to rbind.data.table.
 #' 
-#' @return A \code{tableMatrix} object
+#' @return \code{tableMatrix} object
 #' 
 #' @examples 
 #' 
@@ -1086,6 +1126,8 @@ rbind.tableMatrix <- function(..., use.names=TRUE, fill=FALSE) {
 #' 
 #' @param obj \code{tableList} object.
 #' 
+#' @return \code{tableList} object
+#' 
 #' @export
 copy.tableList <- function(obj) {
 
@@ -1098,6 +1140,8 @@ copy.tableList <- function(obj) {
 #' Copy of a \code{tableMatrix} object. 
 #' 
 #' @param obj \code{tableMatrix} object.
+#' 
+#' @return \code{tableMatrix} object
 #' 
 #' @export
 copy.tableMatrix <- function(obj) {
@@ -1113,9 +1157,11 @@ copy.tableMatrix <- function(obj) {
 
 #' tableList test
 #' 
-#' Tests if passed object is of class \class{tableList}
+#' Tests if passed object is of class \code{tableList}
 #' 
 #' @param obj \code{tableList} object
+#' 
+#' @return logical vector
 #' 
 #' @export
 is.tableList <- function(obj) {
@@ -1126,9 +1172,11 @@ is.tableList <- function(obj) {
 
 #' tableMatrix test
 #' 
-#' Tests if passed object is of class \class{tableMatrix}
+#' Tests if passed object is of class \code{tableMatrix}
 #' 
 #' @param obj \code{tableTable} object
+#' 
+#' @return logical vector
 #' 
 #' @export
 is.tableMatrix <- function(obj) {
@@ -1168,19 +1216,3 @@ is.tableMatrix <- function(obj) {
 #'   \item{pixel1:pixel100 pixel of image, in number}
 #' }
 "images10By10"
-
-#' Images of distributions
-#'
-#' Dataset containing samples of multivariate normal distributions. 
-#' Each row in the dataset represents a generated matrix. Dimensions are stored in
-#' dimX and dimY columns. Directions "up" and "down" correspond to different 
-#' covariance matrices. Direction "both" was created as a combination of "up" and "down". 
-#'
-#' @format Data frame with 90 rows and 228 variables:
-#' \itemize{
-#'   \item{direction direction of diagonal, factor "up", "down", "both"}
-#'   \item{dimX dimension x of image, in pixels}
-#'   \item{dimY dimension y of image, in pixels}
-#'   \item{pixel1:pixel225 pixel of image, in number}
-#' }
-"images15By15"

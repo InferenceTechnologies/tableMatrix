@@ -9,6 +9,9 @@ getRowRepo(...)
 \arguments{
 \item{...}{Passed arguments.}
 }
+\value{
+numeric vector
+}
 \description{
 S3 tableMatrix generic to get row repo for matrix attribute
 }

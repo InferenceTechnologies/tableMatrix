@@ -11,6 +11,9 @@
 
 \item{...}{Passed arguments.}
 }
+\value{
+vector
+}
 \description{
 \code{tableList} method, passes double bracket functionality to the table attribute.
 }

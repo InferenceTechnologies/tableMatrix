@@ -9,6 +9,9 @@ copy.tableList(obj)
 \arguments{
 \item{obj}{\code{tableList} object.}
 }
+\value{
+\code{tableList} object
+}
 \description{
 Copy of a \code{tableList} object.
 }

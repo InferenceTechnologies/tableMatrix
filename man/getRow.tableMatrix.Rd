@@ -20,6 +20,9 @@
 
 \item{value}{Vector for setting value.}
 }
+\value{
+numeric vector
+}
 \description{
 \code{tableMatrix} method to get or set a row from the matrix attribute.
 }

@@ -9,6 +9,9 @@ copy.tableMatrix(obj)
 \arguments{
 \item{obj}{\code{tableMatrix} object.}
 }
+\value{
+\code{tableMatrix} object
+}
 \description{
 Copy of a \code{tableMatrix} object.
 }

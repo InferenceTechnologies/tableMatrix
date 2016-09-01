@@ -9,6 +9,9 @@ getRowDim(...)
 \arguments{
 \item{...}{Passed arguments.}
 }
+\value{
+integer vector of dimensions of a row
+}
 \description{
 S3 tableMatrix generic to get row dim
 }

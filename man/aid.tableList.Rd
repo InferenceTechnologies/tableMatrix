@@ -16,6 +16,9 @@
 
 \item{value}{User defined.}
 }
+\value{
+list with aid data
+}
 \description{
 \code{tableList} method to get or set aid attribute.
 }

@@ -21,7 +21,7 @@ is added.}
 \item{...}{Passed arguments.}
 }
 \value{
-Table part of \code{tableMatrix}
+when getter table part of \code{tableMatrix}
 }
 \description{
 \code{tableMatrix} method to get or set table attribute of \code{tableMatrix} object.

@@ -11,6 +11,9 @@
 
 \item{...}{Passed arguments.}
 }
+\value{
+tableList
+}
 \description{
 \code{tableList} method, passes data.table bracket functionality to the table attribute.
 Usage is the same as in data.table[].

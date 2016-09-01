@@ -14,7 +14,7 @@ rbind.tableMatrix(..., use.names = TRUE, fill = FALSE)
 \item{fill}{Passed to rbind.data.table.}
 }
 \value{
-A \code{tableMatrix} object
+\code{tableMatrix} object
 }
 \description{
 \code{tableMatrix} method, binds rows of \code{tableMatrix} objects. If 
