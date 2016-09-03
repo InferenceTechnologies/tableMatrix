@@ -12,7 +12,7 @@
 \item{...}{Passed arguments.}
 }
 \value{
-tableList
+\code{tableList} or vector.
 }
 \description{
 \code{tableList} method, passes data.table bracket functionality to the table attribute.

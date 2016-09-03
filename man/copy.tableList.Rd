@@ -10,7 +10,7 @@ copy.tableList(obj)
 \item{obj}{\code{tableList} object.}
 }
 \value{
-\code{tableList} object
+\code{tableList} object.
 }
 \description{
 Copy of a \code{tableList} object.

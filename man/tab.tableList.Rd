@@ -16,6 +16,9 @@
 
 \item{value}{data.table}
 }
+\value{
+Table part.
+}
 \description{
 \code{tableList} method to get or set table attribute.
 }

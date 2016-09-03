@@ -17,7 +17,7 @@ aid(obj) <- value
 \item{value}{User defined}
 }
 \value{
-when getter list with aid data
+User aid data.
 }
 \description{
 S3 tableMatrix generic to get or set aid attribute

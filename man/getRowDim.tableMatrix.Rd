@@ -16,7 +16,7 @@
 \item{...}{Passed arguments.}
 }
 \value{
-integer vector of dimensions of a row
+Dimensions corresponding to the row.
 }
 \description{
 \code{tableMatrix} method to get row dimensions from matDim atrribute.

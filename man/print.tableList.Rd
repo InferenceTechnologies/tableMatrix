@@ -11,9 +11,6 @@
 
 \item{...}{Passed arguments.}
 }
-\value{
-character vector
-}
 \description{
 \code{tableList} method, prints table attribute.
 }

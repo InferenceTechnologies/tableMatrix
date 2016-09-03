@@ -13,7 +13,7 @@ setRow(...)
 \item{...}{Passed arguments.}
 }
 \value{
-when getter numeric vector
+numeric vector.
 }
 \description{
 S3 tableMatrix generic to get or set row from matrix attribute

@@ -10,7 +10,7 @@
 \item{x}{\code{tableList} object.}
 }
 \value{
-character vector
+Column or row names of the table part.
 }
 \description{
 \code{tableList} method, returns dimension names of the table attribute.

@@ -10,7 +10,7 @@ copy.tableMatrix(obj)
 \item{obj}{\code{tableMatrix} object.}
 }
 \value{
-\code{tableMatrix} object
+\code{tableMatrix} object.
 }
 \description{
 Copy of a \code{tableMatrix} object.

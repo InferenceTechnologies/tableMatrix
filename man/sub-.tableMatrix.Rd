@@ -12,7 +12,7 @@
 \item{...}{Passed arguments.}
 }
 \value{
-\code{tableMatrix} object
+\code{tableMatrix} or vector.
 }
 \description{
 \code{tableMatrix} method, passes data.table bracket functionality to the table attribute.

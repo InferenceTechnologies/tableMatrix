@@ -7,16 +7,16 @@
 tableList(tabData, aidData = list())
 }
 \arguments{
-\item{tabData}{A data.frame or data.table.}
+\item{tabData}{A data.frame or a data.table.}
 
-\item{aidData}{Aid structures generally in the form of a list.}
+\item{aidData}{Aid structures, generally in the form of a list.}
 }
 \value{
-A tableList object
+A \code{tableList} object
 }
 \description{
-\code{tableList} constructor, creates tableList object from a data.frame or data.table
-and aid data. Goal is to wrap data.table and any additional data structures together. 
+\code{tableList} constructor, creates tableList object from a data.frame or a data.table
+and form aid data. The goal is to wrap data.table and any additional data structures together. 
 It behaves like a data.table object.
 }
 \examples{

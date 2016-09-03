@@ -21,7 +21,7 @@
 \item{value}{Vector for setting value.}
 }
 \value{
-numeric vector
+Row from the matrix part.
 }
 \description{
 \code{tableMatrix} method to get or set a row from the matrix attribute.

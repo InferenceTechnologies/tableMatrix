@@ -16,7 +16,7 @@
 \item{...}{Passed arguments.}
 }
 \value{
-vector of matN and matRow
+Vector of matN and matRow.
 }
 \description{
 \code{tableMatrix} method to get row repo (vector of matN and matRow) for the matrix attribute

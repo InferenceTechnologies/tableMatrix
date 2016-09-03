@@ -18,9 +18,9 @@ range of column names or indicies. By default or when a vector is provided, \cod
 
 \item{matCol}{Integer or character vector or list of these vectors. Specifies column
 names or indices of main data part. For list input, names \code{j} or \code{r} can be used
-as in \code{tabCol}}
+as in \code{tabCol}.}
 
-\item{dims}{Numeric vector or list of vectors. Specifies dimensions in \code{matDim} part.
+\item{dims}{Numeric vector or list of vectors. Specifies dimensions for the \code{matDim} part.
 By default with no dimension details given by user, main data is considered to be vectors
 with one dimension.}
 
@@ -30,7 +30,7 @@ element of \code{dims} parameter. If not specified these names are generated aut
 \item{aidData}{Aid structures generally in the form of a list.}
 }
 \value{
-A tableMatrix object
+A \code{tableMatrix} object
 }
 \description{
 \code{tableMatrix} constructor, creates tableMatrix object from a list of 
@@ -51,7 +51,7 @@ dimensions of main data.
 is the matrix number in \code{mat}, second column \code{tm.matRow} is the row in the matrix. 
 \code{matDim} is \code{data.table}. In \code{matDim} for each matrix number \code{tm.matN} dimensions
 can be specified with user defined dimensions. 
-Default print of \code{tableMatrix} is  the print of \code{tab} part without \code{tm.matN} and 
+Default print of \code{tableMatrix} is the print of \code{tab} part without \code{tm.matN} and 
 \code{tm.matRow} columns.
 }
 \examples{

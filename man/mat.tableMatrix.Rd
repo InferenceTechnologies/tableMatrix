@@ -19,8 +19,6 @@
 \item{value}{List of matrices.}
 }
 \value{
-when getter list of matrices
-
 Full matrix part of \code{tableMatrix} or a matrix.
 }
 \description{

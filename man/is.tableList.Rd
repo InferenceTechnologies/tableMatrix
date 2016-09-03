@@ -10,7 +10,7 @@ is.tableList(obj)
 \item{obj}{\code{tableList} object}
 }
 \value{
-logical vector
+logical vector.
 }
 \description{
 Tests if passed object is of class \code{tableList}

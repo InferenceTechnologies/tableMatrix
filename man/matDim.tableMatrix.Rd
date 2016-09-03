@@ -22,7 +22,7 @@ reseted to 1.}
 \item{value}{data.table}
 }
 \value{
-when getter \code{data.table} with matDim data
+Full dimensions part of \code{tableMatrix} or a subset of dimensions part.
 }
 \description{
 \code{tableMatrix} method to get or set matDim attribute.

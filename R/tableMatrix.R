@@ -48,14 +48,14 @@ tableListWrap <- function(tab=data.table(), aid=list(), objClass=NULL) {
 
 #' tableList constructor
 #' 
-#' \code{tableList} constructor, creates tableList object from a data.frame or data.table
-#' and aid data. Goal is to wrap data.table and any additional data structures together. 
+#' \code{tableList} constructor, creates tableList object from a data.frame or a data.table
+#' and form aid data. The goal is to wrap data.table and any additional data structures together. 
 #' It behaves like a data.table object.
 #'
-#' @param tabData A data.frame or data.table.
-#' @param aidData Aid structures generally in the form of a list.
+#' @param tabData A data.frame or a data.table.
+#' @param aidData Aid structures, generally in the form of a list.
 #' 
-#' @return A tableList object
+#' @return A \code{tableList} object
 #' 
 #' @seealso
 #'    \code{\link{dim.tableList}}, \code{\link{dimnames.tableList}}
@@ -128,8 +128,8 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' range of column names or indicies. By default or when a vector is provided, \code{j} is used.
 #' @param matCol Integer or character vector or list of these vectors. Specifies column
 #' names or indices of main data part. For list input, names \code{j} or \code{r} can be used
-#' as in \code{tabCol} 
-#' @param dims Numeric vector or list of vectors. Specifies dimensions in \code{matDim} part.
+#' as in \code{tabCol}.
+#' @param dims Numeric vector or list of vectors. Specifies dimensions for the \code{matDim} part.
 #' By default with no dimension details given by user, main data is considered to be vectors
 #' with one dimension.
 #' @param dimNames Character vector. Specifies dimension names in \code{matDim} for each
@@ -144,10 +144,10 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' is the matrix number in \code{mat}, second column \code{tm.matRow} is the row in the matrix. 
 #' \code{matDim} is \code{data.table}. In \code{matDim} for each matrix number \code{tm.matN} dimensions
 #' can be specified with user defined dimensions. 
-#' Default print of \code{tableMatrix} is  the print of \code{tab} part without \code{tm.matN} and 
+#' Default print of \code{tableMatrix} is the print of \code{tab} part without \code{tm.matN} and 
 #' \code{tm.matRow} columns.
 #' 
-#' @return A tableMatrix object
+#' @return A \code{tableMatrix} object
 #' 
 #' @seealso
 #'    \code{\link{getRowRepo.tableMatrix}}, \code{\link{getRowDim.tableMatrix}},
@@ -297,7 +297,7 @@ tableMatrix <- function(dataList, tabCol, matCol, dims=NULL, dimNames=NULL, aidD
 #' @param value data.table
 #' @param ... Passed arguments.
 #' 
-#' @return when getter list of \code{data.table}
+#' @return data.table
 #' 
 #' @rdname tab
 #' 
@@ -314,7 +314,7 @@ tab <- function(obj,...) { UseMethod("tab") }
 #' @param value List of matrices.
 #' @param ... Passed arguments.
 #' 
-#' @return when getter list of matrices
+#' @return List of matrices
 #' 
 #' @rdname mat
 #' 
@@ -331,7 +331,7 @@ mat <- function(obj,...) { UseMethod("mat") }
 #' @param ... Passed arguments.
 #' @param value data.table
 #' 
-#' @rdname matDim
+#' @rdname data.table 
 #' 
 #' @return when getter \code{data.table} with aid data
 #' 
@@ -348,7 +348,7 @@ matDim <- function(obj,...) { UseMethod("matDim") }
 #' @param value User defined
 #' @param ... Passed arguments.
 #'
-#' @return when getter list with aid data
+#' @return User aid data.
 #' 
 #' @rdname aid
 #' 
@@ -363,9 +363,9 @@ aid <- function(obj,...) { UseMethod("aid") }
 #' 
 #' @param ... Passed arguments.
 #' 
-#' @rdname getRowRepo
+#' @return numeric vector.
 #'
-#' @return numeric vector
+#' @rdname getRowRepo
 #' 
 #' @export
 getRowRepo <- function(...) { UseMethod("getRowRepo") }
@@ -374,7 +374,7 @@ getRowRepo <- function(...) { UseMethod("getRowRepo") }
 #' 
 #' @param ... Passed arguments.
 #'
-#' @return when getter numeric vector
+#' @return numeric vector.
 #' 
 #' @rdname getRow
 #' 
@@ -389,7 +389,7 @@ setRow <- function(...) { UseMethod("setRow") }
 #' 
 #' @param ... Passed arguments.
 #' 
-#' @return integer vector of dimensions of a row
+#' @return integer vector.
 #'
 #' @export
 getRowDim <- function(...) { UseMethod("getRowDim") }
@@ -406,6 +406,8 @@ getRowDim <- function(...) { UseMethod("getRowDim") }
 #' @param value data.table
 #' @param ... Passed arguments.
 #'
+#' @return Table part.
+#' 
 #' @rdname tab.tableList
 #' 
 #' @export
@@ -436,7 +438,7 @@ tab.tableList <- function(obj, ...) {
 #' @param value User defined. 
 #' @param ... Passed arguments.
 #'
-#' @return list with aid data
+#' @return Aid part.
 #' 
 #' @rdname aid.tableList
 #' @export
@@ -462,7 +464,7 @@ aid.tableList <- function(obj, ...) {	return(obj$aid) }
 #' \code{tm.matN} of returned tab won't be reseted to 1. Default TRUE.
 #' @param ... Passed arguments.
 #' 
-#' @return when getter table part of \code{tableMatrix}
+#' @return Full table part of \code{tableMatrix} or a subset of table part.
 #'
 #' @examples
 #' 
@@ -521,8 +523,6 @@ tab.tableMatrix <- function(obj, matN=NULL, addRow=FALSE, resetN=TRUE, ...) {
 #' @param value List of matrices.
 #' @param ... Passed arguments.
 #' 
-#' @return when getter list of matrices 
-#' 
 #' @return Full matrix part of \code{tableMatrix} or a matrix.
 #' 
 #' @rdname mat.tableMatrix
@@ -571,7 +571,7 @@ mat.tableMatrix <- function(obj, matN=NULL, ...) {
 #' @param ... Passed arguments.
 #' @param value data.table
 #'
-#' @return when getter \code{data.table} with matDim data
+#' @return Full dimensions part of \code{tableMatrix} or a subset of dimensions part.
 #' 
 #' @rdname matDim.tableMatrix
 #' 
@@ -624,7 +624,7 @@ matDim.tableMatrix <- function(obj, matN=NULL, resetN=FALSE, ...) {
 #' @param repo Numeric vector. Vector with 2 elements - matN and matRow.
 #' @param ... Passed arguments.
 #' 
-#' @return vector of matN and matRow
+#' @return Vector of matN and matRow.
 #' 
 #' @examples
 #' 
@@ -659,7 +659,7 @@ getRowRepo.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' @param repo Numeric vector. Vector with 2 elements - matN and matRow.
 #' @param ... Passed arguments.
 #'
-#' @return numeric vector
+#' @return Row from the matrix part.
 #' 
 #' @rdname getRow.tableMatrix
 #' 
@@ -707,7 +707,7 @@ setRow.tableMatrix <- function(obj, value, i=NULL, repo=NULL, ...) {
 #' @param repo Numeric vector. Vector with 2 elements - matN and matRow.
 #' @param ... Passed arguments.
 #' 
-#' @return integer vector of dimensions of a row
+#' @return Dimensions corresponding to the row.
 #' 
 #' @examples
 #' 
@@ -750,7 +750,7 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' @param x \code{tableList} object.
 #' @param ... Passed arguments.
 #' 
-#' @return tableList
+#' @return \code{tableList} or vector.
 #'
 #' @examples
 #' 
@@ -806,7 +806,7 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' @param x \code{tableMatrix} object.
 #' @param ... Passed arguments.
 #'
-#' @return \code{tableMatrix} object
+#' @return \code{tableMatrix} or vector.
 #'
 #' @examples
 #' 
@@ -885,7 +885,7 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' 
 #' @param x \code{tableList} object.
 #' 
-#' @return integer vector
+#' @return Dimensions of the table part.
 #'
 #' @export
 dim.tableList <- function(x) {
@@ -898,7 +898,7 @@ dim.tableList <- function(x) {
 #' 
 #' @param x \code{tableList} object.
 #'
-#' @return character vector
+#' @return Column or row names of the table part.
 #'
 #' @export
 dimnames.tableList <- function(x) {
@@ -912,8 +912,6 @@ dimnames.tableList <- function(x) {
 #' @param x \code{tableList} object.
 #' @param ... Passed arguments.
 #' 
-#' @return character vector
-#'
 #' @export
 print.tableList <- function(x, ...) {
 	
@@ -928,8 +926,6 @@ print.tableList <- function(x, ...) {
 #' @param x \code{tableMatrix} object.
 #' @param ... Passed arguments.
 #' 
-#' @return character vector
-#'
 #' @export
 print.tableMatrix <- function(x, ...) {
 
@@ -948,7 +944,7 @@ print.tableMatrix <- function(x, ...) {
 #' @param key Shared columns as merging key.
 #' @param ... Passed arguments.
 #' 
-#' @return \code{tableMatrix} object
+#' @return \code{tableMatrix} object.
 #' 
 #' @examples
 #' 
@@ -979,7 +975,7 @@ merge.tableMatrix <- function(x, y, key, ...) {
 #' @param use.names Passed to rbind.data.table.
 #' @param fill Passed to rbind.data.table.
 #' 
-#' @return \code{tableList} object
+#' @return \code{tableList} object.
 #'
 #' @examples
 #' 
@@ -1032,7 +1028,7 @@ rbind.tableList <- function(..., use.names=TRUE, fill=FALSE) {
 #' @param use.names Passed to rbind.data.table.
 #' @param fill Passed to rbind.data.table.
 #' 
-#' @return \code{tableMatrix} object
+#' @return \code{tableMatrix} object.
 #' 
 #' @examples 
 #' 
@@ -1126,7 +1122,7 @@ rbind.tableMatrix <- function(..., use.names=TRUE, fill=FALSE) {
 #' 
 #' @param obj \code{tableList} object.
 #' 
-#' @return \code{tableList} object
+#' @return \code{tableList} object.
 #' 
 #' @export
 copy.tableList <- function(obj) {
@@ -1141,7 +1137,7 @@ copy.tableList <- function(obj) {
 #' 
 #' @param obj \code{tableMatrix} object.
 #' 
-#' @return \code{tableMatrix} object
+#' @return \code{tableMatrix} object.
 #' 
 #' @export
 copy.tableMatrix <- function(obj) {
@@ -1161,7 +1157,7 @@ copy.tableMatrix <- function(obj) {
 #' 
 #' @param obj \code{tableList} object
 #' 
-#' @return logical vector
+#' @return logical vector.
 #' 
 #' @export
 is.tableList <- function(obj) {
@@ -1176,7 +1172,7 @@ is.tableList <- function(obj) {
 #' 
 #' @param obj \code{tableTable} object
 #' 
-#' @return logical vector
+#' @return logical vector.
 #' 
 #' @export
 is.tableMatrix <- function(obj) {

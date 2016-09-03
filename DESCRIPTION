@@ -2,9 +2,9 @@ Package: tableMatrix
 Title: Combines Data.table and Matrix
 Version: 0.8
 Authors@R: c(person("Petr", "Lenhard", email = "petr.lenhard@inferencetech.com", role = c("aut", "cre")),	      
-	      person("Inference Technologies", role = "cph"),
+	      person("Inference Technologies", email = "mail@inferencetech.com", role = "cph"),
               person("Petra", "Hudeckova", email = "hudeckovapetra@gmail.com", role = "ctb"))
-Description: Combines data.table and matrix.
+Description: Provides two advanced data structures built on top of data.table. Simple tableList object wraps data.table and any additional data together. More complex tableMatrix object combines strengths of data.table and matrix.
 Depends:
     R (>= 3.3.1)
 License: GPL-2
