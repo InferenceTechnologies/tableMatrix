@@ -57,7 +57,7 @@ Let's have a dataset with the following structure: first set of columns of varyi
 
 ### Example
 
-Working with bitmaps of different sizes. Datasets `images8By8` and `images10By10` contain 8x8 and 10x10 images in the form of vectors. For each row first three columns represent image meta data, remaining columns represent the image itself.
+Working with bitmaps of different sizes. Datasets `images8By8` and `images10By10` contain 8x8 and 10x10 images in the form of vectors. For each row first three columns represent image meta data, remaining columns represent the image itself. For more information see `?images8By8`.
 
 ``` r
 # Load datasets

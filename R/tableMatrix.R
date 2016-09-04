@@ -331,7 +331,7 @@ mat <- function(obj,...) { UseMethod("mat") }
 #' @param ... Passed arguments.
 #' @param value data.table
 #' 
-#' @rdname data.table 
+#' @rdname matDim
 #' 
 #' @return when getter \code{data.table} with aid data
 #' 
