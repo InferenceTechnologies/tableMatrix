@@ -2,10 +2,16 @@
 tableMatrix package
 ===================
 
-`tableMatrix` package provides two advanced data structures built on top of data.table. Simple `tableList` object wraps data.table and any additional data together. More complex `tableMatrix` object combines strengths of data.table and matrix.
+tableMatrix package provides two advanced data structures built on top of data.table. Simple `tableList` object wraps data.table and any additional data together. More complex `tableMatrix` object combines strengths of data.table and matrix.
 
 Installation
 ------------
+
+From CRAN:
+
+``` r
+install.packages("tableMatrix")
+```
 
 From github:
 
@@ -106,10 +112,10 @@ img <- getRow(TM, 1)
 dim(img) <- getRowDim(TM, 1)
 
 # Visualising the image
-image(img)
+image(img, axes=F)
 ```
 
-![](figures/README-unnamed-chunk-4-1.png)
+![](figures/README-unnamed-chunk-5-1.png)
 
 Let's create a heat map
 
@@ -134,7 +140,7 @@ imgHeat <- colMeans(mat(TM1down, 1))
 dim(imgHeat) <- getRowDim(TM1down, 1)
 
 # Visualising heatmap
-image(imgHeat)
+image(imgHeat, axes=F)
 ```
 
-![](figures/README-unnamed-chunk-5-1.png)
+![](figures/README-unnamed-chunk-6-1.png)
