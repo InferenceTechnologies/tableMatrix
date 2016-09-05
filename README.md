@@ -2,7 +2,7 @@
 tableMatrix package
 ===================
 
-tableMatrix package provides two advanced data structures built on top of data.table. Simple `tableList` object wraps data.table and any additional data together. More complex `tableMatrix` object combines strengths of data.table and matrix.
+tableMatrix package provides two classes extending data.table class. Simple `tableList` class wraps data.table and any additional structures together. More complex `tableMatrix` class combines strengths of data.table and matrix.
 
 Installation
 ------------
@@ -20,12 +20,12 @@ From github:
 devtools::install_github("InferenceTechnologies/tableMatrix")
 ```
 
-tableList object
-----------------
+tableList class
+---------------
 
 ### Motivation
 
-Goal is to wrap a data.table object and other structures together and preserve data.table behaviour.
+Goal is to wrap data.table class and other structures together and preserve data.table behaviour.
 
 ### Example
 
@@ -54,8 +54,8 @@ aid(TL)
 #>         5.333
 ```
 
-tableMatrix object
-------------------
+tableMatrix class
+-----------------
 
 ### Motivation
 

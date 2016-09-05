@@ -37,10 +37,10 @@ A \code{tableMatrix} object
 data.frames or data.tables. It is useful for datasets with the following 
 structure: first set of columns of varying types is intented as meta data,
 second set of columns of the same type is intended as main data. 
-tableMatrix combines strengths of data.table (access via bracket 
+\code{tableMatrix} combines strengths of data.table (access via bracket 
 to the meta data part) and matrix (main data). It also stores dimensions of main data,
-thus allowing to combine rows of varying lengths into one object. As in tableList,
-tableMatrix can carry any additional aid data.
+thus allowing to combine rows of varying lengths into one object. As in \code{tableList},
+\code{tableMatrix} can carry any additional aid data.
 }
 \details{
 \code{tableMatrix} is a S3 class that consists of 3 parts. 
@@ -51,7 +51,7 @@ dimensions of main data.
 is the matrix number in \code{mat}, second column \code{tm.matRow} is the row in the matrix. 
 \code{matDim} is \code{data.table}. In \code{matDim} for each matrix number \code{tm.matN} dimensions
 can be specified with user defined dimensions. 
-Default print of \code{tableMatrix} is the print of \code{tab} part without \code{tm.matN} and 
+Default print of \code{tableMatrix} is the print of the \code{tab} part without \code{tm.matN} and 
 \code{tm.matRow} columns.
 }
 \examples{

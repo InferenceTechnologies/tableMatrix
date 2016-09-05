@@ -16,8 +16,8 @@ A \code{tableList} object
 }
 \description{
 \code{tableList} constructor, creates tableList object from a data.frame or a data.table
-and form aid data. The goal is to wrap data.table and any additional data structures together. 
-It behaves like a data.table object.
+and from aid data. The goal is to wrap data.table and any additional data structures together. 
+\code{tableList} behaves like a data.table object.
 }
 \examples{
 

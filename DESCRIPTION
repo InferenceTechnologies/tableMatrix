@@ -1,10 +1,10 @@
 Package: tableMatrix
-Title: Combines Data.table and Matrix
+Title: Combines 'data.table' and 'matrix' Classes
 Version: 0.8
 Authors@R: c(person("Petr", "Lenhard", email = "petr.lenhard@inferencetech.com", role = c("aut", "cre")),	      
 	      person("Inference Technologies", email = "mail@inferencetech.com", role = "cph"),
               person("Petra", "Hudeckova", email = "hudeckovapetra@gmail.com", role = "ctb"))
-Description: Provides two advanced data structures built on top of data.table. Simple 'tableList' object wraps data.table and any additional data together. More complex 'tableMatrix' object combines strengths of data.table and matrix. See http://github.com/InferenceTechnologies/tableMatrix for more information and examples.
+Description: Provides two classes extending 'data.table' class. Simple 'tableList' class wraps 'data.table' and any additional structures together. More complex 'tableMatrix' class combines strengths of 'data.table' and 'matrix'. See <http://github.com/InferenceTechnologies/tableMatrix> for more information and examples.
 Depends:
     R (>= 3.3.1)
 License: GPL-2

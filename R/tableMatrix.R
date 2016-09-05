@@ -49,8 +49,8 @@ tableListWrap <- function(tab=data.table(), aid=list(), objClass=NULL) {
 #' tableList constructor
 #' 
 #' \code{tableList} constructor, creates tableList object from a data.frame or a data.table
-#' and form aid data. The goal is to wrap data.table and any additional data structures together. 
-#' It behaves like a data.table object.
+#' and from aid data. The goal is to wrap data.table and any additional data structures together. 
+#' \code{tableList} behaves like a data.table object.
 #'
 #' @param tabData A data.frame or a data.table.
 #' @param aidData Aid structures, generally in the form of a list.
@@ -115,10 +115,10 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' data.frames or data.tables. It is useful for datasets with the following 
 #' structure: first set of columns of varying types is intented as meta data,
 #' second set of columns of the same type is intended as main data. 
-#' tableMatrix combines strengths of data.table (access via bracket 
+#' \code{tableMatrix} combines strengths of data.table (access via bracket 
 #' to the meta data part) and matrix (main data). It also stores dimensions of main data,
-#' thus allowing to combine rows of varying lengths into one object. As in tableList,
-#' tableMatrix can carry any additional aid data. 
+#' thus allowing to combine rows of varying lengths into one object. As in \code{tableList},
+#' \code{tableMatrix} can carry any additional aid data. 
 #'
 #' @param dataList Dataset(s) in the form of data.frame or data.table or list of data.frames or data.tables.
 #' All datasets must have the same meta data columns, matrix parts can be different. 
@@ -144,7 +144,7 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' is the matrix number in \code{mat}, second column \code{tm.matRow} is the row in the matrix. 
 #' \code{matDim} is \code{data.table}. In \code{matDim} for each matrix number \code{tm.matN} dimensions
 #' can be specified with user defined dimensions. 
-#' Default print of \code{tableMatrix} is the print of \code{tab} part without \code{tm.matN} and 
+#' Default print of \code{tableMatrix} is the print of the \code{tab} part without \code{tm.matN} and 
 #' \code{tm.matRow} columns.
 #' 
 #' @return A \code{tableMatrix} object
@@ -331,9 +331,9 @@ mat <- function(obj,...) { UseMethod("mat") }
 #' @param ... Passed arguments.
 #' @param value data.table
 #' 
-#' @rdname matDim
+#' @return data.table
 #' 
-#' @return when getter \code{data.table} with aid data
+#' @rdname matDim
 #' 
 #' @export
 matDim <- function(obj,...) { UseMethod("matDim") }
@@ -898,7 +898,7 @@ dim.tableList <- function(x) {
 #' 
 #' @param x \code{tableList} object.
 #'
-#' @return Column or row names of the table part.
+#' @return Column and row names of the table part.
 #'
 #' @export
 dimnames.tableList <- function(x) {
