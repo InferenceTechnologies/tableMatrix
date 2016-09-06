@@ -1,9 +1,12 @@
 #
-# Inference Technologies
+# Inference Technologies 
+# http://inferencetech.com
+#
+# pkg tableMatrix
 #
 # Class tableList, tableMatrix
 # 
-# 0.80
+# 0.81
 # 
 
 #
@@ -229,18 +232,10 @@ tableMatrix <- function(dataList, tabCol, matCol, dims=NULL, dimNames=NULL, aidD
 	obj <- tableMatrixWrap()
 	if (missing(dataList)) { return(obj) }
 
-	if (is.data.frame(dataList)||is.data.table(dataList)) { dataList <- list(dataList) }
-
-	if (! is.null(dims)) {
-		if(! is.list(dims)) {
-			dims <- list(dims)
-		}
-
-		if (length(dims) != length(dataList)) {
-			stop("length of dims should be the same as number of dataLists")
-		}
-		
-	}
+	dataList <- inlist(dataList, is.data.frame(dataList)||is.data.table(dataList))
+	tabCol <- inlist(tabCol)
+	matCol <- inlist(matCol)
+	dims <- inlist(dims)
 
 	for (i in 1:length(dataList)) {
 
@@ -248,35 +243,30 @@ tableMatrix <- function(dataList, tabCol, matCol, dims=NULL, dimNames=NULL, aidD
 		if (is.data.frame(obji)) { obji <- as.data.table(obji) }
 		if (!is.data.table(obji)) { stop("tableMatrix requires list of data.frames or data.tables") }
 
-		if (! is.null(dims) && length(dims) != length(dataList)) {
-			stop("length of dims should be the same as number of data.frames (data.tables)")
-		}
-		
 		addTab <- obji[, colj(obji, geti(tabCol, i)), with=F]
-		addTab[,c(tmName$matN, tmName$matRow):=list(1, 1:nrow(addTab))]
+		addTab[,c(tmName$matN, tmName$matRow):=list(1L, 1:nrow(addTab))]
 		colShiftRef(addTab, c(tmName$matN, tmName$matRow), 1)
 
 		addMat <- as.matrix(obji[, colj(obji, geti(matCol, i)), with=F])
 
-
 		if (! is.null(dims)) {
-			dim <- dims[[i]]
+			dimi <- geti(dims, i, T)
 			#generate names for dims
-			if (is.null(names(dim)) && is.null(dimNames)) {
-				names <- c(1:length(dim))
-				names <- paste0(tmName$matDim, names)
+			if (is.null(names(dimi)) && is.null(dimNames)) {
+				dimiNames <- paste0(tmName$matDim, 1:length(dimi))
 			} else {
 				#names are taken from param
-				if (is.null(names(dim))) {
-				    names <- dimNames
+				if (is.null(names(dimi))) {
+					if (length(dimNames)!=length(dimi)) { stop("dims and dimNames lengths do not match") }
+				    dimiNames <- dimNames
 				} else {
-				    names <- names(dim)
+				    dimiNames <- names(dimi)
 				}
 			}
 
 			#set matDim
-			addMatDim <- setnames(data.table(c(1L)), c(tmName$matN))
-			addMatDim[,names := as.list(dim), with=F]
+			addMatDim <- setnames(data.table(1L), tmName$matN)
+			addMatDim[,c(dimiNames) := as.list(dimi), with=F]
 		} else {
 			addMatDim <- setnames(data.table(1L, ncol(addMat)), c(tmName$matN, tmName$matCols))
 		}

@@ -1,9 +1,12 @@
 #
-# Inference Technologies
+# Inference Technologies 
+# http://inferencetech.com
+#
+# pkg tableMatrix
 #
 # Utils
 # 
-# 0.23
+# 0.24
 # 
 
 
@@ -16,7 +19,6 @@
 # rb - column range, numeric or character, border columns excluded
 colj <- function(obj, col, do="j", sortj=FALSE, numj=TRUE) {
 
-	# maybe not needed anymore?
 	if (!is.list(col)) {
 		col <- list(col)
 		names(col) <- do
@@ -98,14 +100,19 @@ colShiftRef <- function(obj, colSrc, colDest, destInSrc="doNothing") {
 	return(invisible())
 }
 
-# limits indexing to the length of the object
-geti <- function(obj, i) {
+# limits indexing to the length of the object, db=TRUE -> use double bracket
+geti <- function(obj, i, db=FALSE, fun=c("[","[[")[db+1]) {
 
 	if (is.null(obj)) { return(NULL) }
+	return(do.call(fun, list(obj, ifelse(i>length(obj), length(obj), i))))
+}
 
-	# case when obj is vector 
-	if (! is.list(obj)) { obj <- list(obj) }
-	return(obj[ifelse(i>length(obj), length(obj), i)])
+# inserts into list
+inlist <- function(obj, con=!is.list(obj)) {
+
+	if (is.null(obj)) { return(NULL) }
+	if (con) { obj <- list(obj) }
+	return(obj)
 }
 
 # cat function
