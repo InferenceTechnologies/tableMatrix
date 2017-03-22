@@ -9,7 +9,7 @@ output:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path='figures/README-'
+  fig.path='man/figures/README-'
 )
 ```
 #tableMatrix package

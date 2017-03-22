@@ -74,6 +74,17 @@ data(images10By10)
 # First 3 columns used as meta data, the rest as main data with corresponding dimensions
 TM <- tableMatrix(list(images8By8, images10By10),
 list(1:3, 1:3), list(c(4:ncol(images8By8)),c(4:ncol(images10By10))), list(c(8,8), c(10,10)))
+#> Warning in `[.data.table`(addMatDim, , `:=`(names, as.list(dim)), with =
+#> F): with=FALSE together with := was deprecated in v1.9.4 released Oct 2014.
+#> Please wrap the LHS of := with parentheses; e.g., DT[,(myVar):=sum(b),by=a]
+#> to assign to column name(s) held in variable myVar. See ?':=' for other
+#> examples. As warned in 2014, this is now a warning.
+
+#> Warning in `[.data.table`(addMatDim, , `:=`(names, as.list(dim)), with =
+#> F): with=FALSE together with := was deprecated in v1.9.4 released Oct 2014.
+#> Please wrap the LHS of := with parentheses; e.g., DT[,(myVar):=sum(b),by=a]
+#> to assign to column name(s) held in variable myVar. See ?':=' for other
+#> examples. As warned in 2014, this is now a warning.
 
 # Default print displays the table (meta data) part
 TM
@@ -115,7 +126,7 @@ dim(img) <- getRowDim(TM, 1)
 image(img, axes=F)
 ```
 
-![](figures/README-unnamed-chunk-5-1.png)
+![](man/figures/README-unnamed-chunk-5-1.png)
 
 Let's create a heat map
 
@@ -143,4 +154,4 @@ dim(imgHeat) <- getRowDim(TM1down, 1)
 image(imgHeat, axes=F)
 ```
 
-![](figures/README-unnamed-chunk-6-1.png)
+![](man/figures/README-unnamed-chunk-6-1.png)
