@@ -735,9 +735,12 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' Bracket
 #' 
 #' \code{tableList} method, passes data.table bracket functionality to the table attribute.
-#' Usage is the same as in data.table[].
+#' Usage is the same as in data.table[] and data.table[] <-.
 #' 
 #' @param x \code{tableList} object.
+#' @param i Same as \code{i} in \code{data.table}
+#' @param j Same as \code{j} in \code{data.table}
+#' @param value Value to be set.
 #' @param ... Passed arguments.
 #' 
 #' @return \code{tableList} or vector.
@@ -751,7 +754,7 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' 
 #' # Apply data.table bracket on a tableList object
 #' TL[direction=="both"]
-#' 
+#'
 #' @export
 '[.tableList' <- function(x, ...) {
 
@@ -768,6 +771,31 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 	## copy after bracket
 	# objTab <- copy(x$tab[...])
 	
+	if (is.null(nrow(objTab))) { return(objTab) }
+
+	x$tab <- objTab
+	return(x)
+}
+
+#' Bracket
+#' @rdname sub-.tableList
+'[<-.tableList' <- function(x, i, j, value) {
+	## copy first, then bracket 1
+	matchCall <- match.call()
+	matchCall[[1]] <- quote(`[<-`)
+	assign("brTableListTab",tab(x), envir=parent.frame())
+	on.exit(rm("brTableListTab", envir=parent.frame()))
+	matchCall[[2]] <- quote(brTableListTab)
+	assign("brI",i, envir=parent.frame())
+	on.exit(rm("brI", envir=parent.frame()))
+	matchCall[[3]] <- quote(brI)
+	assign("brJ",j, envir=parent.frame())
+	on.exit(rm("brJ", envir=parent.frame()))
+	matchCall[[4]] <- quote(brJ)
+	assign("brValue",value, envir=parent.frame())
+	on.exit(rm("brValue", envir=parent.frame()))
+	matchCall[[5]] <- quote(brValue)
+	objTab <- eval.parent(matchCall)
 	if (is.null(nrow(objTab))) { return(objTab) }
 
 	x$tab <- objTab
@@ -794,6 +822,9 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' \code{tableMatrix} method, passes data.table bracket functionality to the table attribute.
 #' 
 #' @param x \code{tableMatrix} object.
+#' @param i Same as \code{i} in \code{data.table}
+#' @param j Same as \code{j} in \code{data.table}
+#' @param value Value to be set.
 #' @param ... Passed arguments.
 #'
 #' @return \code{tableMatrix} or vector.
@@ -823,6 +854,71 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 	# objTab <- do.call('[',list(tab(x),...), quote=T, envir=envir)
 	## copy after bracket
 	# objTab <- copy(x$tab[...])
+
+	if (is.null(nrow(objTab))) { return(objTab) }
+	if (!nrow(objTab)) { 
+		x$tab <- objTab
+		x$mat <- list()
+		x$matDim <- data.table()
+		return(x)
+	}
+
+	mergeNA <- is.na(objTab[[tmName$matN]])
+	if (sum(mergeNA)) { objTab <- objTab[!mergeNA] }
+
+	objMat <- mat(x)
+
+	uniqMatN <- sort(unique(objTab[[tmName$matN]]))
+
+	matNIdx <- list()
+	for (i in 1:length(uniqMatN)) {
+		matN <- uniqMatN[i]
+		matNIdx[[i]] <- which(objTab[[tmName$matN]]==matN)
+		objMat[[matN]] <- objMat[[matN]][objTab[[tmName$matRow]][matNIdx[[i]]],,drop=F]
+		objTab[matNIdx[[i]], c(tmName$matRow):=.I]
+	}
+
+	objMatDim <- matDim(x)[.(uniqMatN)]
+	
+	if (length(uniqMatN)!=length(objMat)) {
+		tmMatSort <- list()
+		for (i in 1:length(uniqMatN)) {
+			matN <- uniqMatN[i]
+			objTab[matNIdx[[i]],c(tmName$matN):=i]
+			tmMatSort[[i]] <- objMat[[matN]]
+			matDimMatNIdx <- which(objMatDim[[tmName$matN]]==matN)
+			objMatDim[matDimMatNIdx, c(tmName$matN):=i]
+		}
+		objMat <- tmMatSort
+	}
+
+	x$tab <- objTab
+	x$mat <- objMat
+	x$matDim <- objMatDim
+	setkeyv(x$tab, c(tmName$matN, tmName$matRow))
+	setkeyv(x$matDim, tmName$matN)
+	return(x)
+}
+
+#' Bracket
+#' @rdname sub-.tableMatrix
+'[<-.tableMatrix' <- function(x, i, j, value) {
+
+	matchCall <- match.call()
+	matchCall[[1]] <- quote(`[<-`)
+	assign("brTableListTab",tab(x), envir=parent.frame())
+	on.exit(rm("brTableListTab", envir=parent.frame()))
+	matchCall[[2]] <- quote(brTableListTab)
+	assign("brI",i, envir=parent.frame())
+	on.exit(rm("brI", envir=parent.frame()))
+	matchCall[[3]] <- quote(brI)
+	assign("brJ",j, envir=parent.frame())
+	on.exit(rm("brJ", envir=parent.frame()))
+	matchCall[[4]] <- quote(brJ)
+	assign("brValue",value, envir=parent.frame())
+	on.exit(rm("brValue", envir=parent.frame()))
+	matchCall[[5]] <- quote(brValue)
+	objTab <- eval.parent(matchCall)
 
 	if (is.null(nrow(objTab))) { return(objTab) }
 	if (!nrow(objTab)) { 

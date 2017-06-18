@@ -129,4 +129,3 @@ length(mat(TM)) # 1 matrix in mat
 \code{\link{getRowRepo.tableMatrix}}, \code{\link{getRowDim.tableMatrix}},
    \code{\link{merge.tableMatrix}}, \code{\link{rbind.tableMatrix}}
 }
-

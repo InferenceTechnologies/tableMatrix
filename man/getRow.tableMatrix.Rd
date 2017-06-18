@@ -46,4 +46,3 @@ TM <- setRow(TM, rep(2,length(row)), 91)
 getRow(TM, 91)
 
 }
-

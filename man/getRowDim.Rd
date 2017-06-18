@@ -15,4 +15,3 @@ integer vector.
 \description{
 S3 tableMatrix generic to get row dim
 }
-

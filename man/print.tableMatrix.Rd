@@ -14,4 +14,3 @@
 \description{
 \code{tableMatrix} method, prints table attribute without \code{tmName} columns.
 }
-

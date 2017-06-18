@@ -4,7 +4,7 @@
 \alias{rbind.tableList}
 \title{Combine by rows}
 \usage{
-rbind.tableList(..., use.names = TRUE, fill = FALSE)
+\method{rbind}{tableList}(..., use.names = TRUE, fill = FALSE)
 }
 \arguments{
 \item{...}{\code{tableList} objects.}
@@ -32,4 +32,3 @@ TL2 <- tableList(images10By10[,1:3])
 rbind(TL1, TL2)
 
 }
-

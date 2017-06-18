@@ -2,20 +2,31 @@
 % Please edit documentation in R/tableMatrix.R
 \name{[.tableMatrix}
 \alias{[.tableMatrix}
+\alias{[<-.tableMatrix}
 \title{Bracket}
 \usage{
 \method{[}{tableMatrix}(x, ...)
+
+\method{[}{tableMatrix}(x, i, j) <- value
 }
 \arguments{
 \item{x}{\code{tableMatrix} object.}
 
 \item{...}{Passed arguments.}
+
+\item{i}{Same as \code{i} in \code{data.table}}
+
+\item{j}{Same as \code{j} in \code{data.table}}
+
+\item{value}{Value to be set.}
 }
 \value{
 \code{tableMatrix} or vector.
 }
 \description{
 \code{tableMatrix} method, passes data.table bracket functionality to the table attribute.
+
+Bracket
 }
 \examples{
 
@@ -28,4 +39,3 @@ TM <- tableMatrix(images8By8, 1:3, 4:ncol(images8By8))
 TM[direction=="both"]
 
 }
-

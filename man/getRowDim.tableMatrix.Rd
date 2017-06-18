@@ -44,4 +44,3 @@ getRowDim(TM, 91)
 getRowDim(TM, repo=c(2,1))
 
 }
-

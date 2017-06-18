@@ -22,4 +22,3 @@ Table part.
 \description{
 \code{tableList} method to get or set table attribute.
 }
-

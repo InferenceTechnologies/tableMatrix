@@ -4,7 +4,7 @@
 \alias{rbind.tableMatrix}
 \title{Combine by rows}
 \usage{
-rbind.tableMatrix(..., use.names = TRUE, fill = FALSE)
+\method{rbind}{tableMatrix}(..., use.names = TRUE, fill = FALSE)
 }
 \arguments{
 \item{...}{\code{tableMatrix} objects.}
@@ -53,4 +53,3 @@ length(mat(TM))
 matDim(TM)
 
 }
-

@@ -15,4 +15,3 @@ copy.tableList(obj)
 \description{
 Copy of a \code{tableList} object.
 }
-
