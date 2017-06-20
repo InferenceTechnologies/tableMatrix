@@ -15,4 +15,3 @@ copy.tableMatrix(obj)
 \description{
 Copy of a \code{tableMatrix} object.
 }
-

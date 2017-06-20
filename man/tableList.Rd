@@ -37,4 +37,3 @@ aid(TL)
 \code{\link{dim.tableList}}, \code{\link{dimnames.tableList}}
    \code{\link{rbind.tableList}}
 }
-

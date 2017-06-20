@@ -29,4 +29,3 @@ TL <- tableList(images8By8[,1:3])
 TL[direction=="both"]
 
 }
-

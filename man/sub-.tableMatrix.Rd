@@ -28,4 +28,3 @@ TM <- tableMatrix(images8By8, 1:3, 4:ncol(images8By8))
 TM[direction=="both"]
 
 }
-

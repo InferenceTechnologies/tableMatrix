@@ -21,4 +21,3 @@ dimX and dimY columns. Directions "up" and "down" correspond to different
 covariance matrices. Direction "both" was created as a combination of "up" and "down".
 }
 \keyword{datasets}
-

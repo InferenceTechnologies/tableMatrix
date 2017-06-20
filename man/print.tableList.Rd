@@ -14,4 +14,3 @@
 \description{
 \code{tableList} method, prints table attribute.
 }
-

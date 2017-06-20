@@ -33,4 +33,3 @@ TM <- tableMatrix(images8By8, c("direction","dimX","dimY"), 4:ncol(images8By8), 
 merge(TM, data.frame(direction="down", flag=TRUE), key="direction")
 
 }
-

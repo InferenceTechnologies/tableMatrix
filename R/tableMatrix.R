@@ -266,7 +266,7 @@ tableMatrix <- function(dataList, tabCol, matCol, dims=NULL, dimNames=NULL, aidD
 
 			#set matDim
 			addMatDim <- setnames(data.table(1L), tmName$matN)
-			addMatDim[,c(dimiNames) := as.list(dimi), with=F]
+			addMatDim[,c(dimiNames) := as.list(dimi)]
 		} else {
 			addMatDim <- setnames(data.table(1L, ncol(addMat)), c(tmName$matN, tmName$matCols))
 		}

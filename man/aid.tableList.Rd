@@ -22,4 +22,3 @@ Aid part.
 \description{
 \code{tableList} method to get or set aid attribute.
 }
-
