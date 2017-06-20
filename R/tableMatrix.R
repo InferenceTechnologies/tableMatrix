@@ -736,6 +736,8 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' 
 #' \code{tableList} method, passes data.table bracket functionality to the table attribute.
 #' Usage is the same as in data.table[] and data.table[] <-.
+#' Assigning works only for \code{tab} part and only \code{i} and \code{j} from \code{data.table}
+#' is used.
 #' 
 #' @param x \code{tableList} object.
 #' @param i Same as \code{i} in \code{data.table}
@@ -820,6 +822,8 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' Bracket
 #' 
 #' \code{tableMatrix} method, passes data.table bracket functionality to the table attribute.
+#' Assigning works only for \code{tab} part and only \code{i} and \code{j} from \code{data.table}
+#' is used. If \code{j} is numeric, it corresponds to first atribute after \code{tm.matRow}.
 #' 
 #' @param x \code{tableMatrix} object.
 #' @param i Same as \code{i} in \code{data.table}
@@ -835,10 +839,7 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #'
 #' # Create tableMatrix from images8By8
 #' TM <- tableMatrix(images8By8, 1:3, 4:ncol(images8By8))
-#' 
-#' # Apply data.table bracket on a tableMatrix object
-#' TM[direction=="both"]
-#' 
+#'
 #' @export
 '[.tableMatrix' <- function(x, ...) {
 
@@ -912,6 +913,7 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 	assign("brI",i, envir=parent.frame())
 	on.exit(rm("brI", envir=parent.frame()))
 	matchCall[[3]] <- quote(brI)
+	if (is.numeric(j)) j <- j+2
 	assign("brJ",j, envir=parent.frame())
 	on.exit(rm("brJ", envir=parent.frame()))
 	matchCall[[4]] <- quote(brJ)
@@ -921,45 +923,8 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 	objTab <- eval.parent(matchCall)
 
 	if (is.null(nrow(objTab))) { return(objTab) }
-	if (!nrow(objTab)) { 
-		x$tab <- objTab
-		x$mat <- list()
-		x$matDim <- data.table()
-		return(x)
-	}
-
-	mergeNA <- is.na(objTab[[tmName$matN]])
-	if (sum(mergeNA)) { objTab <- objTab[!mergeNA] }
-
-	objMat <- mat(x)
-
-	uniqMatN <- sort(unique(objTab[[tmName$matN]]))
-
-	matNIdx <- list()
-	for (i in 1:length(uniqMatN)) {
-		matN <- uniqMatN[i]
-		matNIdx[[i]] <- which(objTab[[tmName$matN]]==matN)
-		objMat[[matN]] <- objMat[[matN]][objTab[[tmName$matRow]][matNIdx[[i]]],,drop=F]
-		objTab[matNIdx[[i]], c(tmName$matRow):=.I]
-	}
-
-	objMatDim <- matDim(x)[.(uniqMatN)]
-	
-	if (length(uniqMatN)!=length(objMat)) {
-		tmMatSort <- list()
-		for (i in 1:length(uniqMatN)) {
-			matN <- uniqMatN[i]
-			objTab[matNIdx[[i]],c(tmName$matN):=i]
-			tmMatSort[[i]] <- objMat[[matN]]
-			matDimMatNIdx <- which(objMatDim[[tmName$matN]]==matN)
-			objMatDim[matDimMatNIdx, c(tmName$matN):=i]
-		}
-		objMat <- tmMatSort
-	}
 
 	x$tab <- objTab
-	x$mat <- objMat
-	x$matDim <- objMatDim
 	setkeyv(x$tab, c(tmName$matN, tmName$matRow))
 	setkeyv(x$matDim, tmName$matN)
 	return(x)

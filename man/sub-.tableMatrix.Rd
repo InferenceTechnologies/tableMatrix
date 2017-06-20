@@ -25,6 +25,8 @@
 }
 \description{
 \code{tableMatrix} method, passes data.table bracket functionality to the table attribute.
+Assigning works only for \code{tab} part and only \code{i} and \code{j} from \code{data.table}
+is used. If \code{j} is numeric, it corresponds to first atribute after \code{tm.matRow}.
 
 Bracket
 }
@@ -34,8 +36,5 @@ data(images8By8)
 
 # Create tableMatrix from images8By8
 TM <- tableMatrix(images8By8, 1:3, 4:ncol(images8By8))
-
-# Apply data.table bracket on a tableMatrix object
-TM[direction=="both"]
 
 }

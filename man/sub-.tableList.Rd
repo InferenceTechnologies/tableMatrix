@@ -26,6 +26,8 @@
 \description{
 \code{tableList} method, passes data.table bracket functionality to the table attribute.
 Usage is the same as in data.table[] and data.table[] <-.
+Assigning works only for \code{tab} part and only \code{i} and \code{j} from \code{data.table}
+is used.
 
 Bracket
 }
