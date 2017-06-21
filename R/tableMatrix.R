@@ -782,22 +782,30 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' Bracket
 #' @rdname sub-.tableList
 '[<-.tableList' <- function(x, i, j, value) {
-	## copy first, then bracket 1
 	matchCall <- match.call()
+	if (missing(j)) {
+		j<-setdiff(colnames(x$tab), tmName)
+		matchCall$j <- j
+		names(matchCall)[4:5] <- c("j", "value")
+	}
+
 	matchCall[[1]] <- quote(`[<-`)
 	assign("brTableListTab",tab(x), envir=parent.frame())
 	on.exit(rm("brTableListTab", envir=parent.frame()))
 	matchCall[[2]] <- quote(brTableListTab)
-	assign("brI",i, envir=parent.frame())
-	on.exit(rm("brI", envir=parent.frame()))
-	matchCall[[3]] <- quote(brI)
+	if (! missing(i)) {
+		assign("brI",i, envir=parent.frame())
+		on.exit(rm("brI", envir=parent.frame()))
+		matchCall$i <- quote(brI)
+	}
 	assign("brJ",j, envir=parent.frame())
 	on.exit(rm("brJ", envir=parent.frame()))
-	matchCall[[4]] <- quote(brJ)
+	matchCall$j <- quote(brJ)
 	assign("brValue",value, envir=parent.frame())
 	on.exit(rm("brValue", envir=parent.frame()))
-	matchCall[[5]] <- quote(brValue)
+	matchCall$value <- quote(brValue)
 	objTab <- eval.parent(matchCall)
+
 	if (is.null(nrow(objTab))) { return(objTab) }
 
 	x$tab <- objTab
@@ -904,22 +912,29 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' Bracket
 #' @rdname sub-.tableMatrix
 '[<-.tableMatrix' <- function(x, i, j, value) {
-
 	matchCall <- match.call()
+	if (missing(j)) {
+		j<-setdiff(colnames(x$tab), tmName)
+		matchCall$j <- j
+		names(matchCall)[4:5] <- c("j", "value")
+	}
+	if (is.numeric(j)) j <- setdiff(colnames(x$tab), tmName)[j]
+
 	matchCall[[1]] <- quote(`[<-`)
 	assign("brTableListTab",tab(x), envir=parent.frame())
 	on.exit(rm("brTableListTab", envir=parent.frame()))
 	matchCall[[2]] <- quote(brTableListTab)
-	assign("brI",i, envir=parent.frame())
-	on.exit(rm("brI", envir=parent.frame()))
-	matchCall[[3]] <- quote(brI)
-	if (is.numeric(j)) j <- j+2
+	if (! missing(i)) {
+		assign("brI",i, envir=parent.frame())
+		on.exit(rm("brI", envir=parent.frame()))
+		matchCall$i <- quote(brI)
+	}
 	assign("brJ",j, envir=parent.frame())
 	on.exit(rm("brJ", envir=parent.frame()))
-	matchCall[[4]] <- quote(brJ)
+	matchCall$j <- quote(brJ)
 	assign("brValue",value, envir=parent.frame())
 	on.exit(rm("brValue", envir=parent.frame()))
-	matchCall[[5]] <- quote(brValue)
+	matchCall$value <- quote(brValue)
 	objTab <- eval.parent(matchCall)
 
 	if (is.null(nrow(objTab))) { return(objTab) }
