@@ -757,6 +757,17 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' # Apply data.table bracket on a tableList object
 #' TL[direction=="both"]
 #'
+#' \dontrun{
+#' TL[2,1] <- "aaa"
+#' 
+#' # setting row
+#' TL[2,] <- list("aaa", 1000, 1000)
+#' 
+#' # setting column
+#' TL[,2] <- 1
+#' 
+#' }
+#'
 #' @export
 '[.tableList' <- function(x, ...) {
 
@@ -831,7 +842,7 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' 
 #' \code{tableMatrix} method, passes data.table bracket functionality to the table attribute.
 #' Assigning works only for \code{tab} part and only \code{i} and \code{j} from \code{data.table}
-#' is used. If \code{j} is numeric, it corresponds to first atribute after \code{tm.matRow}.
+#' is used. If \code{j} is numeric, it corresponds to first atribute after \code{tmName} names.
 #' 
 #' @param x \code{tableMatrix} object.
 #' @param i Same as \code{i} in \code{data.table}
@@ -847,6 +858,19 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #'
 #' # Create tableMatrix from images8By8
 #' TM <- tableMatrix(images8By8, 1:3, 4:ncol(images8By8))
+#'
+#' \dontrun{
+#' TM[2,1] <- "aaa"
+#'
+#' TM[1,"dimX"] <- 1000
+#' 
+#' # setting row
+#' TM[2,] <- list("aaa", 1000, 1000)
+#' 
+#' # setting column
+#' TM[,2] <- 1
+#' 
+#' }
 #'
 #' @export
 '[.tableMatrix' <- function(x, ...) {
