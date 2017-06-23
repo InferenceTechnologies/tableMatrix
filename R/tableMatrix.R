@@ -757,7 +757,7 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' # Apply data.table bracket on a tableList object
 #' TL[direction=="both"]
 #'
-#' \dontrun{
+#' 
 #' TL[2,1] <- "aaa"
 #' 
 #' # setting row
@@ -765,8 +765,6 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' 
 #' # setting column
 #' TL[,2] <- 1
-#' 
-#' }
 #'
 #' @export
 '[.tableList' <- function(x, ...) {
@@ -792,14 +790,9 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 
 #' Bracket
 #' @rdname sub-.tableList
+#' @export
 '[<-.tableList' <- function(x, i, j, value) {
 	matchCall <- match.call()
-	if (missing(j)) {
-		j<-setdiff(colnames(x$tab), tmName)
-		matchCall$j <- j
-		names(matchCall)[4:5] <- c("j", "value")
-	}
-
 	matchCall[[1]] <- quote(`[<-`)
 	assign("brTableListTab",tab(x), envir=parent.frame())
 	on.exit(rm("brTableListTab", envir=parent.frame()))
@@ -809,9 +802,11 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 		on.exit(rm("brI", envir=parent.frame()))
 		matchCall$i <- quote(brI)
 	}
-	assign("brJ",j, envir=parent.frame())
-	on.exit(rm("brJ", envir=parent.frame()))
-	matchCall$j <- quote(brJ)
+	if (! missing(j)) {
+		assign("brJ",j, envir=parent.frame())
+		on.exit(rm("brJ", envir=parent.frame()))
+		matchCall$j <- quote(brJ)
+	}
 	assign("brValue",value, envir=parent.frame())
 	on.exit(rm("brValue", envir=parent.frame()))
 	matchCall$value <- quote(brValue)
@@ -859,7 +854,7 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' # Create tableMatrix from images8By8
 #' TM <- tableMatrix(images8By8, 1:3, 4:ncol(images8By8))
 #'
-#' \dontrun{
+#' 
 #' TM[2,1] <- "aaa"
 #'
 #' TM[1,"dimX"] <- 1000
@@ -869,8 +864,6 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' 
 #' # setting column
 #' TM[,2] <- 1
-#' 
-#' }
 #'
 #' @export
 '[.tableMatrix' <- function(x, ...) {
@@ -935,6 +928,7 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 
 #' Bracket
 #' @rdname sub-.tableMatrix
+#' @export
 '[<-.tableMatrix' <- function(x, i, j, value) {
 	matchCall <- match.call()
 	if (missing(j)) {

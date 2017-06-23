@@ -2,6 +2,8 @@
 
 S3method("[",tableList)
 S3method("[",tableMatrix)
+S3method("[<-",tableList)
+S3method("[<-",tableMatrix)
 S3method("[[",tableList)
 S3method("aid<-",tableList)
 S3method("mat<-",tableMatrix)
