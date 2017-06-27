@@ -5,7 +5,7 @@
 \title{tableMatrix constructor}
 \usage{
 tableMatrix(dataList, tabCol, matCol, dims = NULL, dimNames = NULL,
-  aidData = list())
+  aidData = list(), dataType = NULL)
 }
 \arguments{
 \item{dataList}{Dataset(s) in the form of data.frame or data.table or list of data.frames or data.tables.
@@ -123,6 +123,12 @@ list(r=c("direction","dimY"), j=c("direction","dimX","dimY")),
 list(j=4:ncol(images8By8),4:ncol(images8By8)))
 matDim(TM)
 length(mat(TM)) # 1 matrix in mat
+
+# dataType support
+TM <- tableMatrix(list(images8By8, images10By10),
+list(1:3, 1:3), list(c(4:ncol(images8By8)),c(4:ncol(images10By10))), list(c(8,8), c(10,10)), 
+dataType=list("d"="direction", "di"=c("dimX","dimY"))
+dataType(TM)
 
 }
 \seealso{

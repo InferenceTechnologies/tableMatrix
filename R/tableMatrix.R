@@ -34,11 +34,15 @@ tmName <- list(matN="tm.matN", matRow="tm.matRow", matCols="tm.matCols", matDim=
 #
 
 # Wraps tableList components together.
-tableListWrap <- function(tab=data.table(), aid=list(), objClass=NULL) {
+tableListWrap <- function(tab=data.table(), aid=list(), objClass=NULL, dataType=NULL) {
 
 	obj <- list()
 	obj$tab <- tab
 	obj$aid <- aid
+
+	if (! is.null(dataType)) {
+		obj$aid$dataType <- dataType
+	} 
 
 	if (!is.null(objClass)) {
 		class(obj) <- objClass
@@ -78,25 +82,29 @@ tableListWrap <- function(tab=data.table(), aid=list(), objClass=NULL) {
 #' aid(TL)
 #' 
 #' @export
-tableList <- function(tabData, aidData=list()) {
+tableList <- function(tabData, aidData=list(), dataType=NULL) {
 
 	if (missing(tabData)) { return(tableListWrap()) }
 
 	if (is.data.frame(tabData)) { tabData <- as.data.table(tabData) }
 	if (!is.data.table(tabData)) { stop("tableList requires data.frame or data.table") }
 	
-	return(tableListWrap(tabData, aidData))
+	return(tableListWrap(tabData, aidData,dataType=dataType))
 }
 
 # Wraps tableMatrix components
 tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
-	aid=list(), setKey=FALSE, objClass=NULL) {
+	aid=list(), setKey=FALSE, objClass=NULL, dataType=NULL) {
 	
 	obj <- list()
 	obj$tab <- tab
 	obj$mat <- mat
 	obj$matDim <- matDim
 	obj$aid <- aid
+
+	if (! is.null(dataType)) {
+		obj$aid$dataType <- dataType
+	} 
 
 	if (setKey) {
 		setkeyv(obj$tab, c(tmName$matN, tmName$matRow))
@@ -226,8 +234,14 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' matDim(TM)
 #' length(mat(TM)) # 1 matrix in mat
 #' 
+#' # dataType support
+#' TM <- tableMatrix(list(images8By8, images10By10),
+#' list(1:3, 1:3), list(c(4:ncol(images8By8)),c(4:ncol(images10By10))), list(c(8,8), c(10,10)), 
+#' dataType=list("d"="direction", "di"=c("dimX","dimY"))
+#' dataType(TM)
+#'
 #' @export
-tableMatrix <- function(dataList, tabCol, matCol, dims=NULL, dimNames=NULL, aidData=list()) {
+tableMatrix <- function(dataList, tabCol, matCol, dims=NULL, dimNames=NULL, aidData=list(), dataType=NULL) {
 
 	obj <- tableMatrixWrap()
 	if (missing(dataList)) { return(obj) }
@@ -270,7 +284,7 @@ tableMatrix <- function(dataList, tabCol, matCol, dims=NULL, dimNames=NULL, aidD
 		} else {
 			addMatDim <- setnames(data.table(1L, ncol(addMat)), c(tmName$matN, tmName$matCols))
 		}
-		obj <- rbind(obj, tableMatrixWrap(addTab, list(addMat), addMatDim, setKey=T))
+		obj <- rbind(obj, tableMatrixWrap(addTab, list(addMat), addMatDim, setKey=T, dataType=dataType))
 	}
 	setkeyv(obj$tab, c(tmName$matN, tmName$matRow))
 	setkeyv(obj$matDim, tmName$matN)
@@ -349,6 +363,19 @@ aid <- function(obj,...) { UseMethod("aid") }
 #' @export
 'aid<-' <- function(obj, value) { UseMethod("aid<-") }
 
+#' S3 tableMatrix generic to get or set dataType attribute
+#'
+#' @param ... Passed arguments.
+#'
+#' @return List.
+#'
+#' @export
+dataType <- function(...) { UseMethod("dataType") }
+#' @rdname dataType
+#'
+#' @export
+'dataType<-' <- function(...) { UseMethod("dataType<-") }
+
 #' S3 tableMatrix generic to get row repo for matrix attribute
 #' 
 #' @param ... Passed arguments.
@@ -383,6 +410,42 @@ setRow <- function(...) { UseMethod("setRow") }
 #'
 #' @export
 getRowDim <- function(...) { UseMethod("getRowDim") }
+
+#
+# Methods Functions
+#
+
+
+mergeDataTypeRef <- function(objTab, dtX, dtY) {
+
+	objDataType <- list()
+
+	dTypes <- intersect(names(dtX), names(dtY))
+	if (length(dTypes)) {
+		for (dType in dTypes)  { objDataType[[dType]] <- union(dtX[[dType]], dtY[[dType]]) }
+	}
+	dTypes <- setdiff(names(dtX), names(dtY))
+	if (length(dTypes)) {
+		for (dType in dTypes)  { objDataType[[dType]] <- dtX[[dType]] }
+	}
+	dTypes <- setdiff(names(dtY), names(dtX))
+	if (length(dTypes)) {
+		for (dType in dTypes)  { objDataType[[dType]] <- dtY[[dType]] }
+	}
+
+	#TODO
+
+	return(objDataType)
+}
+
+updateDataType <- function(tabName, checkDataType) {
+
+	for (dType in names(checkDataType)) {
+		checkDataType[[dType]] <- intersect(tabName, checkDataType[[dType]])
+		if (!length(checkDataType[[dType]])) { checkDataType[[dType]] <- NULL }
+	}
+	return(checkDataType)
+}
 
 #
 # Classes Generics Methods
@@ -501,6 +564,41 @@ tab.tableMatrix <- function(obj, matN=NULL, addRow=FALSE, resetN=TRUE, ...) {
 	}
 
 	return(objTab) 
+}
+
+#' Get or set dataType attribute
+#'
+#' \code{tableList} and \code{tableMarix} method to get or set dataType attribute.
+#'
+#' @param obj \code{tableMatrix} or \code{tableList} object.
+#' @param value List of datatypes.
+#' 
+#' @return List of datatypes.
+#'
+#' @export
+dataType.tableList <- function(obj) {	
+
+	return(obj$aid$dataType)
+}
+#' @rdname dataType.tableList
+#' @export
+'dataType<-.tableList' <- function(obj, value) {
+	
+	obj$aid$dataType <- value	
+	return(obj)
+}
+#' @rdname dataType.tableList
+#' @export
+dataType.tableMatrix <- function(obj) {	
+
+	return(obj$aid$dataType)
+}
+#' @rdname dataType.tableList
+#' @export
+'dataType<-.tableMatrix' <- function(obj, value) {
+	
+	obj$aid$dataType <- value	
+	return(obj)
 }
 
 #' Get or set matrix attribute

@@ -4,7 +4,7 @@
 \alias{tableList}
 \title{tableList constructor}
 \usage{
-tableList(tabData, aidData = list())
+tableList(tabData, aidData = list(), dataType = NULL)
 }
 \arguments{
 \item{tabData}{A data.frame or a data.table.}
