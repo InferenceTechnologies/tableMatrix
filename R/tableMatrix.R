@@ -433,7 +433,21 @@ mergeDataTypeRef <- function(objTab, dtX, dtY) {
 		for (dType in dTypes)  { objDataType[[dType]] <- dtY[[dType]] }
 	}
 
-	#TODO
+	if (! missing(dtX)&missing(dtY)) {
+		if (names(dtX)%in%names(objDataType)) {
+			colShiftRef(objTab, objDataType[[names(dtX)]], 1, destInSrc=1)
+			metaEndIdx <- max(colj(objTab, objDataType[[names(dtX)]]))+1
+			if (names(dtY)%in%names(objDataType)) {
+				colShiftRef(objTab, objDataType[[names(dtY)]], metaEndIdx, destInSrc=metaEndIdx)
+			}
+
+		} else {
+			if (names(dtY)%in%names(objDataType)) {
+				colShiftRef(objTab, objDataType[[names(dtY)]], 1, destInSrc=1)
+			}
+		}
+	}
+
 
 	return(objDataType)
 }
