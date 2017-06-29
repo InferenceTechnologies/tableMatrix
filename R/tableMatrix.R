@@ -237,7 +237,7 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' # dataType support
 #' TM <- tableMatrix(list(images8By8, images10By10),
 #' list(1:3, 1:3), list(c(4:ncol(images8By8)),c(4:ncol(images10By10))), list(c(8,8), c(10,10)), 
-#' dataType=list("d"="direction", "di"=c("dimX","dimY"))
+#' dataType=list("d"="direction", "di"=c("dimX","dimY")))
 #' dataType(TM)
 #'
 #' @export
@@ -370,11 +370,11 @@ aid <- function(obj,...) { UseMethod("aid") }
 #' @return List.
 #'
 #' @export
-dataType <- function(...) { UseMethod("dataType") }
+dataType <- function(obj,...) { UseMethod("dataType") }
 #' @rdname dataType
 #'
 #' @export
-'dataType<-' <- function(...) { UseMethod("dataType<-") }
+'dataType<-' <- function(obj,value) { UseMethod("dataType<-") }
 
 #' S3 tableMatrix generic to get row repo for matrix attribute
 #' 
@@ -590,7 +590,7 @@ tab.tableMatrix <- function(obj, matN=NULL, addRow=FALSE, resetN=TRUE, ...) {
 #' @return List of datatypes.
 #'
 #' @export
-dataType.tableList <- function(obj) {	
+dataType.tableList <- function(obj,...) {
 
 	return(obj$aid$dataType)
 }
@@ -603,7 +603,7 @@ dataType.tableList <- function(obj) {
 }
 #' @rdname dataType.tableList
 #' @export
-dataType.tableMatrix <- function(obj) {	
+dataType.tableMatrix <- function(obj,...) {	
 
 	return(obj$aid$dataType)
 }
@@ -1033,6 +1033,9 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 	x$tab <- objTab
 	x$mat <- objMat
 	x$matDim <- objMatDim
+	if (!is.null(nrow(x)) && ! is.null(x$aid$dataType)) { 
+		x$aid$dataType <- updateDataType(colnames(x$tab), x$aid$dataType)
+	}
 	setkeyv(x$tab, c(tmName$matN, tmName$matRow))
 	setkeyv(x$matDim, tmName$matN)
 	return(x)
@@ -1074,6 +1077,33 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 	setkeyv(x$matDim, tmName$matN)
 	return(x)
 }
+
+
+#' Column binding
+#' 
+#' @rdname cbind.tableMatrix
+#' @export
+cbind.tableList <- function(x,y) {
+
+	x <- copy(x)
+	x$tab <- cbind(x$tab, y$tab)
+	x$aid$dataType <- mergeDataTypeRef(x$tab, dataType(x), dataType(y))
+	return(x)
+}
+
+#' Column binding
+#' 
+#' Column binding of tab part of \code{tableMatrix} or \code{tableList} object.
+#'
+#' @return Matrix object.
+#' 
+#' @export
+cbind.tableMatrix <- function(x,y) {
+
+	x <- cbind.tableList(x, y)
+	return(x)
+}
+
 
 #' Dimensions
 #' 

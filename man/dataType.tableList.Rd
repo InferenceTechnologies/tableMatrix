@@ -7,11 +7,11 @@
 \alias{dataType<-.tableMatrix}
 \title{Get or set dataType attribute}
 \usage{
-\method{dataType}{tableList}(obj)
+\method{dataType}{tableList}(obj, ...)
 
 \method{dataType}{tableList}(obj) <- value
 
-\method{dataType}{tableMatrix}(obj)
+\method{dataType}{tableMatrix}(obj, ...)
 
 \method{dataType}{tableMatrix}(obj) <- value
 }

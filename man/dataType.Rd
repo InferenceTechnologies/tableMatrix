@@ -5,9 +5,9 @@
 \alias{dataType<-}
 \title{S3 tableMatrix generic to get or set dataType attribute}
 \usage{
-dataType(...)
+dataType(obj, ...)
 
-dataType(...) <- value
+dataType(obj) <- value
 }
 \arguments{
 \item{...}{Passed arguments.}
