@@ -9,6 +9,11 @@
 
 \method{cbind}{tableMatrix}(x, y)
 }
+\arguments{
+\item{x}{\code{tableList} or \code{tableMatrix} object.}
+
+\item{y}{\code{tableList} or \code{tableMatrix} object.}
+}
 \value{
 Matrix object.
 }

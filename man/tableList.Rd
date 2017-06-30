@@ -10,6 +10,9 @@ tableList(tabData, aidData = list(), dataType = NULL)
 \item{tabData}{A data.frame or a data.table.}
 
 \item{aidData}{Aid structures, generally in the form of a list.}
+
+\item{dataType}{Named list. Contains names of groups of atributes, elements are atributes which
+belong to the group.}
 }
 \value{
 A \code{tableList} object
@@ -17,7 +20,8 @@ A \code{tableList} object
 \description{
 \code{tableList} constructor, creates tableList object from a data.frame or a data.table
 and from aid data. The goal is to wrap data.table and any additional data structures together. 
-\code{tableList} behaves like a data.table object.
+\code{tableList} behaves like a data.table object. Groups of atributes can be stored together via 
+\code{dataType}.
 }
 \examples{
 
@@ -31,6 +35,9 @@ mean(TL[feed=="casein", weight])
 
 # Aid part of the tableList object carries the linear model
 aid(TL)
+
+# dataType support
+TL <- tableList(chickwts, lm(weight~feed, chickwts), dataType=list(group1="weight", group2="feed"))
 
 }
 \seealso{

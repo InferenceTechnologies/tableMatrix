@@ -57,10 +57,13 @@ tableListWrap <- function(tab=data.table(), aid=list(), objClass=NULL, dataType=
 #' 
 #' \code{tableList} constructor, creates tableList object from a data.frame or a data.table
 #' and from aid data. The goal is to wrap data.table and any additional data structures together. 
-#' \code{tableList} behaves like a data.table object.
+#' \code{tableList} behaves like a data.table object. Groups of atributes can be stored together via 
+#' \code{dataType}.
 #'
 #' @param tabData A data.frame or a data.table.
 #' @param aidData Aid structures, generally in the form of a list.
+#' @param dataType Named list. Contains names of groups of atributes, elements are atributes which
+#' belong to the group.
 #' 
 #' @return A \code{tableList} object
 #' 
@@ -80,6 +83,9 @@ tableListWrap <- function(tab=data.table(), aid=list(), objClass=NULL, dataType=
 #'
 #' # Aid part of the tableList object carries the linear model
 #' aid(TL)
+#'
+#' # dataType support
+#' TL <- tableList(chickwts, lm(weight~feed, chickwts), dataType=list(group1="weight", group2="feed"))
 #' 
 #' @export
 tableList <- function(tabData, aidData=list(), dataType=NULL) {
@@ -129,7 +135,7 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' \code{tableMatrix} combines strengths of data.table (access via bracket 
 #' to the meta data part) and matrix (main data). It also stores dimensions of main data,
 #' thus allowing to combine rows of varying lengths into one object. As in \code{tableList},
-#' \code{tableMatrix} can carry any additional aid data. 
+#' \code{tableMatrix} can carry any additional aid data and data types groups.
 #'
 #' @param dataList Dataset(s) in the form of data.frame or data.table or list of data.frames or data.tables.
 #' All datasets must have the same meta data columns, matrix parts can be different. 
@@ -146,15 +152,18 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' @param dimNames Character vector. Specifies dimension names in \code{matDim} for each
 #' element of \code{dims} parameter. If not specified these names are generated automatically.
 #' @param aidData Aid structures generally in the form of a list.
+#' @param dataType Named list. Contains names of groups of atributes, elements are atributes which
+#' belong to the group.
 #' 
-#' @details \code{tableMatrix} is a S3 class that consists of 3 parts. 
+#' @details \code{tableMatrix} is a S3 class that consists of 4 parts. 
 #' \code{tab} - table part - is used for storing meta data, 
 #' \code{mat} - matrix part - for storing main data and \code{matDim} - dimensions part - for 
 #' dimensions of main data. 
 #' \code{mat} is a list of matrices. \code{tab} is a data.table. In \code{tab} first column \code{tm.matN} 
 #' is the matrix number in \code{mat}, second column \code{tm.matRow} is the row in the matrix. 
 #' \code{matDim} is \code{data.table}. In \code{matDim} for each matrix number \code{tm.matN} dimensions
-#' can be specified with user defined dimensions. 
+#' can be specified with user defined dimensions. \code{dataType} is a list which contains names of groups of
+#' atributes and vectors of atributes belonging to it.
 #' Default print of \code{tableMatrix} is the print of the \code{tab} part without \code{tm.matN} and 
 #' \code{tm.matRow} columns.
 #' 
@@ -235,9 +244,8 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' length(mat(TM)) # 1 matrix in mat
 #' 
 #' # dataType support
-#' TM <- tableMatrix(list(images8By8, images10By10),
-#' list(1:3, 1:3), list(c(4:ncol(images8By8)),c(4:ncol(images10By10))), list(c(8,8), c(10,10)), 
-#' dataType=list("d"="direction", "di"=c("dimX","dimY")))
+#' TM <- tableMatrix(images10By10, 1:3, 4:ncol(images10By10), 
+#' dataType=list("group1"="direction", "group2"=c("dimX","dimY")))
 #' dataType(TM)
 #'
 #' @export
@@ -365,6 +373,8 @@ aid <- function(obj,...) { UseMethod("aid") }
 
 #' S3 tableMatrix generic to get or set dataType attribute
 #'
+#' @param obj Object.
+#' @param value Named list.
 #' @param ... Passed arguments.
 #'
 #' @return List.
@@ -585,6 +595,7 @@ tab.tableMatrix <- function(obj, matN=NULL, addRow=FALSE, resetN=TRUE, ...) {
 #' \code{tableList} and \code{tableMarix} method to get or set dataType attribute.
 #'
 #' @param obj \code{tableMatrix} or \code{tableList} object.
+#' @param ... Passed arguments.
 #' @param value List of datatypes.
 #' 
 #' @return List of datatypes.
@@ -895,7 +906,9 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 	# objTab <- copy(x$tab[...])
 	
 	if (is.null(nrow(objTab))) { return(objTab) }
-
+	if (! is.null(x$aid$dataType)) {
+		x$aid$dataType <- updateDataType(colnames(x$tab), x$aid$dataType)
+	}
 	x$tab <- objTab
 	return(x)
 }
@@ -1082,6 +1095,10 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' Column binding
 #' 
 #' @rdname cbind.tableMatrix
+#'
+#' @param x \code{tableList} or \code{tableMatrix} object.
+#' @param y \code{tableList} or \code{tableMatrix} object.
+#'
 #' @export
 cbind.tableList <- function(x,y) {
 
@@ -1162,11 +1179,11 @@ print.tableMatrix <- function(x, ...) {
 
 #' Merge
 #' 
-#' \code{tableMatrix} method, merges \code{tableMatrix} objects with data.table or 
-#' data.frame.
+#' \code{tableMatrix} method, merges \code{tableMatrix} objects with data.table, 
+#' data.frame or \code{tableList}.
 #' 
 #' @param x \code{tableMatrix} object
-#' @param y data.table or data.frame object.
+#' @param y data.table, data.frame or \code{tableList} object.
 #' @param key Shared columns as merging key.
 #' @param ... Passed arguments.
 #' 
@@ -1189,8 +1206,14 @@ merge.tableMatrix <- function(x, y, key, ...) {
 	obj <- copy(x)
 	dataObj <- copy(y)
 	setkeyv(obj$tab,key)
-	setkeyv(dataObj,key)
-	return(obj[J(dataObj)])
+	if (! is.data.table(y)) {
+		setkeyv(dataObj$tab,key)
+		obj$aid$dataType <- mergeDataTypeRef(obj$tab, dataType(obj), dataType(y))
+		return(obj[J(dataObj$tab)])
+	} else {
+		setkeyv(dataObj,key)
+		return(obj[J(dataObj)])
+	}
 }
 
 #' Combine by rows

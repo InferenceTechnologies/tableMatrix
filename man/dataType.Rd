@@ -10,7 +10,11 @@ dataType(obj, ...)
 dataType(obj) <- value
 }
 \arguments{
+\item{obj}{Object.}
+
 \item{...}{Passed arguments.}
+
+\item{value}{Named list.}
 }
 \value{
 List.

@@ -18,6 +18,8 @@
 \arguments{
 \item{obj}{\code{tableMatrix} or \code{tableList} object.}
 
+\item{...}{Passed arguments.}
+
 \item{value}{List of datatypes.}
 }
 \value{

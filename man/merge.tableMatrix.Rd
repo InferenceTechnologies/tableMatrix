@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{\code{tableMatrix} object}
 
-\item{y}{data.table or data.frame object.}
+\item{y}{data.table, data.frame or \code{tableList} object.}
 
 \item{key}{Shared columns as merging key.}
 
@@ -19,8 +19,8 @@
 \code{tableMatrix} object.
 }
 \description{
-\code{tableMatrix} method, merges \code{tableMatrix} objects with data.table or 
-data.frame.
+\code{tableMatrix} method, merges \code{tableMatrix} objects with data.table, 
+data.frame or \code{tableList}.
 }
 \examples{
 
