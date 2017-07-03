@@ -443,23 +443,30 @@ mergeDataTypeRef <- function(objTab, dtX, dtY) {
 		for (dType in dTypes)  { objDataType[[dType]] <- dtY[[dType]] }
 	}
 
-	if (! missing(dtX)&missing(dtY)) {
-		if (names(dtX)%in%names(objDataType)) {
-			colShiftRef(objTab, objDataType[[names(dtX)]], 1, destInSrc=1)
-			metaEndIdx <- max(colj(objTab, objDataType[[names(dtX)]]))+1
-			if (names(dtY)%in%names(objDataType)) {
-				colShiftRef(objTab, objDataType[[names(dtY)]], metaEndIdx, destInSrc=metaEndIdx)
-			}
+	if (! (missing(dtX)&&missing(dtY))) {
 
-		} else {
-			if (names(dtY)%in%names(objDataType)) {
-				colShiftRef(objTab, objDataType[[names(dtY)]], 1, destInSrc=1)
+		for (index in 1:length(objDataType)) {
+			type <- objDataType[index]
+			prevType <- objDataType[index-1]
+
+			if (any(names(dtX)==names(type))) {
+				metaEndIdx <- max(colj(objTab, prevType[names(dtX)]),colj(objTab, prevType[names(dtY)]))+1
+				colShiftRef(objTab, type[names(dtX)], metaEndIdx, destInSrc=metaEndIdx)
+				if (any(names(dtY)==names(type))) {
+					metaEndIdx <- max(colj(objTab, type[names(dtY)[names(dtX)==names(dtY)]]))+1
+					colShiftRef(objTab, type[names(dtY)[names(type)==names(dtY)]], metaEndIdx, destInSrc=metaEndIdx)
+				}
+
+			} else {
+				if (any(names(dtY)==names(objDataType))) {
+					metaEndIdx <- max(colj(objTab, objDataType[index-1][names(dtX)]))+1
+					colShiftRef(objTab, type[names(dtY)], metaEndIdx, destInSrc=metaEndIdx)
+				}
 			}
 		}
-	}
-
 
 	return(objDataType)
+	}
 }
 
 updateDataType <- function(tabName, checkDataType) {
@@ -906,10 +913,11 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 	# objTab <- copy(x$tab[...])
 	
 	if (is.null(nrow(objTab))) { return(objTab) }
-	if (! is.null(x$aid$dataType)) {
-		x$aid$dataType <- updateDataType(colnames(x$tab), x$aid$dataType)
-	}
+
 	x$tab <- objTab
+	if (! is.null(x$aid$dataType)) {
+		x$aid$dataType <- updateDataType(colnames(objTab), x$aid$dataType)
+	}
 	return(x)
 }
 
@@ -1177,13 +1185,26 @@ print.tableMatrix <- function(x, ...) {
 	return(invisible())
 }
 
+#' Merging tableList
+#' 
+#' @rdname merge.tableMatrix
+#' @export
+merge.tableList <- function(x,y, key, ...) {
+
+	x <- copy(x)
+	x$tab <- merge(x$tab, y$tab, by=key, ...)
+	if (is.null(x$aid$dataType))
+	x$aid$dataType <- mergeDataTypeRef(x$tab, dataType(x), dataType(y))
+	return(x)
+}
+
 #' Merge
 #' 
-#' \code{tableMatrix} method, merges \code{tableMatrix} objects with data.table, 
-#' data.frame or \code{tableList}.
+#' \code{tableMatrix} method, merges \code{tableMatrix} or \code{tableList} objects with data.table, 
+#' data.frame, \code{tableList} or \code{tableMatrix}.
 #' 
 #' @param x \code{tableMatrix} object
-#' @param y data.table, data.frame or \code{tableList} object.
+#' @param y data.table, data.frame, \code{tableList}, \code{tableMatrix} object.
 #' @param key Shared columns as merging key.
 #' @param ... Passed arguments.
 #' 
