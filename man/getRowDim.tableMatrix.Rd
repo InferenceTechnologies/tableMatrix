@@ -19,7 +19,7 @@
 Dimensions corresponding to the row.
 }
 \description{
-\code{tableMatrix} method to get row dimensions from matDim atrribute.
+\code{tableMatrix} method to get row dimensions from matDim attribute.
 }
 \examples{
 

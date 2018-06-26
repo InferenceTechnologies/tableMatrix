@@ -14,7 +14,7 @@ All datasets must have the same meta data columns, matrix parts can be different
 \item{tabCol}{Integer or character vector or list of these vectors. Specifies column 
 names or indices of meta data part. For list input, names \code{j} or \code{r} can be used. 
 List name \code{j} indicates that column names or indices are specified, name \code{r} indicates 
-range of column names or indicies. By default or when a vector is provided, \code{j} is used.}
+range of column names or indices. By default or when a vector is provided, \code{j} is used.}
 
 \item{matCol}{Integer or character vector or list of these vectors. Specifies column
 names or indices of main data part. For list input, names \code{j} or \code{r} can be used
@@ -29,7 +29,7 @@ element of \code{dims} parameter. If not specified these names are generated aut
 
 \item{aidData}{Aid structures generally in the form of a list.}
 
-\item{dataType}{Named list. Contains names of groups of atributes, elements are atributes which
+\item{dataType}{Named list. Contains names of groups of attributes, elements are attributes which
 belong to the group.}
 }
 \value{
@@ -38,7 +38,7 @@ A \code{tableMatrix} object
 \description{
 \code{tableMatrix} constructor, creates tableMatrix object from a list of 
 data.frames or data.tables. It is useful for datasets with the following 
-structure: first set of columns of varying types is intented as meta data,
+structure: first set of columns of varying types is intended as meta data,
 second set of columns of the same type is intended as main data. 
 \code{tableMatrix} combines strengths of data.table (access via bracket 
 to the meta data part) and matrix (main data). It also stores dimensions of main data,
@@ -54,7 +54,7 @@ dimensions of main data.
 is the matrix number in \code{mat}, second column \code{tm.matRow} is the row in the matrix. 
 \code{matDim} is \code{data.table}. In \code{matDim} for each matrix number \code{tm.matN} dimensions
 can be specified with user defined dimensions. \code{dataType} is a list which contains names of groups of
-atributes and vectors of atributes belonging to it.
+attributes and vectors of attributes belonging to it.
 Default print of \code{tableMatrix} is the print of the \code{tab} part without \code{tm.matN} and 
 \code{tm.matRow} columns.
 }

@@ -16,7 +16,7 @@
 is added.}
 
 \item{resetN}{Logical. Used when matN is specified. When FALSE
-\code{tm.matN} of returned tab won't be reseted to 1. Default TRUE.}
+\code{tm.matN} of returned tab won't be reset to 1. Default TRUE.}
 
 \item{...}{Passed arguments.}
 }

@@ -56,12 +56,12 @@ tableListWrap <- function(tab=data.table(), aid=list(), objClass=NULL, dataType=
 #' 
 #' \code{tableList} constructor, creates tableList object from a data.frame or a data.table
 #' and from aid data. The goal is to wrap data.table and any additional data structures together. 
-#' \code{tableList} behaves like a data.table object. Groups of atributes can be stored together via 
+#' \code{tableList} behaves like a data.table object. Groups of attributes can be stored together via 
 #' \code{dataType}.
 #'
 #' @param tabData A data.frame or a data.table.
 #' @param aidData Aid structures, generally in the form of a list.
-#' @param dataType Named list. Contains names of groups of atributes, elements are atributes which
+#' @param dataType Named list. Contains names of groups of attributes, elements are attributes which
 #' belong to the group.
 #' 
 #' @return A \code{tableList} object
@@ -129,7 +129,7 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' 
 #' @description \code{tableMatrix} constructor, creates tableMatrix object from a list of 
 #' data.frames or data.tables. It is useful for datasets with the following 
-#' structure: first set of columns of varying types is intented as meta data,
+#' structure: first set of columns of varying types is intended as meta data,
 #' second set of columns of the same type is intended as main data. 
 #' \code{tableMatrix} combines strengths of data.table (access via bracket 
 #' to the meta data part) and matrix (main data). It also stores dimensions of main data,
@@ -141,7 +141,7 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' @param tabCol Integer or character vector or list of these vectors. Specifies column 
 #' names or indices of meta data part. For list input, names \code{j} or \code{r} can be used. 
 #' List name \code{j} indicates that column names or indices are specified, name \code{r} indicates 
-#' range of column names or indicies. By default or when a vector is provided, \code{j} is used.
+#' range of column names or indices. By default or when a vector is provided, \code{j} is used.
 #' @param matCol Integer or character vector or list of these vectors. Specifies column
 #' names or indices of main data part. For list input, names \code{j} or \code{r} can be used
 #' as in \code{tabCol}.
@@ -151,7 +151,7 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' @param dimNames Character vector. Specifies dimension names in \code{matDim} for each
 #' element of \code{dims} parameter. If not specified these names are generated automatically.
 #' @param aidData Aid structures generally in the form of a list.
-#' @param dataType Named list. Contains names of groups of atributes, elements are atributes which
+#' @param dataType Named list. Contains names of groups of attributes, elements are attributes which
 #' belong to the group.
 #' 
 #' @details \code{tableMatrix} is a S3 class that consists of 4 parts. 
@@ -162,7 +162,7 @@ tableMatrixWrap <- function(tab=data.table(), mat=list(), matDim=data.table(),
 #' is the matrix number in \code{mat}, second column \code{tm.matRow} is the row in the matrix. 
 #' \code{matDim} is \code{data.table}. In \code{matDim} for each matrix number \code{tm.matN} dimensions
 #' can be specified with user defined dimensions. \code{dataType} is a list which contains names of groups of
-#' atributes and vectors of atributes belonging to it.
+#' attributes and vectors of attributes belonging to it.
 #' Default print of \code{tableMatrix} is the print of the \code{tab} part without \code{tm.matN} and 
 #' \code{tm.matRow} columns.
 #' 
@@ -544,7 +544,7 @@ aid.tableList <- function(obj, ...) {	return(obj$aid) }
 #' @param addRow Logical. If TRUE column \code{tm.allRow} with row indexes before subsetting
 #' is added.
 #' @param resetN Logical. Used when matN is specified. When FALSE
-#' \code{tm.matN} of returned tab won't be reseted to 1. Default TRUE.
+#' \code{tm.matN} of returned tab won't be reset to 1. Default TRUE.
 #' @param ... Passed arguments.
 #' 
 #' @return Full table part of \code{tableMatrix} or a subset of table part.
@@ -686,7 +686,7 @@ mat.tableMatrix <- function(obj, matN=NULL, ...) {
 #' @param obj \code{tableMatrix} object.
 #' @param matN Integer. Matrix number in the matrix part list.
 #' @param resetN Logical. When FALSE \code{tm.matN} of returned \code{matDim} won't be 
-#' reseted to 1.
+#' reset to 1.
 #' @param ... Passed arguments.
 #' @param value data.table
 #'
@@ -819,7 +819,7 @@ setRow.tableMatrix <- function(obj, value, i=NULL, repo=NULL, ...) {
 
 #' Get row dimensions
 #' 
-#' \code{tableMatrix} method to get row dimensions from matDim atrribute.
+#' \code{tableMatrix} method to get row dimensions from matDim attribute.
 #' 
 #' @param obj \code{tableMatrix} object.
 #' @param i Integer. Row index in \code{tab}.
@@ -969,7 +969,7 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #' 
 #' \code{tableMatrix} method, passes data.table bracket functionality to the table attribute.
 #' Assigning works only for \code{tab} part and only \code{i} and \code{j} from \code{data.table}
-#' is used. If \code{j} is numeric, it corresponds to first atribute after \code{tmName} names.
+#' is used. If \code{j} is numeric, it corresponds to first attribute after \code{tmName} names.
 #' 
 #' @param x \code{tableMatrix} object.
 #' @param i Same as \code{i} in \code{data.table}

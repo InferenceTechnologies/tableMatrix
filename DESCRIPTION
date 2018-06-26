@@ -1,6 +1,6 @@
 Package: tableMatrix
 Title: Combines 'data.table' and 'matrix' Classes
-Version: 0.82
+Version: 0.82.0
 Authors@R: c(person("Petr", "Lenhard", email = "petr.lenhard@inferencetech.com", role = c("aut", "cre")),	      
 	      person("Inference Technologies", email = "mail@inferencetech.com", role = "cph"),
               person("Petra", "Hudeckova", email = "hudeckovapetra@gmail.com", role = "ctb"))

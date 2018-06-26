@@ -26,7 +26,7 @@
 \description{
 \code{tableMatrix} method, passes data.table bracket functionality to the table attribute.
 Assigning works only for \code{tab} part and only \code{i} and \code{j} from \code{data.table}
-is used. If \code{j} is numeric, it corresponds to first atribute after \code{tmName} names.
+is used. If \code{j} is numeric, it corresponds to first attribute after \code{tmName} names.
 
 Bracket
 }
