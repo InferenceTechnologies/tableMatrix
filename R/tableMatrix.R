@@ -6,7 +6,7 @@
 #
 # Class tableList, tableMatrix
 # 
-# 0.81
+# 0.82
 # 
 
 #
