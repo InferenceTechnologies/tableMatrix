@@ -4,7 +4,7 @@
 \alias{copy.tableList}
 \title{Copy}
 \usage{
-copy.tableList(obj)
+\method{copy}{tableList}(obj)
 }
 \arguments{
 \item{obj}{\code{tableList} object.}

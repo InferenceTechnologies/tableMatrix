@@ -2,7 +2,10 @@
 tableMatrix package
 ===================
 
-tableMatrix package provides two classes extending data.table class. Simple `tableList` class wraps data.table and any additional structures together. More complex `tableMatrix` class combines strengths of data.table and matrix.
+tableMatrix package provides two classes extending data.table class.
+Simple `tableList` class wraps data.table and any additional structures
+together. More complex `tableMatrix` class combines data.table and
+matrix.
 
 Installation
 ------------
@@ -25,7 +28,8 @@ tableList class
 
 ### Motivation
 
-Goal is to wrap data.table class and other structures together and preserve data.table behaviour.
+Goal is to wrap data.table class and other structures together and
+preserve data.table behaviour.
 
 ### Example
 
@@ -59,11 +63,20 @@ tableMatrix class
 
 ### Motivation
 
-Let's have a dataset with the following structure: first set of columns of varying types is intented as meta data, second set of columns of the same type is intended as main data. `tableMatrix` stores meta data as a data.table and main data as a matrix. It also keeps track of dimensions of main data, thus allowing to combine rows of varying lengths into one object. As in tableList, tableMatrix can carry any additional aid data.
+Let’s have a dataset with the following structure: first set of columns
+of varying types is intented as meta data, second set of columns of the
+same type is intended as main data. `tableMatrix` stores meta data as a
+data.table and main data as a matrix. It also keeps track of dimensions
+of main data, thus allowing to combine rows of varying lengths into one
+object. As in tableList, tableMatrix can carry any additional aid data.
 
 ### Example
 
-Working with bitmaps of different sizes. Datasets `images8By8` and `images10By10` contain 8x8 and 10x10 images in the form of vectors. For each row first three columns represent image meta data, remaining columns represent the image itself. For more information see `?images8By8`.
+Working with bitmaps of different sizes. Datasets `images8By8` and
+`images10By10` contain 8x8 and 10x10 images in the form of vectors. For
+each row first three columns represent image meta data, remaining
+columns represent the image itself. For more information see
+`?images8By8`.
 
 ``` r
 # Load datasets
@@ -117,7 +130,7 @@ image(img, axes=F)
 
 ![](man/figures/README-unnamed-chunk-5-1.png)
 
-Let's create a heat map
+Let’s create a heat map
 
 ``` r
 # Subsetting via bracket passed to the table (meta data) part

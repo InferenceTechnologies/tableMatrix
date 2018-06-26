@@ -5,14 +5,16 @@
 \alias{cbind.tableMatrix}
 \title{Column binding}
 \usage{
-\method{cbind}{tableList}(x, y)
+\method{cbind}{tableList}(x, y, ...)
 
-\method{cbind}{tableMatrix}(x, y)
+\method{cbind}{tableMatrix}(x, y, ...)
 }
 \arguments{
 \item{x}{\code{tableList} or \code{tableMatrix} object.}
 
 \item{y}{\code{tableList} or \code{tableMatrix} object.}
+
+\item{...}{Passed arguments.}
 }
 \value{
 Matrix object.

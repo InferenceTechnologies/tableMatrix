@@ -1,17 +1,23 @@
 Package: tableMatrix
 Title: Combines 'data.table' and 'matrix' Classes
-Version: 0.81
+Version: 0.82
 Authors@R: c(person("Petr", "Lenhard", email = "petr.lenhard@inferencetech.com", role = c("aut", "cre")),	      
 	      person("Inference Technologies", email = "mail@inferencetech.com", role = "cph"),
               person("Petra", "Hudeckova", email = "hudeckovapetra@gmail.com", role = "ctb"))
-Description: Provides two classes extending 'data.table' class. Simple 'tableList' class wraps 'data.table' and any additional structures together. More complex 'tableMatrix' class combines strengths of 'data.table' and 'matrix'. See <http://github.com/InferenceTechnologies/tableMatrix> for more information and examples.
+Description: Provides two classes extending 'data.table' class. Simple
+    'tableList' class wraps 'data.table' and any additional structures together.
+    More complex 'tableMatrix' class combines 'data.table' and
+    'matrix'. See <http://github.com/InferenceTechnologies/tableMatrix> for more
+    information and examples.
 Depends:
     R (>= 3.3.1)
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Imports: data.table
-Suggests: knitr,
+Imports:
+    data.table
+Suggests:
+    knitr,
     rmarkdown
 VignetteBuilder: knitr

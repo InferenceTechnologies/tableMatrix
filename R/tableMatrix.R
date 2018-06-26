@@ -28,7 +28,6 @@ utils::globalVariables(c("J", "."))
 # tableMatrix names
 tmName <- list(matN="tm.matN", matRow="tm.matRow", matCols="tm.matCols", matDim="tm.matDim", allRow="tm.allRow")
 
-
 #
 # Classes Constructors
 #
@@ -1106,12 +1105,14 @@ getRowDim.tableMatrix <- function(obj, i=NULL, repo=NULL, ...) {
 #'
 #' @param x \code{tableList} or \code{tableMatrix} object.
 #' @param y \code{tableList} or \code{tableMatrix} object.
+#' @param ... Passed arguments.
 #'
+#' @method cbind tableList
 #' @export
-cbind.tableList <- function(x,y) {
+cbind.tableList <- function(x, y, ...) {
 
 	x <- copy(x)
-	x$tab <- cbind(x$tab, y$tab)
+	x$tab <- cbind(x$tab, y$tab, ...)
 	x$aid$dataType <- mergeDataTypeRef(x$tab, dataType(x), dataType(y))
 	return(x)
 }
@@ -1122,10 +1123,11 @@ cbind.tableList <- function(x,y) {
 #'
 #' @return Matrix object.
 #' 
+#' @method cbind tableMatrix
 #' @export
-cbind.tableMatrix <- function(x,y) {
+cbind.tableMatrix <- function(x, y, ...) {
 
-	x <- cbind.tableList(x, y)
+	x <- cbind.tableList(x, y, ...)
 	return(x)
 }
 
@@ -1138,6 +1140,7 @@ cbind.tableMatrix <- function(x,y) {
 #' 
 #' @return Dimensions of the table part.
 #'
+#' @method dim tableList
 #' @export
 dim.tableList <- function(x) {
 	return(dim(x$tab))
@@ -1151,6 +1154,7 @@ dim.tableList <- function(x) {
 #'
 #' @return Column and row names of the table part.
 #'
+#' @method dimnames tableList
 #' @export
 dimnames.tableList <- function(x) {
 	return(dimnames(x$tab))
@@ -1163,6 +1167,7 @@ dimnames.tableList <- function(x) {
 #' @param x \code{tableList} object.
 #' @param ... Passed arguments.
 #' 
+#' @method print tableList
 #' @export
 print.tableList <- function(x, ...) {
 	
@@ -1177,6 +1182,7 @@ print.tableList <- function(x, ...) {
 #' @param x \code{tableMatrix} object.
 #' @param ... Passed arguments.
 #' 
+#' @method print tableMatrix
 #' @export
 print.tableMatrix <- function(x, ...) {
 
@@ -1188,6 +1194,8 @@ print.tableMatrix <- function(x, ...) {
 #' Merging tableList
 #' 
 #' @rdname merge.tableMatrix
+#' 
+#' @method merge tableList
 #' @export
 merge.tableList <- function(x,y, key, ...) {
 
@@ -1220,6 +1228,7 @@ merge.tableList <- function(x,y, key, ...) {
 #' # Merge tableMatrix object with a data.frame
 #' merge(TM, data.frame(direction="down", flag=TRUE), key="direction")
 #' 
+#' @method merge tableMatrix
 #' @export
 merge.tableMatrix <- function(x, y, key, ...) {
 
@@ -1259,6 +1268,7 @@ merge.tableMatrix <- function(x, y, key, ...) {
 #' # Bindind rows of two tableList objects
 #' rbind(TL1, TL2)
 #'
+#' @method rbind tableList
 #' @export
 rbind.tableList <- function(..., use.names=TRUE, fill=FALSE) {
 
@@ -1330,6 +1340,7 @@ rbind.tableList <- function(..., use.names=TRUE, fill=FALSE) {
 #' # Two dimension types
 #' matDim(TM)
 #' 
+#' @method rbind tableMatrix
 #' @export
 rbind.tableMatrix <- function(..., use.names=TRUE, fill=FALSE) {
 
@@ -1394,6 +1405,7 @@ rbind.tableMatrix <- function(..., use.names=TRUE, fill=FALSE) {
 #' 
 #' @return \code{tableList} object.
 #' 
+#' @method copy tableList
 #' @export
 copy.tableList <- function(obj) {
 
@@ -1409,6 +1421,7 @@ copy.tableList <- function(obj) {
 #' 
 #' @return \code{tableMatrix} object.
 #' 
+#' @method copy tableMatrix
 #' @export
 copy.tableMatrix <- function(obj) {
 
